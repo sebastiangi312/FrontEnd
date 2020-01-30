@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http"
@@ -22,16 +25,17 @@ import { PerfilComponent } from './perfil/perfil.component';
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    HeaderComponent,
+
     LoginComponent,
     SignUpComponent,
     PerfilComponent
   ],
   imports: [
-    BrowserModule,
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
@@ -39,9 +43,15 @@ import { PerfilComponent } from './perfil/perfil.component';
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(
+      [
+        { path: '', component: HomeComponent},
+      ]
+    )
   ],
+  exports: [HomeComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, HomeComponent]
 })
 export class AppModule { }
