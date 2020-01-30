@@ -36,6 +36,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
