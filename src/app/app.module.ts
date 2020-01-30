@@ -23,7 +23,7 @@ import { PerfilComponent } from './perfil/perfil.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
     PerfilComponent
   ],
   imports: [
