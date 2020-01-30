@@ -1,0 +1,107 @@
+<div class="container">
+
+    <form [formGroup] = "formularioCreado">
+
+        <!-- NOMBRE -->
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName = "nombre">
+
+            <div *ngIf="formularioCreado.controls['nombre'].invalid && formularioCreado.controls['nombre'].dirty" class="alert alert-danger" role="alert">
+                El nombre es requerido
+            </div>
+        </div>
+
+        <!-- ID -->
+        <div class="form-group">
+            <label>Número de identificación</label>
+            <input type="number" class="form-control" formControlName = "id">
+
+            <div *ngIf="formularioCreado.controls['id'].invalid && formularioCreado.controls['id'].dirty" class="alert alert-danger" role="alert">
+                El número de identificación es requerido
+            </div>
+        </div>
+
+        <!-- CELULAR -->
+        <div class="form-group">
+            <label>Número de celular</label>
+            <input type="number" class="form-control" formControlName = "celular">
+
+            <div *ngIf="formularioCreado.controls['celular'].invalid && formularioCreado.controls['celular'].dirty" class="alert alert-danger" role="alert">
+                El número de celular es requerido
+            </div>
+        </div>
+
+        <!-- CORREO -->
+        <div class="form-group">
+            <label>Correo</label>
+            <input type="email" class="form-control" formControlName = "correo">
+            
+            <div *ngIf="formularioCreado.controls['correo'].invalid && formularioCreado.controls['correo'].dirty">
+                <div *ngIf = "formularioCreado.controls['correo'].errors.required" class="alert alert-danger" role="alert">
+                    El correo es requerido
+                </div>
+
+                <div *ngIf = "formularioCreado.controls['correo'].errors.email" class="alert alert-danger" role="alert">
+                    Formato incorrecto
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTRASEÑA -->
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" class="form-control" formControlName = "password">
+
+            <div *ngIf="formularioCreado.controls['password'].invalid && formularioCreado.controls['password'].dirty">
+                <div *ngIf = "formularioCreado.controls['password'].errors.required" class="alert alert-danger" role="alert">
+                    La conraseña es requerida
+                </div>
+
+                <div *ngIf = "formularioCreado.controls['password'].errors.minlength" class="alert alert-danger" role="alert">
+                    La contraseña debe tener más de 8 caracteres
+                </div>
+            </div>
+        </div>
+
+        <!-- FECHA DE NACIMIENTO -->
+        <div class="form-group">
+            <label>Fecha de Nacimiento</label>
+            <input type="date" class="form-control" formControlName = "fechaNacimiento">
+
+            <div *ngIf="formularioCreado.controls['fechaNacimiento'].invalid && formularioCreado.controls['fechaNacimiento'].dirty">
+                <div *ngIf = "formularioCreado.controls['fechaNacimiento'].errors.required" class="alert alert-danger" role="alert">
+                    La fecha de nacimiento es requerida
+                </div>
+
+                <!-- <div *ngIf = "formularioCreado.controls['fechaNacimiento'].errors.minlength" class="alert alert-danger" role="alert">
+                    Debe ser mayor de 18 años
+                </div> -->
+            </div>
+        </div>
+
+        <!-- DINERO DISPONIBLE -->
+        <div class="form-group">
+            <label>Dinero disponible</label>
+            <input type="number" class="form-control" formControlName = "dineroDisponible">
+
+            <div *ngIf="formularioCreado.controls['dineroDisponible'].invalid && formularioCreado.controls['dineroDisponible'].dirty" class="alert alert-danger" role="alert">
+                El dinero disponible es requerido
+            </div>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="restriccion">
+            <label class="form-check-label" for="restriccion">Soy mayor de 18 años</label>
+
+            <div *ngIf="formularioCreado.controls['restriccion'].required" class="alert alert-danger" role="alert">
+                Debe ser mayor de edad para registrarse
+            </div>
+        </div>
+
+        <button [disabled] = "!formularioCreado.valid" class="btn btn-primary" (click) = "aceptar()">Aceptar</button>
+
+    </form>
+
+</div>
+
