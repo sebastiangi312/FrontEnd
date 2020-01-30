@@ -1,0 +1,27 @@
+table {
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  overflow: hidden;
+  padding: 20px 10px;
+}
+
+.perfil {
+  padding: 10px 300px
+
+}
+
+th, td{
+  padding: 15px;
+}
+
+
+
+h1 {
+  font-size: 2em;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  letter-spacing: 5px;
+}
