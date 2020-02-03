@@ -20,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilComponent } from './profile/perfil.component';
+import { EditarPerfilComponent } from './edit-profile/editar-perfil.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 
     LoginComponent,
     SignUpComponent,
-    PerfilComponent
+    PerfilComponent,
+    EditarPerfilComponent
   ],
   imports: [
     FormsModule,
