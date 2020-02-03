@@ -3,6 +3,7 @@
 
 <div class="header">
   <h1>Perfil de Usuario</h1>
+  <a [routerLink]="['/editar-perfil/id']" class="button fancy-button login"><i class="material-icons">edit</i>Editar perfil</a>
 </div>
 
 <div class="perfil">
@@ -12,7 +13,7 @@
         <ng-container matColumnDef="identificacion">
 
           <td mat-cell>Identificación</td>
-          <td>123456789</td>
+          <td>{{usuario.id}}</td>
 
         </ng-container>
       </tr>
@@ -22,7 +23,7 @@
         <ng-container matColumnDef="nombre">
 
           <td mat-cell>Nombre</td>
-          <td>Santiago</td>
+          <td>{{usuario.nombre}}</td>
 
         </ng-container>
       </tr>
@@ -33,7 +34,7 @@
         <ng-container matColumnDef="email">
 
           <td mat-cell>Email</td>
-          <td>Santiago@gmail.com</td>
+          <td>{{usuario.email}}</td>
 
         </ng-container>
       </tr>
@@ -44,7 +45,7 @@
         <ng-container matColumnDef="fecha">
 
           <td mat-cell>Fecha de nacimiento</td>
-          <td>20/12/1980</td>
+          <td>{{usuario.fecha_de_nacimiento}}</td>
 
 
         </ng-container>
@@ -57,7 +58,7 @@
         <ng-container matColumnDef="celular">
 
           <td mat-cell>Celular</td>
-          <td>1023445678</td>
+          <td>{{usuario.celular}}</td>
 
         </ng-container>
       </tr>
@@ -68,7 +69,7 @@
         <ng-container matColumnDef="dinero">
 
           <td mat-cell>Dinero</td>
-          <td>$2000</td>
+          <td>${{usuario.dinero_disponible}}</td>
 
         </ng-container>
       </tr>

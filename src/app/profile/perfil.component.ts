@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../modelos/usuario';
+
 
 
 
@@ -9,7 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerfilComponent implements OnInit {
 
-  
+  usuario: Usuario = {
+
+    id: 0,
+    nombre: '',
+    password: '',
+    email: '',
+    fecha_de_nacimiento: '',
+    celular: 0,
+    dinero_disponible: 0,
+    rol: '',
+  }
+
+
 
 
   constructor() { }
