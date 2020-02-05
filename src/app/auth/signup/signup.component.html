@@ -1,0 +1,58 @@
+<div class="main-div">
+  <mat-card>
+    <mat-card-title>Regístrate</mat-card-title>
+    <mat-card-content>
+      <mat-spinner *ngIf="isLoading" color = "accent"></mat-spinner>
+      <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+
+        <div class="row">
+
+          <mat-form-field color = "accent">
+            <input matInput name="name" ngModel type="text" placeholder="Nombre completo" #nameInput="ngModel" required>
+            <mat-error *ngIf="nameInput.invalid">Por favor ingrese un nombre válido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color = "accent">
+            <input matInput name="id" ngModel type="text" placeholder="Cédula" #idInput="ngModel" required>
+            <mat-error *ngIf="idInput.invalid">Por favor ingrese una cédula válida.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="row">
+
+          <mat-form-field color = "accent">
+            <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel" required email>
+            <mat-error *ngIf="emailInput.invalid">Por favor ingrese un email válido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color = "accent">
+            <input type="password" name="password" ngModel matInput placeholder="Contraseña" #passwordInput="ngModel"
+              required>
+            <mat-error *ngIf="passwordInput.invalid">Por favor ingrese una contraseña válida.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="row">
+
+          <mat-form-field color = "accent">
+            <input matInput name="phone" ngModel type="tel" placeholder="Teléfono" #phoneInput="ngModel" required>
+            <mat-error *ngIf="phoneInput.invalid">Por favor ingrese un teléfono válido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color = "accent">
+            <input matInput name="birthdate" [max]="maxDate" [matDatepicker]="picker" ngModel
+              placeholder="Fecha de nacimiento" #birthdateInput="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="birthdateInput.invalid">Por favor ingrese una fecha válida.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Regístrate</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

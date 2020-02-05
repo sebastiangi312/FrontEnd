@@ -14,12 +14,20 @@ mat-card-title {
   text-align: center;
 }
 
+.row {
+  display: flex;
+}
+
 mat-form-field {
-  margin: auto;
-  width: 100%;
+  flex: 50%;
+  margin: 0 5px 10px 5px;
 }
 
 form {
   display: flex;
   flex-direction: column;
+}
+
+mat-spinner {
+  margin: auto;
 }

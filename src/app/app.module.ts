@@ -1,60 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from "@angular/common/http"
-import {
-  MatInputModule,
-  MatCardModule,
-  MatButtonModule,
-  MatToolbarModule,
-  MatExpansionModule,
-  MatProgressSpinnerModule,
-  MatPaginatorModule
-} from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { PerfilComponent } from './profile/perfil.component';
-import { EditarPerfilComponent } from './edit-profile/editar-perfil.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
+import { MaterialModule } from './material/material.module';
+import { CoreModule } from './core/core.module';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './core/interceptors/token-interceptor.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-
-    LoginComponent,
-    SignUpComponent,
-    PerfilComponent,
-    EditarPerfilComponent
+    AppComponent
   ],
   imports: [
-    FormsModule,
+    BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatExpansionModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    HttpClientModule,
-    RouterModule.forRoot(
-      [
-        { path: '', component: HomeComponent},
-      ]
-    )
+    SharedModule,
+    HomeModule,
+    MaterialModule,
+    CoreModule,
+    FormsModule,
+    HttpClientModule
   ],
-  exports: [HomeComponent],
-  providers: [],
-  bootstrap: [AppComponent, HomeComponent]
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

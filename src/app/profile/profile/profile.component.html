@@ -1,0 +1,64 @@
+<div class="main-div">
+  <mat-card>
+    <mat-card-title>Regístrate</mat-card-title>
+    <mat-card-content>
+      <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
+      <form [formGroup]="form" (submit)="onEditProfile()" *ngIf="!isLoading">
+
+        <div class="row">
+          <mat-form-field color="accent">
+            <input matInput type="text" formControlName="name" placeholder="Nombre completo" required>
+            <mat-error *ngIf="form.get('name').invalid">Por favor ingrese un nombre válido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color="accent">
+            <input matInput type="text" formControlName="id" placeholder="Cédula" required>
+            <mat-error *ngIf="form.get('id').invalid">Por favor ingrese una cédula válida.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="row">
+
+          <mat-form-field color="accent">
+            <input matInput type="text" formControlName="email" placeholder="Email" required email>
+            <mat-error *ngIf="form.get('email').invalid">Por favor ingrese un email válido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color="accent">
+            <input matInput type="text" formControlName="phone" placeholder="Teléfono" required>
+            <mat-error *ngIf="form.get('phone').invalid">Por favor ingrese un teléfono válido.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="row">
+
+          <mat-form-field color="accent">
+            <input matInput type="number" formControlName="balance" placeholder="Dinero" required>
+            <mat-error *ngIf="form.get('balance').invalid">Por favor ingrese un número válido.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color="accent">
+            <input matInput formControlName="birthdate" placeholder="Fecha de nacimiento" required>
+            <mat-error *ngIf="form.get('birthdate').invalid">Por favor ingrese una fecha válida.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="row">
+          <mat-form-field color="accent">
+            <input matInput type="password" formControlName="password" placeholder="Contraseña">
+            <mat-error *ngIf="form.get('password').invalid">Por favor ingrese una contraseña válida.</mat-error>
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <input matInput type="password" formControlName="newPassword" placeholder="Nueva contraseña">
+            <mat-error *ngIf="form.get('newPassword').invalid">Por favor ingrese una contraseña válida.</mat-error>
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Actualizar datos</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
