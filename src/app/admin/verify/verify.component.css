@@ -2,6 +2,14 @@
   width: 90vw;
   margin-left: auto;
   margin-right: auto;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -200px;
+}
+
+.footer {
+  height: 200px;
 }
 
 mat-toolbar {
@@ -46,4 +54,8 @@ label {
 
 .delete-button {
   margin-left: 1rem;
+}
+
+input.balance {
+  -moz-appearance: textfield;
 }

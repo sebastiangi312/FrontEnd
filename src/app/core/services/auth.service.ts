@@ -43,6 +43,7 @@ export class AuthService {
       birthdate: Date;
       phone: string;
       balance: number;
+      roles: Roles;
     }>(BACKEND_URL + userId);
   }
 

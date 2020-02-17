@@ -4,53 +4,63 @@
   </mat-toolbar>
   <mat-spinner *ngIf="isLoading" color = "accent"></mat-spinner>
   <mat-accordion *ngIf="!isLoading">
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngFor="let user of users">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          user.email
+          {{ user.email }}
         </mat-panel-title>
         <mat-panel-description>
-          user.name
+          {{ user.name }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <hr>
       <div class="expansion-content">
         <div class="expansion-user-info">
-          <h3>user.email</h3>
+          <h3>{{ user.email }}</h3>
           <table>
             <tr>
               <td>
-                <label>Nombre:</label>
-                user.name
+                <label>Nombre: </label>
+                {{ user.name }}
               </td>
               <td>
-                <label>ID:</label>
-                user.id
+                <label>ID: </label>
+                {{ user.id }}
               </td>
             </tr>
             <tr>
               <td>
-                <label>Celular:</label>
-                user.phone
+                <label>Celular: </label>
+                {{ user.phone }}
               </td>
               <td>
-                <label>Fecha de nacimiento:</label>
-                user.birthdate
+                <label>Fecha de nacimiento: </label>
+                {{ user.birthdate }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field appearance="fill" color="accent">
+                  <mat-label>Balance</mat-label>
+                  <input matInput [(ngModel)]="user.balance" type="number" class="balance" disabled required>
+                  <span matPrefix>$&nbsp;</span>
+                </mat-form-field>
               </td>
             </tr>
           </table>
         </div>
         <div class="expansion-buttons">
-          <button mat-raised-button (click)="onVerify(user.id)" class="accept-button" color="accent">Aceptar</button>
-          <button mat-raised-button (click)="onDelete(user.id)" class="delete-button" color="warn">Eliminar</button>
+          <button mat-raised-button (click)="onVerify(userId, user.id)" class="accept-button" color="accent">VERIFICAR</button>
+          <button mat-raised-button (click)="onDelete(userId, user.id)" class="delete-button" color="warn">RECHAZAR</button>
         </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-
-<mat-paginator [length]="totalUsers" [pageSize]="usersPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+<div class="footer">
+  <mat-paginator [length]="totalUsers" [pageSize]="usersPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
   *ngIf="users.length > 0"></mat-paginator>
 
+</div>
   <p class="info-text mat-body-1" *ngIf="users.length <= 0 && !isLoading">No hay usuarios por autorizar</p>
 

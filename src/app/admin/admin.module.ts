@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { VerifyComponent } from './verify/verify.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
-
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +11,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ]
 })
 export class AdminModule { }
