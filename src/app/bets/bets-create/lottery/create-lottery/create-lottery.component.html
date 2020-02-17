@@ -1,0 +1,30 @@
+<div class="main-div">
+  <mat-card>
+    <mat-card-title>Crear apuesta de azar</mat-card-title>
+    <mat-card-content>
+      <mat-spinner *ngIf="isLoading" color = "accent"></mat-spinner>
+      <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+
+        <div class="row">
+
+          <mat-form-field color = "accent">
+            <input matInput name="firstPrize" ngModel type="text" placeholder="Valor del premio gordo" #nameInput="ngModel" required>
+            <mat-error *ngIf="nameInput.invalid">Por favor ingrese un valor válido.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="row">
+
+          <mat-form-field color = "accent">
+            <input matInput name="thirdPrize" ngModel type="text" placeholder="Valor del tercer premio" #nameInput="ngModel" required>
+            <mat-error *ngIf="nameInput.invalid">Por favor ingrese un valor válido.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Crear</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
