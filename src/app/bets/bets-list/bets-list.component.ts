@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BetsListService } from 'src/app/core/services/bets-list.service';
 import { Subscription } from 'rxjs';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-bets-list',
@@ -22,7 +22,8 @@ export class BetsListComponent implements OnInit {
   'Segundo Premio','Tercer Premio','precio Boleta','Estado'];
   dataSource = this.ELEMENT_DATA;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              public betService: BetsListService) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -36,6 +37,7 @@ export class BetsListComponent implements OnInit {
   }
 
   cargarBets(){
+    this.betService.cargarBets().subscribe( bets => this.ELEMENT_DATA = bets);
   }
 }
 
