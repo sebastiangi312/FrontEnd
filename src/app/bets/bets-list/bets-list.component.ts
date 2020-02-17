@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-bets-list',
@@ -15,13 +16,10 @@ export class BetsListComponent implements OnInit {
   userId: string;
   private authStatusSub: Subscription;
   
-  ELEMENT_DATA: Bet[] = [
-    {id: 1, fechaCreacion: new Date(), fechaCierre: new Date, firstPrice: 10, price: 5},
-    {id: 2, fechaCreacion: new Date(), fechaCierre: new Date, firstPrice: 11, price: 6},
-    {id: 3, fechaCreacion: new Date(), fechaCierre: new Date, firstPrice: 12, price: 7}
-  ];
+  ELEMENT_DATA: Bet[] = [];
 
-  displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'firstPrice','price'];
+  displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'Premio Mayor',
+  'Segundo Premio','Tercer Premio','precio Boleta','Estado'];
   dataSource = this.ELEMENT_DATA;
 
   constructor(private authService: AuthService) { }
@@ -37,6 +35,8 @@ export class BetsListComponent implements OnInit {
       });
   }
 
+  cargarBets(){
+  }
 }
 
 export interface Bet {
@@ -44,6 +44,9 @@ export interface Bet {
   fechaCreacion: Date,
   fechaCierre: Date,
   firstPrice: number,
-  price: number
+  secondPrice: number,
+  thirdPrice: number,
+  fare: number,
+  open: Boolean
 }
 
