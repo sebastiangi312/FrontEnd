@@ -51,7 +51,9 @@ export class AuthService {
     return this.http
       .put(BACKEND_URL + userId, { userId, phone, email, password, newPassword })
       .subscribe(response => {
-        this.router.navigate(['/profile/, userId']);
+        this.router.navigate(['/']).then(() => {
+          this.router.navigate(['/profile/', userId]);
+        })
       });
   }
 
