@@ -7,12 +7,22 @@ import { Subscription } from 'rxjs';
   templateUrl: './bets-list.component.html',
   styleUrls: ['./bets-list.component.css']
 })
+
 export class BetsListComponent implements OnInit {
 
   isLoading = false;
   userIsAuthenticated = false;
   userId: string;
   private authStatusSub: Subscription;
+  
+  ELEMENT_DATA: Bet[] = [
+    {id: 1, fechaCreacion: new Date(), fechaCierre: new Date, firstPrice: 10, price: 5},
+    {id: 2, fechaCreacion: new Date(), fechaCierre: new Date, firstPrice: 11, price: 6},
+    {id: 3, fechaCreacion: new Date(), fechaCierre: new Date, firstPrice: 12, price: 7}
+  ];
+
+  displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'firstPrice','price'];
+  dataSource = this.ELEMENT_DATA;
 
   constructor(private authService: AuthService) { }
 
@@ -28,3 +38,12 @@ export class BetsListComponent implements OnInit {
   }
 
 }
+
+export interface Bet {
+  id: number,
+  fechaCreacion: Date,
+  fechaCierre: Date,
+  firstPrice: number,
+  price: number
+}
+
