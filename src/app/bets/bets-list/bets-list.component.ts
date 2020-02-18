@@ -43,7 +43,7 @@ export class BetsListComponent implements OnInit {
         this.ELEMENT_DATA = lotteries;
         this.dataSource = this.ELEMENT_DATA;
         this.displayedColumns = ['id', 'fare', 'closingDate', 'firstPrize',
-          'secondPrize', 'thirdPrize', 'creationDate', 'open'];
+          'secondPrize', 'thirdPrize', 'creationDate', 'open','delete'];
       });
   }
 }
