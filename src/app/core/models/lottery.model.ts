@@ -1,5 +1,8 @@
 export interface Lottery {
-  firstPrize: string;
-  secondPrize: string;
-  thirdPrize: string;
+  id: string;
+  fare: number;
+  closingDate: Date;
+  firstPrize: number;
+  secondPrize: number;
+  thirdPrize: number;
 }

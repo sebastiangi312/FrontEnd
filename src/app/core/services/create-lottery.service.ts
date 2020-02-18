@@ -13,15 +13,17 @@ const BACKEND_URL = environment.apiUrl + '';
 })
 export class CreateLotteryService {
 
-  private authStatusListener = new Subject<boolean>();
+  createLottery(
+    fare: number, closingDate: Date,
+    firstPrize: number, secondPrize: number, thirdPrize: number ) {
 
-  createLottery( firstPrize: string, secondPrize: string, thirdPrize: string ) {
-    const lottery: Lottery = { firstPrize, secondPrize, thirdPrize };
-    this.http.post(BACKEND_URL + '/lottery', lottery);
-  }
-
-  getAuthStatusListener() {
-    return this.authStatusListener.asObservable();
+    const data = { fare, closingDate, firstPrize, secondPrize, thirdPrize };
+    this.http
+    .post(BACKEND_URL + '/lottery', data
+    )
+    .subscribe(result => {
+      this.router.navigate(['/bets/list']);
+    });
   }
 
   constructor(private http: HttpClient, private router: Router) { }
