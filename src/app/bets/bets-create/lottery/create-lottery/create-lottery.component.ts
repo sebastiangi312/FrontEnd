@@ -12,13 +12,12 @@ import { User } from 'src/app/core/models';
 export class CreateLotteryComponent implements OnInit, OnDestroy {
 
   isLoading = false;
-  private authStatusSub: Subscription;
 
   // maxDate = new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDate());
 
   constructor(public createLotteryService: CreateLotteryService) { }
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
   onCreate(form: NgForm) {
     if (form.invalid) {
@@ -29,10 +28,5 @@ export class CreateLotteryComponent implements OnInit, OnDestroy {
     this.createLotteryService.createLottery(fare, closingDate, firstPrize, secondPrize, thirdPrize);
     this.isLoading = false;
   }
-
-  ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
-  }
-
 
 }
