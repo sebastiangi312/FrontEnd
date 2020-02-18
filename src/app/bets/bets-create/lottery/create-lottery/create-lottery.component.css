@@ -14,18 +14,9 @@ mat-card-title {
   text-align: center;
 }
 
-.row {
-  display: flex;
-}
-
 mat-form-field {
-  flex: 50%;
+  width: 100%;
   margin: 0 5px 10px 5px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
 }
 
 mat-spinner {
@@ -34,4 +25,21 @@ mat-spinner {
 
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.edit {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.edit .mat-raised-button {
+  width: 40%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.create {
+  margin: auto;
+  width: 100%;
 }

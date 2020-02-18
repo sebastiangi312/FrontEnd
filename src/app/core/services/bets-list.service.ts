@@ -4,6 +4,7 @@ import { environment } from "../../../environments/environment";
 import { Lottery } from '../models/lottery.model';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 const BACKEND_URL = environment.apiUrl + "/lottery";
 
@@ -16,7 +17,7 @@ export class BetsListService {
   lotteries: Lottery[];
   private lotteriesUpdated = new Subject<Lottery[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getLotteries() {
     this.http.get<{ message: string, result: any }>(BACKEND_URL).pipe(
@@ -40,7 +41,19 @@ export class BetsListService {
     });
   }
 
+  onDelete(id: string) {
+    return this.http.delete(BACKEND_URL + '/delete/' + id);
+  }
+
+  onBet() {
+    return;
+  }
+
   getLotteryUpdateListener() {
     return this.lotteriesUpdated.asObservable();
+  }
+
+  getLottery(id: string) {
+    return { ...this.lotteries.find(p => p.id === id) };
   }
 }

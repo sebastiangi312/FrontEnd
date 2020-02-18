@@ -75,16 +75,24 @@ export class UsersService {
     return this.http.delete(BACKEND_URL + userId);
   }
 
-  /*verifyUser(idUserToAuthorize: string) {
+  authorizeUser(idUserToAuthorize: string) {
     const verifyData: VerifyData = {
       idUserToAuthorize
     };
-    this.http
+    return this.http
       .put<{ message: string }>(
         BACKEND_URL + './userAuth', verifyData
-      ).subscribe((res) => {
+      );
+  }
 
-      })
-  }*/
+  deauthorizeUser(idUserToDeauthorize: string) {
+    const verifyData: VerifyData = {
+      idUserToAuthorize: idUserToDeauthorize
+    };
+    return this.http
+      .put<{ message: string }>(
+        BACKEND_URL + './userDeauth', verifyData
+      );
+  }
 
 }

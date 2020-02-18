@@ -25,11 +25,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
+        this.roleListenerSubs = this.authService.getUser().subscribe((user) => {
+          this.isAdmin = false;
+          this.isAdmin = user.roles.admin;
+        });
         this.userIsAuthenticated = isAuthenticated;
       });
-    this.roleListenerSubs = this.authService.getUser().subscribe((user) => {
-      this.isAdmin = user.roles.admin;
-    });
+
   }
 
   onLogout() {
@@ -38,5 +40,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
+    this.roleListenerSubs.unsubscribe();
   }
 }

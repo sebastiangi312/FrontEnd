@@ -40,21 +40,6 @@ export class VerifyComponent implements OnInit {
   constructor(public usersService: UsersService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.users = [
-      {
-        id: 'user1', name: 'Sebas', email: 'sebas@gmail.com', birthdate: new Date(),
-        phone: '301301301', balance: 0, roles: { subscriber: true }
-      },
-      {
-        id: 'user2', name: 'Santi', email: 'santi@gmail.com', birthdate: new Date(),
-        phone: '301301302', balance: 0, roles: { subscriber: true }
-      },
-      {
-        id: 'user1', name: 'Sebas', email: 'sebas@gmail.com', birthdate: new Date(),
-        phone: '301301301', balance: 0, roles: { bettor: true }
-      }
-    ]
-    /*
     this.isLoading = true;
     this.usersService.getUsers(this.usersPerPage, this.currentPage);
     this.userId = this.authService.getUserId();
@@ -72,7 +57,6 @@ export class VerifyComponent implements OnInit {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
-      */
   }
 
   onChangedPage(pageData: PageEvent) {
@@ -91,14 +75,22 @@ export class VerifyComponent implements OnInit {
     });
   }
 
-  onVerify(idUserToAuthorize: string) {
+  onAuthorize(idUserToAuthorize: string) {
     this.isLoading = true;
-    /*this.usersService.verifyUser(idUserToAuthorize).subscribe(() => {
-
+    this.usersService.authorizeUser(idUserToAuthorize).subscribe(() => {
       this.usersService.getUsers(this.usersPerPage, this.currentPage);
     }, () => {
       this.isLoading = false;
-    });*/
+    });
+  }
+
+  onDeauthorize(idUserToAuthorize: string) {
+    this.isLoading = true;
+    this.usersService.deauthorizeUser(idUserToAuthorize).subscribe(() => {
+      this.usersService.getUsers(this.usersPerPage, this.currentPage);
+    }, () => {
+      this.isLoading = false;
+    });
   }
 
 }
