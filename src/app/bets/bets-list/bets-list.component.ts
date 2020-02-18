@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BetsListService } from 'src/app/core/services/bets-list.service';
 import { Subscription } from 'rxjs';
-import { Bet } from 'src/app/core/models/bet.model';
+import { Lottery } from 'src/app/core/models/lottery.model';
 
 @Component({
   selector: 'app-bets-list',
@@ -16,26 +16,15 @@ export class BetsListComponent implements OnInit {
   userIsAuthenticated = false;
   userId: string;
   private authStatusSub: Subscription;
+  private lotterySub: Subscription;
 
+  ELEMENT_DATA: Lottery[];
 
-  bet: Bet = {
-    id: 0,
-    fechaCreacion: new Date(),
-    fechaCierre: new Date(),
-    firstPrice: 0,
-    secondPrice: 0,
-    thirdPrice: 0,
-    fare: 0,
-    open: true
-  }
-
-
-  displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'Premio Mayor',
-    'Segundo Premio', 'Tercer Premio', 'precio Boleta', 'Estado', 'Eliminar'];
-  dataSource: any;
+  displayedColumns: string[];
+  dataSource: Lottery[];
 
   constructor(private authService: AuthService,
-              public betService: BetsListService) {}
+    public betService: BetsListService) { }
 
 
   ngOnInit() {
@@ -47,22 +36,14 @@ export class BetsListComponent implements OnInit {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
-    this.cargarBets();
-  }
 
-  delete() {
-    this.betService.deleteBets(this.bet);
-  }
-
-  cargarBets(){
-    /*this.dataSource = [
-      {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-         secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
-         {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
-          secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
-          {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-            secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
-    ];*/
-    this.betService.cargarBets().subscribe( bets => this.dataSource = bets);
+    this.betService.getLotteries();
+    this.lotterySub = this.betService.getLotteryUpdateListener()
+      .subscribe(lotteries => {
+        this.ELEMENT_DATA = lotteries;
+        this.dataSource = this.ELEMENT_DATA;
+        this.displayedColumns = ['id', 'fare', 'closingDate', 'firstPrize',
+          'secondPrize', 'thirdPrize', 'creationDate', 'open'];
+      });
   }
 }

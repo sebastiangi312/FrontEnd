@@ -16,6 +16,9 @@
     <li *ngIf="!userIsAuthenticated">
       <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">Regístrate</a>
     </li>
+    <li *ngIf="userIsAuthenticated && isAdmin">
+      <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
+    </li>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Apuestas</a>
     </li>
