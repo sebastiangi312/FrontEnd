@@ -10,7 +10,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   userIsAuthenticated = false;
+  isAdmin = false;
   private authListenerSubs: Subscription;
+  private roleListenerSubs: Subscription;
   userId: string;
 
   constructor(private authService: AuthService) { }
@@ -25,6 +27,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
       });
+    this.roleListenerSubs = this.authService.getUser().subscribe((user) => {
+      this.isAdmin = user.roles.admin;
+    });
   }
 
   onLogout() {

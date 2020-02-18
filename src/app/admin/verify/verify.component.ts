@@ -41,12 +41,18 @@ export class VerifyComponent implements OnInit {
 
   ngOnInit() {
     this.users = [
-      {id: 'user1', name: 'Sebas', email: 'sebas@gmail.com', birthdate: new Date(),
-      phone: '301301301', balance: 0, roles: {subscriber: true}},
-      {id: 'user2', name: 'Santi', email: 'santi@gmail.com', birthdate: new Date(),
-      phone: '301301302', balance: 0, roles: {subscriber: true}},
-      {id: 'user1', name: 'Sebas', email: 'sebas@gmail.com', birthdate: new Date(),
-      phone: '301301301', balance: 0, roles: {bettor: true}}
+      {
+        id: 'user1', name: 'Sebas', email: 'sebas@gmail.com', birthdate: new Date(),
+        phone: '301301301', balance: 0, roles: { subscriber: true }
+      },
+      {
+        id: 'user2', name: 'Santi', email: 'santi@gmail.com', birthdate: new Date(),
+        phone: '301301302', balance: 0, roles: { subscriber: true }
+      },
+      {
+        id: 'user1', name: 'Sebas', email: 'sebas@gmail.com', birthdate: new Date(),
+        phone: '301301301', balance: 0, roles: { bettor: true }
+      }
     ]
     /*
     this.isLoading = true;
@@ -85,9 +91,9 @@ export class VerifyComponent implements OnInit {
     });
   }
 
-  onVerify(userId: string, idUserToAuthorize: string) {
+  onVerify(idUserToAuthorize: string) {
     this.isLoading = true;
-    this.usersService.verifyUser(userId, idUserToAuthorize); /* .subscribe(() => {
+    /*this.usersService.verifyUser(idUserToAuthorize).subscribe(() => {
 
       this.usersService.getUsers(this.usersPerPage, this.currentPage);
     }, () => {

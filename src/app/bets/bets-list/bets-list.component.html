@@ -6,45 +6,45 @@
   </ng-container>
 
   <!-- DCreation Column -->
-  <ng-container matColumnDef="fechaCreacion">
-    <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
-    <td mat-cell *matCellDef="let element"> {{ element.fechaCreacion.getDate() + "/" + 
-        element.fechaCreacion.getMonth() + "/" + element.fechaCreacion.getFullYear() }} </td>
+  <ng-container matColumnDef="fare">
+    <th mat-header-cell *matHeaderCellDef>Tarifa</th>
+    <td mat-cell *matCellDef="let element"> {{ element.fare }} </td>
   </ng-container>
 
   <!-- DEnd Column -->
-  <ng-container matColumnDef="fechaCierre">
+  <ng-container matColumnDef="closingDate">
     <th mat-header-cell *matHeaderCellDef>Fecha Cierre</th>
-    <td mat-cell *matCellDef="let element">{{ element.fechaCierre.getDate() + "/" + 
-      element.fechaCierre.getMonth() + "/" + element.fechaCierre.getFullYear() }} </td>
+    <td mat-cell *matCellDef="let element">{{ element.closingDate.getDate() + "/" +
+      element.closingDate.getMonth() + "/" + element.closingDate.getFullYear() }} </td>
   </ng-container>
 
   <!--FPrice Column -->
-  <ng-container matColumnDef="Premio Mayor">
+  <ng-container matColumnDef="firstPrize">
     <th mat-header-cell *matHeaderCellDef>Premio Mayor</th>
-    <td mat-cell *matCellDef="let element"> {{element.firstPrice}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.firstPrize}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="Segundo Premio">
+  <ng-container matColumnDef="secondPrize">
     <th mat-header-cell *matHeaderCellDef>Segundo Premio</th>
-    <td mat-cell *matCellDef="let element"> {{element.secondPrice}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.secondPrize}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="Tercer Premio">
+  <ng-container matColumnDef="thirdPrize">
     <th mat-header-cell *matHeaderCellDef>Tercer Premio</th>
-    <td mat-cell *matCellDef="let element"> {{element.thirdPrice}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.thirdPrize}} </td>
   </ng-container>
 
   <!--Price Column -->
-  <ng-container matColumnDef="precio Boleta">
+  <ng-container matColumnDef="creationDate">
     <th mat-header-cell *matHeaderCellDef>Precio Boleta</th>
-    <td mat-cell *matCellDef="let element"> {{element.fare}} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.creationDate.getDate() + "/" +
+      element.creationDate.getMonth() + "/" + element.creationDate.getFullYear() }} </td>
   </ng-container>
 
   <!--Status Column -->
-  <ng-container matColumnDef="Estado">
-    <th mat-header-cell *matHeaderCellDef >Estado</th>
-    <td mat-cell *matCellDef="let element"> {{element.open}} </td>
+  <ng-container matColumnDef="open">
+    <th mat-header-cell *matHeaderCellDef>Estado</th>
+    <td mat-cell *matCellDef="let element"> {{element.open ? 'Abierto' : 'Cerrado'}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

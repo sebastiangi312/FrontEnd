@@ -1,3 +1,5 @@
+import { Roles } from './roles.model';
+
 export interface ProfileData {
   id: string;
   name: string;
@@ -5,4 +7,5 @@ export interface ProfileData {
   birthdate: Date;
   phone: string;
   balance: number;
+  roles: Roles;
 }

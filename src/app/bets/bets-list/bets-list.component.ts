@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BetsListService } from 'src/app/core/services/bets-list.service';
 import { Subscription } from 'rxjs';
+import { Lottery } from 'src/app/core/models/lottery.model';
 
 @Component({
   selector: 'app-bets-list',
@@ -15,15 +16,15 @@ export class BetsListComponent implements OnInit {
   userIsAuthenticated = false;
   userId: string;
   private authStatusSub: Subscription;
-  
-  ELEMENT_DATA: Bet[] = [];
+  private lotterySub: Subscription;
 
-  displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'Premio Mayor',
-  'Segundo Premio','Tercer Premio','precio Boleta','Estado'];
-  dataSource = this.ELEMENT_DATA;
+  ELEMENT_DATA: Lottery[];
+
+  displayedColumns: string[];
+  dataSource: Lottery[];
 
   constructor(private authService: AuthService,
-              public betService: BetsListService) { }
+    public betService: BetsListService) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -34,21 +35,13 @@ export class BetsListComponent implements OnInit {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
-  }
-
-  cargarBets(){
-    this.betService.cargarBets().subscribe( bets => this.ELEMENT_DATA = bets);
+    this.betService.getLotteries();
+    this.lotterySub = this.betService.getLotteryUpdateListener()
+      .subscribe(lotteries => {
+        this.ELEMENT_DATA = lotteries;
+        this.dataSource = this.ELEMENT_DATA;
+        this.displayedColumns = ['id', 'fare', 'closingDate', 'firstPrize',
+          'secondPrize', 'thirdPrize', 'creationDate', 'open'];
+      });
   }
 }
-
-export interface Bet {
-  id: number,
-  fechaCreacion: Date,
-  fechaCierre: Date,
-  firstPrice: number,
-  secondPrice: number,
-  thirdPrice: number,
-  fare: number,
-  open: Boolean
-}
-
