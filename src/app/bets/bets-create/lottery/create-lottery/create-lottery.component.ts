@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CreateLotteryService } from 'src/app/core/services/create-lottery.service';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
@@ -9,7 +9,7 @@ import { User } from 'src/app/core/models';
   templateUrl: './create-lottery.component.html',
   styleUrls: ['./create-lottery.component.css']
 })
-export class CreateLotteryComponent implements OnInit, OnDestroy {
+export class CreateLotteryComponent implements OnInit {
 
   isLoading = false;
 
