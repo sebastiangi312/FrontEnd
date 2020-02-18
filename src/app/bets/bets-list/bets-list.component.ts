@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BetsListService } from 'src/app/core/services/bets-list.service';
 import { Subscription } from 'rxjs';
+import { Bet } from 'src/app/core/models/bet.model';
 
 @Component({
   selector: 'app-bets-list',
@@ -16,12 +17,26 @@ export class BetsListComponent implements OnInit {
   userId: string;
   private authStatusSub: Subscription;
 
+
+  bet: Bet = {
+    id: 0,
+    fechaCreacion: new Date(),
+    fechaCierre: new Date(),
+    firstPrice: 0,
+    secondPrice: 0,
+    thirdPrice: 0,
+    fare: 0,
+    open: true
+  }
+
+
   displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'Premio Mayor',
-  'Segundo Premio','Tercer Premio','precio Boleta','Estado'];
+    'Segundo Premio', 'Tercer Premio', 'precio Boleta', 'Estado', 'Eliminar'];
   dataSource: any;
 
   constructor(private authService: AuthService,
               public betService: BetsListService) {}
+
 
   ngOnInit() {
     this.isLoading = true;
@@ -33,6 +48,10 @@ export class BetsListComponent implements OnInit {
         this.userId = this.authService.getUserId();
       });
     this.cargarBets();
+  }
+
+  delete() {
+    this.betService.deleteBets(this.bet);
   }
 
   cargarBets(){

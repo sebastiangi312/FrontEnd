@@ -7,5 +7,5 @@ export interface Bet {
     thirdPrice: number,
     fare: number,
     open: Boolean
-  }
+}
   

@@ -13,4 +13,10 @@ export class BetsListService {
   cargarBets(){
     return this.http.get( BACKEND_URL );
   }
+
+  deleteBets( bet: Bet){
+    return this.http.delete(BACKEND_URL + `/${bet.id}`);
+
+
+  }
 }
