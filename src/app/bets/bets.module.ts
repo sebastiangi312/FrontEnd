@@ -6,9 +6,10 @@ import { BetsRoutingModule } from './bets-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { MatTableModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { BetsEditComponent } from './bets-edit/bets-edit.component';
 
 @NgModule({
-  declarations: [BetsListComponent, CreateLotteryComponent],
+  declarations: [BetsListComponent, CreateLotteryComponent, BetsEditComponent],
   imports: [
     CommonModule,
     BetsRoutingModule,

@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BetsListComponent } from './bets-list/bets-list.component';
 import { CreateLotteryComponent } from './bets-create/lottery/create-lottery/create-lottery.component';
+import { BetsEditComponent } from './bets-edit/bets-edit.component';
 import { AdminGuard } from '../core/guards/admin.guard';
 
 const routes: Routes = [
   { path: 'list', component: BetsListComponent },
-  { path: 'create-lottery', component: CreateLotteryComponent, canActivate: [AdminGuard] }
+  { path: 'create-lottery', component: CreateLotteryComponent, canActivate: [AdminGuard] },
+  { path: 'edit-lottery', component: BetsEditComponent, canActivate: [AdminGuard]},
 ];
 
 @NgModule({
