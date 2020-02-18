@@ -63,7 +63,6 @@ export class ProfileComponent implements OnInit {
       this.form.value.password,
       this.form.value.newPassword
     );
-    this.form.reset();
   }
 
 }
