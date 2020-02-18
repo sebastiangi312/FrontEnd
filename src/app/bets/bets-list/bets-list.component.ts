@@ -46,4 +46,8 @@ export class BetsListComponent implements OnInit {
           'secondPrize', 'thirdPrize', 'creationDate', 'open','delete'];
       });
   }
+
+  onDelete(e){
+    console.log(e);
+  }
 }

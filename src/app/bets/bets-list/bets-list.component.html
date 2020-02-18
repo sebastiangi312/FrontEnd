@@ -54,7 +54,7 @@
     <th mat-header-cell *matHeaderCellDef >Opciones</th>
 
     <td mat-cell *matCellDef="let element">
-       <button mat-raised-button>
+       <button mat-raised-button (click)="onDelete( element )">
 
         <mat-icon  >delete</mat-icon>
       </button>
