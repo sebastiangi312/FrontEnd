@@ -17,6 +17,7 @@ export class BetsListComponent implements OnInit {
   userId: string;
   private authStatusSub: Subscription;
 
+
   bet: Bet = {
     id: 0,
     fechaCreacion: new Date(),
@@ -28,26 +29,14 @@ export class BetsListComponent implements OnInit {
     open: true
   }
 
-  ELEMENT_DATA: Bet[] = [
-    {
-      id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-      secondPrice: 9, thirdPrice: 8, fare: 8, open: true
-    },
-    {
-      id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
-      secondPrice: 10, thirdPrice: 8, fare: 8, open: false
-    },
-    {
-      id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-      secondPrice: 9, thirdPrice: 8, fare: 8, open: true
-    }];
 
   displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'Premio Mayor',
     'Segundo Premio', 'Tercer Premio', 'precio Boleta', 'Estado', 'Eliminar'];
-  dataSource = this.ELEMENT_DATA;
+  dataSource: any;
 
   constructor(private authService: AuthService,
-    public betService: BetsListService) { }
+              public betService: BetsListService) {}
+
 
   ngOnInit() {
     this.isLoading = true;
@@ -58,16 +47,22 @@ export class BetsListComponent implements OnInit {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
-  }
-
-  cargarBets() {
-    this.betService.cargarBets().subscribe(bets => this.ELEMENT_DATA = bets);
+    this.cargarBets();
   }
 
   delete() {
-    this.betService.deleteBets(this.bet)
+    this.betService.deleteBets(this.bet);
+  }
+
+  cargarBets(){
+    /*this.dataSource = [
+      {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+         secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
+         {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
+          secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
+          {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+            secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
+    ];*/
+    this.betService.cargarBets().subscribe( bets => this.dataSource = bets);
   }
 }
-
-
-
