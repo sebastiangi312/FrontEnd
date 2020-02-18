@@ -1,0 +1,37 @@
+.main-div {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  padding: 5vh;
+  width: 40%;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+}
+
+mat-form-field {
+  flex: 50%;
+  margin: 0 5px 10px 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

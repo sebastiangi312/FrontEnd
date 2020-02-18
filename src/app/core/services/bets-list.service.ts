@@ -12,6 +12,7 @@ const BACKEND_URL = environment.apiUrl + "/lottery";
 })
 export class BetsListService {
 
+
   lotteries: Lottery[];
   private lotteriesUpdated = new Subject<Lottery[]>();
 
@@ -42,5 +43,4 @@ export class BetsListService {
   getLotteryUpdateListener() {
     return this.lotteriesUpdated.asObservable();
   }
-
 }

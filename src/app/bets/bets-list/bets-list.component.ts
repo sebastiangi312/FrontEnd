@@ -26,6 +26,7 @@ export class BetsListComponent implements OnInit {
   constructor(private authService: AuthService,
     public betService: BetsListService) { }
 
+
   ngOnInit() {
     this.isLoading = true;
     this.userIsAuthenticated = this.authService.getIsAuth();
@@ -35,6 +36,7 @@ export class BetsListComponent implements OnInit {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
+
     this.betService.getLotteries();
     this.lotterySub = this.betService.getLotteryUpdateListener()
       .subscribe(lotteries => {
