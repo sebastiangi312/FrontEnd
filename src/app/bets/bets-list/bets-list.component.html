@@ -8,14 +8,14 @@
   <!-- DCreation Column -->
   <ng-container matColumnDef="fechaCreacion">
     <th mat-header-cell *matHeaderCellDef>Fecha Creacion</th>
-    <td mat-cell *matCellDef="let element"> {{ element.fechaCreacion.getDate() + "/" + 
+    <td mat-cell *matCellDef="let element"> {{ element.fechaCreacion.getDate() + "/" +
         element.fechaCreacion.getMonth() + "/" + element.fechaCreacion.getFullYear() }} </td>
   </ng-container>
 
   <!-- DEnd Column -->
   <ng-container matColumnDef="fechaCierre">
     <th mat-header-cell *matHeaderCellDef>Fecha Cierre</th>
-    <td mat-cell *matCellDef="let element">{{ element.fechaCierre.getDate() + "/" + 
+    <td mat-cell *matCellDef="let element">{{ element.fechaCierre.getDate() + "/" +
       element.fechaCierre.getMonth() + "/" + element.fechaCierre.getFullYear() }} </td>
   </ng-container>
 
@@ -44,7 +44,20 @@
   <!--Status Column -->
   <ng-container matColumnDef="Estado">
     <th mat-header-cell *matHeaderCellDef >Estado</th>
-    <td mat-cell *matCellDef="let element"> {{element.open}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.open}}   </td>
+    <
+  </ng-container>
+
+  <ng-container matColumnDef="Eliminar">
+    <th mat-header-cell *matHeaderCellDef >Opciones</th>
+
+    <td mat-cell *matCellDef="let element">
+       <button mat-raised-button (click)="delete()">
+
+        <mat-icon  >delete</mat-icon>
+      </button>
+      </td>
+
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
