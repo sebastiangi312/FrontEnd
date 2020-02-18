@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BetsListService } from 'src/app/core/services/bets-list.service';
 import { Subscription } from 'rxjs';
+import { Bet } from 'src/app/core/models/bet.model';
 
 @Component({
   selector: 'app-bets-list',
@@ -34,21 +35,18 @@ export class BetsListComponent implements OnInit {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
+    this.cargarBets();
   }
 
   cargarBets(){
-    this.betService.cargarBets().subscribe( bets => this.ELEMENT_DATA = bets);
+    //this.betService.cargarBets().subscribe( bets => this.ELEMENT_DATA = bets);
+    this.ELEMENT_DATA = [
+      {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+         secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
+         {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
+          secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
+          {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+            secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
+    ];
   }
 }
-
-export interface Bet {
-  id: number,
-  fechaCreacion: Date,
-  fechaCierre: Date,
-  firstPrice: number,
-  secondPrice: number,
-  thirdPrice: number,
-  fare: number,
-  open: Boolean
-}
-
