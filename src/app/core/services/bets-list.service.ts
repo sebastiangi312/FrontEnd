@@ -11,7 +11,14 @@ export class BetsListService {
   constructor(public http: HttpClient) {}
 
   cargarBets() : any{
-    return this.http.get( BACKEND_URL );
+    return [
+      {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+         secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
+         {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
+          secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
+          {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+            secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
+    ];
   }
 }
 

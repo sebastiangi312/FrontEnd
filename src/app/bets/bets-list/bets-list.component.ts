@@ -17,14 +17,7 @@ export class BetsListComponent implements OnInit {
   userId: string;
   private authStatusSub: Subscription;
   
-  ELEMENT_DATA: Bet[] = [
-    {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-       secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
-       {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
-        secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
-        {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-          secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
-  ];
+  ELEMENT_DATA: Bet[] = [];
 
   displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'Premio Mayor',
   'Segundo Premio','Tercer Premio','precio Boleta','Estado'];
@@ -42,9 +35,18 @@ export class BetsListComponent implements OnInit {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
+    this.cargarBets();
   }
 
   cargarBets(){
-    this.betService.cargarBets().subscribe( bets => this.ELEMENT_DATA = bets);
+    //this.betService.cargarBets().subscribe( bets => this.ELEMENT_DATA = bets);
+    this.ELEMENT_DATA = [
+      {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+         secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
+         {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
+          secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
+          {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+            secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
+    ];
   }
 }
