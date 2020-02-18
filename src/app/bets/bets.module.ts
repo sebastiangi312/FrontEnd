@@ -5,6 +5,7 @@ import { CreateLotteryComponent } from './bets-create/lottery/create-lottery/cre
 import { BetsRoutingModule } from './bets-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { MatTableModule } from '@angular/material';
+import { BetsListService } from '../core/services/bets-list.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     BetsRoutingModule,
     MaterialModule,
     MatTableModule,
-    FormsModule
-  ]
+    FormsModule,
+    MatTableModule
+  ],providers: [BetsListService]
 })
 export class BetsModule { }
