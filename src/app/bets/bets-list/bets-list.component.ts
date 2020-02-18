@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BetsListService } from 'src/app/core/services/bets-list.service';
 import { Subscription } from 'rxjs';
-import { Bet } from 'src/app/core/models/bet.model';
 
 @Component({
   selector: 'app-bets-list',
@@ -16,22 +15,13 @@ export class BetsListComponent implements OnInit {
   userIsAuthenticated = false;
   userId: string;
   private authStatusSub: Subscription;
-  
-  ELEMENT_DATA: Bet[] = [
-    {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-       secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
-       {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
-        secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
-        {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-          secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
-  ];
 
   displayedColumns: string[] = ['id', 'fechaCreacion', 'fechaCierre', 'Premio Mayor',
   'Segundo Premio','Tercer Premio','precio Boleta','Estado'];
-  dataSource = this.ELEMENT_DATA;
+  dataSource: any;
 
   constructor(private authService: AuthService,
-              public betService: BetsListService) { }
+              public betService: BetsListService) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -42,10 +32,18 @@ export class BetsListComponent implements OnInit {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
       });
+    this.cargarBets();
   }
 
   cargarBets(){
-    //this.betService.cargarBets().subscribe( bets => this.ELEMENT_DATA = bets);
-    
+    /*this.dataSource = [
+      {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+         secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
+         {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
+          secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
+          {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
+            secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
+    ];*/
+    this.betService.cargarBets().subscribe( bets => this.dataSource = bets);
   }
 }
