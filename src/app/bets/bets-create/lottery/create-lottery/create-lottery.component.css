@@ -31,3 +31,7 @@ form {
 mat-spinner {
   margin: auto;
 }
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
