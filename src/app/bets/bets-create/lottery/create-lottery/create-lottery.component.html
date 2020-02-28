@@ -1,63 +1,55 @@
 <div class="main-div">
   <mat-card>
-    <mat-card-title>Crear lotería</mat-card-title>
+    <mat-card-title *ngIf="mode=='create'">Crear lotería</mat-card-title>
+    <mat-card-title *ngIf="mode=='edit'">Editar lotería</mat-card-title>
     <mat-card-content>
-      <mat-spinner *ngIf="isLoading" color = "accent"></mat-spinner>
+      <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
       <form (submit)="onCreate(createLotteryForm)" #createLotteryForm="ngForm" *ngIf="!isLoading">
 
-        <div class="row">
-
-          <mat-form-field color = "accent">
-            <input matInput name="fare" ngModel type="number" placeholder="Valor de la boleta"
+        <mat-form-field color="accent">
+          <input matInput name="fare" [ngModel]="lottery?.fare" type="number" placeholder="Valor de la boleta"
             #fareInput="ngModel" required>
-            <mat-error *ngIf="fareInput.invalid">Por favor ingrese un valor válido.</mat-error>
-          </mat-form-field>
+          <mat-error *ngIf="fareInput.invalid">Por favor ingrese un valor válido.</mat-error>
+        </mat-form-field>
 
+
+        <mat-form-field color="accent">
+          <input matInput [min]="minDate" name="closingDate" [matDatepicker]="picker" [ngModel]="lottery?.closingDate"
+            placeholder="Fecha de cierre" #closingDateInput="ngModel" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="closingDateInput.invalid">Por favor ingrese una fecha válida.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input matInput name="firstPrize" [ngModel]="lottery?.firstPrize" type="number"
+            placeholder="Valor del premio gordo" #firstPrizeInput="ngModel" required>
+          <mat-error *ngIf="firstPrizeInput.invalid">Por favor ingrese un valor válido.</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field color="accent">
+          <input matInput name="secondPrize" [ngModel]="lottery?.secondPrize" type="number"
+            placeholder="Valor del segundo gordo" #secondPrizeInput="ngModel" required>
+          <mat-error *ngIf="secondPrizeInput.invalid">Por favor ingrese un valor válido.</mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field color="accent">
+          <input matInput name="thirdPrize" [ngModel]="lottery?.thirdPrize" type="number"
+            placeholder="Valor del tercer premio" #thirdPrizeInput="ngModel" required>
+          <mat-error *ngIf="thirdPrizeInput.invalid">Por favor ingrese un valor válido.</mat-error>
+        </mat-form-field>
+
+
+        <button mat-raised-button color="accent" type="submit" *ngIf="mode=='create' && !isLoading" class="create"
+          [disabled]="createLotteryForm.form.invalid">CREAR</button>
+        <div class="edit">
+          <a mat-raised-button color="warn" *ngIf="mode=='edit' && !isLoading" routerLink="/bets/list">CANCELAR</a>
+          <button mat-raised-button color="accent" type="submit" *ngIf="mode=='edit' && !isLoading"
+            [disabled]="createLotteryForm.form.invalid">EDITAR</button>
         </div>
-
-        <div class="row">
-
-            <mat-form-field color = "accent">
-                <input matInput name="closingDate" [matDatepicker]="picker" ngModel
-                  placeholder="Fecha de cierre" #closingDateInput="ngModel" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="closingDateInput.invalid">Por favor ingrese una fecha válida.</mat-error>
-              </mat-form-field>
-
-        </div>
-
-        <div class="row">
-
-          <mat-form-field color = "accent">
-            <input matInput name="firstPrize" ngModel type="number" placeholder="Valor del premio gordo"
-            #firstPrizeInput="ngModel" required>
-            <mat-error *ngIf="firstPrizeInput.invalid">Por favor ingrese un valor válido.</mat-error>
-          </mat-form-field>
-
-        </div>
-
-        <div class="row">
-
-            <mat-form-field color = "accent">
-              <input matInput name="secondPrize" ngModel type="number" placeholder="Valor del segundo gordo"
-              #secondPrizeInput="ngModel" required>
-              <mat-error *ngIf="secondPrizeInput.invalid">Por favor ingrese un valor válido.</mat-error>
-            </mat-form-field>
-
-          </div>
-
-        <div class="row">
-
-          <mat-form-field color = "accent">
-            <input matInput name="thirdPrize" ngModel type="number" placeholder="Valor del tercer premio"
-            #thirdPrizeInput="ngModel" required>
-            <mat-error *ngIf="thirdPrizeInput.invalid">Por favor ingrese un valor válido.</mat-error>
-          </mat-form-field>
-
-        </div>
-
-        <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Crear</button>
       </form>
     </mat-card-content>
   </mat-card>

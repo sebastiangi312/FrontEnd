@@ -7,7 +7,8 @@ import { AdminGuard } from '../core/guards/admin.guard';
 
 const routes: Routes = [
   { path: 'list', component: BetsListComponent },
-  { path: 'create-lottery', component: CreateLotteryComponent, canActivate: [AdminGuard] }
+  { path: 'create-lottery', component: CreateLotteryComponent, canActivate: [AdminGuard] },
+  { path: 'edit-lottery/:id', component: CreateLotteryComponent, canActivate: [AdminGuard] }
 ];
 
 @NgModule({

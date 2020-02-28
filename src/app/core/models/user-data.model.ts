@@ -1,6 +1,6 @@
 import { Roles } from './roles.model';
 
-export interface ProfileData {
+export interface UserData {
   id: string;
   name: string;
   email: string;

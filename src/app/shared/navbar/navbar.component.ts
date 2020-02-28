@@ -1,19 +1,27 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
+import { AuthService } from "src/app/core/services/auth.service";
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from "@angular/material/dialog";
+import { ChargeMoneyComponent } from "../charge-money/charge-money.component";
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
+  styleUrls: ["./navbar.component.css"]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-
   userIsAuthenticated = false;
+  isAdmin = false;
   private authListenerSubs: Subscription;
+  private roleListenerSubs: Subscription;
   userId: string;
+  money: Number;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.getIsAuth();
@@ -23,6 +31,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
+        this.roleListenerSubs = this.authService.getUser().subscribe(user => {
+          this.isAdmin = false;
+          this.isAdmin = user.roles.admin;
+        });
         this.userIsAuthenticated = isAuthenticated;
       });
   }
@@ -33,5 +45,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
+    this.roleListenerSubs.unsubscribe();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ChargeMoneyComponent, {
+      width: "250px",
+      data: { money: this.money}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("The dialog was closed");
+      this.money = result;
+    });
+    
   }
 }

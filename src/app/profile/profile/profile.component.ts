@@ -41,7 +41,8 @@ export class ProfileComponent implements OnInit {
         email: profileData.email,
         birthdate: profileData.birthdate,
         phone: profileData.phone,
-        balance: profileData.balance
+        balance: profileData.balance,
+        roles: profileData.roles
       };
       this.form.setValue({
         id: this.userData.id,

@@ -1,20 +1,26 @@
 <mat-toolbar color="primary">
   <span class="icon">
     <a routerLink="">
-      <svg width="120" height="50" viewBox="0 0 322 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="120" height="50" viewBox="0 0 322 75" fill="#80deea" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M26.0377 2.54176L25.7034 1.5H24.6094H3H1.5V3V71.25V72.75H3H19.4531H20.9531V71.25V55.3125V55.2759L20.9513 55.2394L19.8774 33.2238L32.9863 71.7334L33.3323 72.75H34.4062H45.2812H46.3558L46.7015 71.7326L59.7613 33.2953L58.6893 55.2393L58.6875 55.2759V55.3125V71.25V72.75H60.1875H76.6875H78.1875V71.25V3V1.5H76.6875H55.0312H53.9362L53.6025 2.54304L39.8415 45.5674L26.0377 2.54176ZM103.641 72.75H105.141V71.25V49.5938H114.141C122.684 49.5938 129.596 47.5529 134.696 43.2917L134.697 43.2911C139.844 38.9848 142.406 33.2223 142.406 26.1562C142.406 21.4001 141.231 17.1059 138.853 13.3184C136.504 9.49575 133.168 6.57404 128.897 4.55317C124.663 2.50325 119.825 1.5 114.422 1.5H87.1875H85.6875V3V71.25V72.75H87.1875H103.641ZM120.658 31.9094L120.647 31.9191C119.364 33.1544 117.373 33.8906 114.422 33.8906H105.141V17.2031H114.601C117.219 17.2323 119.135 18.0702 120.527 19.6138C121.941 21.1822 122.719 23.34 122.719 26.25C122.719 28.8544 121.973 30.6671 120.658 31.9095L120.658 31.9094ZM196.312 58.5938V57.0938H194.812H167.672V3V1.5H166.172H149.719H148.219V3V71.25V72.75H149.719H194.812H195.243H196.312H197.391H214.969H216.075L216.402 71.693L230.161 27.1892L244.005 71.6955L244.333 72.75H245.438H263.109H265.263L264.516 70.7301L239.298 2.4801L238.935 1.5H237.891H222.422H221.374L221.014 2.4835L196.312 69.8333V58.5938ZM286.076 28.7888L274.849 2.41255L274.461 1.5H273.469H255.797H253.366L254.456 3.67254L276.234 47.0895V71.25V72.75H277.734H294.422H295.922V71.25V47.0902L317.746 3.67369L318.839 1.5H316.406H298.641H297.647L297.26 2.4144L286.076 28.7888Z"
-          stroke="#ffffff" stroke-width="3" />
+          stroke="#80deea" stroke-width="3" />
       </svg>
     </a>
   </span>
   <span class="spacer"></span>
   <ul>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-raised-button (click)="openDialog()">Recargar Dinero</button>
+    </li>
     <li *ngIf="!userIsAuthenticated">
       <a mat-stroked-button routerLink="/auth/login" routerLinkActive="mat-accent">Inicia sesión</a>
     </li>
     <li *ngIf="!userIsAuthenticated">
       <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">Regístrate</a>
+    </li>
+    <li *ngIf="isAdmin">
+      <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
     </li>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Apuestas</a>
