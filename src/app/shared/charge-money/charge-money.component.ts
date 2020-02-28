@@ -1,6 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { NavbarComponent } from "../navbar/navbar.component";
+import { CreateMoneyChargeService } from 'src/app/core/services/create-money-charge.service';
 
 @Component({
   selector: "app-charge-money",
