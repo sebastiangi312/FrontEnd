@@ -10,11 +10,17 @@
   </span>
   <span class="spacer"></span>
   <ul>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-raised-button (click)="openDialog()">Recargar Dinero</button>
+    </li>
     <li *ngIf="!userIsAuthenticated">
       <a mat-stroked-button routerLink="/auth/login" routerLinkActive="mat-accent">Inicia sesión</a>
     </li>
     <li *ngIf="!userIsAuthenticated">
       <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">Regístrate</a>
+    </li>
+    <li *ngIf="isAdmin">
+      <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
     </li>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Apuestas</a>

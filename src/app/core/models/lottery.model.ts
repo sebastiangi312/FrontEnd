@@ -5,4 +5,6 @@ export interface Lottery {
   firstPrize: number;
   secondPrize: number;
   thirdPrize: number;
+  creationDate: number;
+  open: boolean;
 }

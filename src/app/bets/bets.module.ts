@@ -5,6 +5,7 @@ import { CreateLotteryComponent } from './bets-create/lottery/create-lottery/cre
 import { BetsRoutingModule } from './bets-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { MatTableModule } from '@angular/material';
+import { BetsListService } from '../core/services/bets-list.service';
 import { FormsModule } from '@angular/forms';
 import { BetsEditComponent } from './bets-edit/bets-edit.component';
 
@@ -15,7 +16,8 @@ import { BetsEditComponent } from './bets-edit/bets-edit.component';
     BetsRoutingModule,
     MaterialModule,
     MatTableModule,
-    FormsModule
-  ]
+    FormsModule,
+    MatTableModule
+  ],providers: [BetsListService]
 })
 export class BetsModule { }

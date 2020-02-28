@@ -50,8 +50,8 @@
           </table>
         </div>
         <div class="expansion-buttons">
-          <button mat-raised-button (click)="onVerify(userId, user.id)" class="accept-button" color="accent">VERIFICAR</button>
-          <button mat-raised-button (click)="onDelete(userId, user.id)" class="delete-button" color="warn">RECHAZAR</button>
+          <button mat-raised-button (click)="onAuthorize(user.id)" class="accept-button" color="accent">VERIFICAR</button>
+          <button mat-raised-button (click)="onDeauthorize(user.id)" class="delete-button" color="warn">RECHAZAR</button>
         </div>
       </div>
     </mat-expansion-panel>

@@ -1,25 +1,59 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
+import { Lottery } from '../models/lottery.model';
+import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
-const BACKEND_URL = environment.apiUrl + "";
+const BACKEND_URL = environment.apiUrl + "/lottery";
 
 @Injectable({
   providedIn: "root"
 })
 export class BetsListService {
-  constructor(public http: HttpClient) {}
 
-  cargarBets() : any{
-    return [
-      {id: 1, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-         secondPrice: 9, thirdPrice: 8, fare: 8, open: true},
-         {id: 2, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 11,
-          secondPrice: 10, thirdPrice: 8, fare: 8, open: false},
-          {id: 3, fechaCreacion: new Date(), fechaCierre: new Date(), firstPrice: 10,
-            secondPrice: 9, thirdPrice: 8, fare: 8, open: true}
-    ];
+
+  lotteries: Lottery[];
+  private lotteriesUpdated = new Subject<Lottery[]>();
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+  getLotteries() {
+    this.http.get<{ message: string, result: any }>(BACKEND_URL).pipe(
+      map(lotteryData => {
+        return lotteryData.result.map(lottery => {
+          return {
+            id: lottery._id,
+            fare: lottery.fare,
+            closingDate: new Date(lottery.closingDate),
+            firstPrize: lottery.firstPrize,
+            secondPrize: lottery.secondPrize,
+            thirdPrize: lottery.thirdPrize,
+            creationDate: new Date(lottery.creationDate),
+            open: lottery.open
+          };
+        });
+      })
+    ).subscribe(transformedLotteries => {
+      this.lotteries = transformedLotteries;
+      this.lotteriesUpdated.next([...this.lotteries]);
+    });
+  }
+
+  onDelete(id: string) {
+    return this.http.delete(BACKEND_URL + '/delete/' + id);
+  }
+
+  onBet() {
+    return;
+  }
+
+  getLotteryUpdateListener() {
+    return this.lotteriesUpdated.asObservable();
+  }
+
+  getLottery(id: string) {
+    return { ...this.lotteries.find(p => p.id === id) };
   }
 }
-
-
