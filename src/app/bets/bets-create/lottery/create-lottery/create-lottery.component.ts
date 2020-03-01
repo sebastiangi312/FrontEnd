@@ -44,13 +44,13 @@ export class CreateLotteryComponent implements OnInit {
     }
     if (this.mode === 'create') {
       this.isLoading = true;
-      const { fare, closingDate, firstPrize, secondPrize, thirdPrize } = form.value;
-      this.createLotteryService.createLottery(fare, closingDate, firstPrize, secondPrize, thirdPrize);
+      const { fare, closingDate, firstPrize, secondPrize } = form.value;
+      this.createLotteryService.createLottery(fare, closingDate, firstPrize, secondPrize, fare);
       this.isLoading = false;
     } else {
       this.isLoading = true;
-      const { fare, closingDate, firstPrize, secondPrize, thirdPrize } = form.value;
-      this.createLotteryService.editLottery(this.lottery.id, fare, closingDate, firstPrize, secondPrize, thirdPrize);
+      const { fare, closingDate, firstPrize, secondPrize } = form.value;
+      this.createLotteryService.editLottery(this.lottery.id, fare, closingDate, firstPrize, secondPrize, fare);
       this.isLoading = false;
     }
   }
