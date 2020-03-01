@@ -37,9 +37,8 @@
 
 
         <mat-form-field color="accent">
-          <input matInput name="thirdPrize" [ngModel]="lottery?.thirdPrize" type="number"
-            placeholder="Valor del tercer premio" #thirdPrizeInput="ngModel" required>
-          <mat-error *ngIf="thirdPrizeInput.invalid">Por favor ingrese un valor válido.</mat-error>
+          <input matInput name="thirdPrize" value={{fareInput.value}}  type="number"
+            placeholder="Valor del tercer premio" disabled>
         </mat-form-field>
 
 
