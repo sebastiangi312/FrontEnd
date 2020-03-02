@@ -1,12 +1,17 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+
 import { environment } from "../../../environments/environment";
+
 import { Lottery } from '../models/lottery.model';
+import { GlobalBalance } from '../models/global-balance.model';
+
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
 const BACKEND_URL = environment.apiUrl + "/lottery";
+const ADMIN_URL = environment.apiUrl + '/admin';
 
 @Injectable({
   providedIn: "root"
@@ -16,6 +21,7 @@ export class BetsListService {
 
   lotteries: Lottery[];
   private lotteriesUpdated = new Subject<Lottery[]>();
+  globalBalance: GlobalBalance;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -55,5 +61,13 @@ export class BetsListService {
 
   getLottery(id: string) {
     return { ...this.lotteries.find(p => p.id === id) };
+  }
+
+  getGlobalBalance() {
+    this.http.get<{ message: string, result: any }>(ADMIN_URL + '/globalBalance')
+      .subscribe((globalBalanceData) => {
+        this.globalBalance.id = globalBalanceData.result._id;
+        this.globalBalance.value = globalBalanceData.result.value;
+      });
   }
 }
