@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private authListenerSubs: Subscription;
   private roleListenerSubs: Subscription;
   userId: string;
-  amount: Number;
+  amount: number;
 
   constructor(private authService: AuthService, private dialog: MatDialog,
     private chargeMoneyService: CreateMoneyChargeService) {}
@@ -65,6 +65,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.amount = result;
       this.chargeMoneyService.createTransaction(this.userId, this.amount);
     });
-    
+
   }
 }

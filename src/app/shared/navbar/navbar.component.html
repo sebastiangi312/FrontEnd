@@ -22,7 +22,7 @@
     <li *ngIf="isAdmin && userIsAuthenticated">
       <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
     </li>
-    <li *ngIf="isAdmin">
+    <li *ngIf="isAdmin && userIsAuthenticated">
       <a mat-button routerLink="/admin/verifyCharges">Verificar recargas</a>
     </li>
     <li *ngIf="userIsAuthenticated">

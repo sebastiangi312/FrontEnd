@@ -3,6 +3,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { BetsListService } from 'src/app/core/services/bets-list.service';
 import { Subscription } from 'rxjs';
 import { Lottery } from 'src/app/core/models/lottery.model';
+import { MatDialog } from '@angular/material/dialog';
+import { BetsInDialogComponent } from '../bets-in-dialog/bets-in-dialog.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-bets-list',
@@ -25,8 +28,11 @@ export class BetsListComponent implements OnInit, OnDestroy {
   displayedColumns: string[];
   dataSource: Lottery[];
 
+
+  private chosenNumbers: number[] = new Array(4);
+
   constructor(private authService: AuthService,
-    public betService: BetsListService) { }
+              public betService: BetsListService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
@@ -61,6 +67,8 @@ export class BetsListComponent implements OnInit, OnDestroy {
   }
 
   onBet(row: Lottery) {
+    this.chosenNumbers = [0, 0, 0, 0, 0];
+    this.openBetDialog(row);
     console.log(row);
   }
 
@@ -73,4 +81,23 @@ export class BetsListComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     });
   }
+
+  openBetDialog(row: Lottery) {
+    const dialogRef = this.dialog.open(BetsInDialogComponent, {
+      width: '1000px',
+      data: {
+        userId: this.userId, lotteryId: row.id, balance: 0, fare: row.fare, chosenNumbers: this.chosenNumbers
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.betService.onBet(row.id, this.userId, this.chosenNumbers);
+      }
+    });
+  }
+
+openSnackBar(message: string) {
+  this._snackBar.open(message, null, { duration: 5000 });
+}
+
 }

@@ -14,7 +14,9 @@ import {
   MAT_DATE_LOCALE,
   MatNativeDateModule,
   MatExpansionModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 @NgModule({
@@ -32,7 +34,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   exports: [
     MatToolbarModule,
@@ -46,7 +50,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
