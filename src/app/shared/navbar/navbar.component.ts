@@ -18,29 +18,28 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   isAdmin = false;
   private authListenerSubs: Subscription;
-  private roleListenerSubs: Subscription;
+  private userListenerSubs: Subscription;
+  currentBalance: number;
   userId: string;
   amount: number;
 
   constructor(private authService: AuthService, private dialog: MatDialog,
-    private chargeMoneyService: CreateMoneyChargeService) {}
+    private chargeMoneyService: CreateMoneyChargeService) { }
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.getIsAuth();
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
     }
-    this.roleListenerSubs = this.authService.getUser().subscribe((user) => {
-      this.isAdmin = false;
-      this.isAdmin = user.roles.admin;
-    });
+    this.userListenerSubs = this.authService.getUser()
+      .subscribe((user) => {
+        this.isAdmin = false;
+        this.isAdmin = user.roles.admin;
+        this.currentBalance = user.balance;
+      });
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
-        this.roleListenerSubs = this.authService.getUser().subscribe(user => {
-          this.isAdmin = false;
-          this.isAdmin = user.roles.admin;
-        });
         this.userIsAuthenticated = isAuthenticated;
       });
   }
@@ -51,13 +50,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
-    this.roleListenerSubs.unsubscribe();
+    this.userListenerSubs.unsubscribe();
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ChargeMoneyComponent, {
       width: "250px",
-      data: { money: this.amount}
+      data: { money: this.amount }
     });
 
     dialogRef.afterClosed().subscribe(result => {

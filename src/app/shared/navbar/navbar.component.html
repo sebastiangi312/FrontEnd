@@ -33,6 +33,9 @@
         <mat-icon>perm_identity</mat-icon>Cuenta
       </a>
     </li>
+    <li>
+      <span *ngIf="userIsAuthenticated" class="currentBalance mat-body">{{ currentBalance | currency }}</span>
+    </li>
     <li *ngIf="userIsAuthenticated">
       <button mat-raised-button (click)="onLogout()">
         <mat-icon>exit_to_app</mat-icon>Cerrar sesión
