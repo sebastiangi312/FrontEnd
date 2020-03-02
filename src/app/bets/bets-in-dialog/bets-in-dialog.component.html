@@ -1,0 +1,30 @@
+<h3 mat-dialog-title>Apostar en: {{ data.lotteryId }}</h3>
+<div mat-dialog-content>
+  <p>Escoge 5 números</p>
+  <mat-form-field color="accent">
+      <mat-label>Primer número</mat-label>
+      <input type="number" matInput [(ngModel)]="data.chosenNumbers[0]" maxlength="2" min="0" max="45" required>
+  </mat-form-field>
+  <mat-form-field color="accent">
+    <mat-label>Segundo número</mat-label>
+    <input type="number" matInput [(ngModel)]="data.chosenNumbers[1]" maxlength="2" min="0" max="45" required>
+</mat-form-field>
+<mat-form-field color="accent">
+  <mat-label>Tercer número</mat-label>
+  <input type="number" matInput [(ngModel)]="data.chosenNumbers[2]" maxlength="2" min="0" max="45" required>
+</mat-form-field>
+<mat-form-field color="accent">
+  <mat-label>Cuarto número</mat-label>
+  <input type="number" matInput [(ngModel)]="data.chosenNumbers[3]" maxlength="2" min="0" max="45" required>
+</mat-form-field>
+<mat-form-field color="accent">
+  <mat-label>Quinto número</mat-label>
+  <input type="number" matInput [(ngModel)]="data.chosenNumbers[4]" maxlength="2" min="0" max="45" required>
+</mat-form-field>
+<p>Balance actual: {{ data.balance }}</p>
+<p>Balance nuevo: {{ data.balance - data.fare }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onNoClick()">CANCELAR</button>
+  <button mat-button color="accent" [mat-dialog-close]="data.lotteryId" cdkFocusInitial>APOSTAR</button>
+</div>

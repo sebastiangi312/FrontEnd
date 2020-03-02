@@ -11,7 +11,7 @@ import { CreateMoneyChargeService } from 'src/app/core/services/create-money-cha
 export class ChargeMoneyComponent {
   constructor(
     public dialogRef: MatDialogRef<NavbarComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Number) {}
+    @Inject(MAT_DIALOG_DATA) public data: {money: number}) {}
 
   onNoClick(): void {
     this.dialogRef.close();
