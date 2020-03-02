@@ -25,6 +25,9 @@
     <li *ngIf="isAdmin && userIsAuthenticated">
       <a mat-button routerLink="/admin/verifyCharges">Verificar recargas</a>
     </li>
+    <li *ngIf="isAdmin && userIsAuthenticated">
+      <a mat-button routerLink="/admin/verifiedList">Usuarios verificados</a>
+    </li>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Apuestas</a>
     </li>
