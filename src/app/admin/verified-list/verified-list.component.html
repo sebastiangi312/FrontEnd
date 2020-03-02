@@ -1,0 +1,58 @@
+<div class="main-div">
+    <mat-toolbar>
+        Usuarios verificados
+    </mat-toolbar>
+    <mat-spinner *ngIf="isLoading" color = "accent"></mat-spinner>
+    <mat-accordion *ngIf="!isLoading">
+      <mat-expansion-panel *ngFor="let verifiedUser of verifiedUsers">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ verifiedUser.email }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ verifiedUser.name }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <hr>
+        <div class="expansion-content">
+          <div class="expansion-user-info">
+            <h3>{{ verifiedUser.email }}</h3>
+            <table>
+              <tr>
+                <td>
+                  <label>Nombre: </label>
+                  {{ verifiedUser.name }}
+                </td>
+                <td>
+                  <label>ID: </label>
+                  {{ verifiedUser.id }}
+                </td>
+                <td>
+                  <mat-form-field appearance="fill" color="accent">
+                    <mat-label>Balance</mat-label>
+                    <input matInput [(ngModel)]="verifiedUser.balance" type="number" class="balance" disabled required>
+                    <span matPrefix>$&nbsp;</span>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label>Celular: </label>
+                  {{ verifiedUser.phone }}
+                </td>
+                <td>
+                  <label>Fecha de nacimiento: </label>
+                  {{ verifiedUser.birthdate }}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <!--<div class="footer">
+    <mat-paginator [length]="totalUsers" [pageSize]="usersPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+    *ngIf="verifiedUsers.length > 0"></mat-paginator>
+  </div>-->
+    <p class="info-text mat-body-1" *ngIf="verifiedUsers.length <= 0 && !isLoading">No hay usuarios verificados</p>
