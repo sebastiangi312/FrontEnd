@@ -91,10 +91,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.betService.onBet(row.id, this.userId, this.chosenNumbers)
-        .subscribe((result) => {
-          this.openSnackBar('Ticket creado exitosamente');
-        });
+        this.betService.onBet(row.id, this.userId, this.chosenNumbers);
       }
     });
   }

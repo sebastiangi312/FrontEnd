@@ -58,7 +58,13 @@ export class BetsListService {
       fourthNumber: chosenNumbers[3],
       fifthNumber: chosenNumbers[4]
     };
-    return this.http.post<{ message: string }>(TICKET_URL + '/lotteryTicket', ticketData);
+    this.http.post<{ message: string }>(TICKET_URL + '/lotteryTicket', ticketData)
+    .subscribe(response => {
+      console.log(response.message);
+    },
+    error => {
+      console.log(error);
+    });
   }
 
   getLotteryUpdateListener() {
