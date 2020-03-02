@@ -7,9 +7,10 @@ import { MaterialModule } from '../material/material.module';
 import { MatTableModule } from '@angular/material';
 import { BetsListService } from '../core/services/bets-list.service';
 import { FormsModule } from '@angular/forms';
+import { BetsInDialogComponent } from './bets-in-dialog/bets-in-dialog.component';
 
 @NgModule({
-  declarations: [BetsListComponent, CreateLotteryComponent],
+  declarations: [BetsListComponent, CreateLotteryComponent, BetsInDialogComponent],
   imports: [
     CommonModule,
     BetsRoutingModule,
@@ -17,6 +18,8 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     FormsModule,
     MatTableModule
-  ],providers: [BetsListService]
+  ], entryComponents: [
+    BetsInDialogComponent
+  ], providers: [BetsListService]
 })
 export class BetsModule { }

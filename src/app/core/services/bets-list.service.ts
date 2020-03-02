@@ -1,20 +1,19 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-
-import { environment } from "../../../environments/environment";
-
-import { Lottery } from '../models/lottery.model';
 import { GlobalBalance } from '../models/global-balance.model';
-
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Lottery } from '../models/lottery.model';
+import { Ticket } from '../models/ticket.model';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
 const BACKEND_URL = environment.apiUrl + "/lottery";
 const ADMIN_URL = environment.apiUrl + '/admin';
+const TICKET_URL = environment.apiUrl + '/ticket';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class BetsListService {
 
@@ -51,8 +50,23 @@ export class BetsListService {
     return this.http.delete(BACKEND_URL + '/delete/' + id);
   }
 
-  onBet() {
-    return;
+  onBet(lotteryId: string, userId: string, chosenNumbers: number[]) {
+    const ticketData: Ticket = {
+      lotteryId: lotteryId,
+      userId: userId,
+      firstNumber: chosenNumbers[0],
+      secondNumber: chosenNumbers[1],
+      thirdNumber: chosenNumbers[2],
+      fourthNumber: chosenNumbers[3],
+      fifthNumber: chosenNumbers[4]
+    };
+    this.http.post<{ message: string }>(TICKET_URL + '/lotteryTicket', ticketData)
+    .subscribe(response => {
+      console.log(response.message);
+    },
+    error => {
+      console.log(error);
+    });
   }
 
   getLotteryUpdateListener() {
