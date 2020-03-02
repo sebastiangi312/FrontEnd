@@ -1,0 +1,57 @@
+.main-div {
+  width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -200px;
+}
+
+.footer {
+  height: 200px;
+}
+
+mat-toolbar {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+table {
+  margin: auto;
+  width: 60vw;
+}
+
+label {
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+}
+
+label {
+  padding-right: 1rem;
+}
+
+.id, .birthdate {
+  text-align: justify;
+  margin-left: auto;
+}
+
+.expansion-content {
+  display: flex;
+}
+
+.expansion-user-info {
+  width: 80vw;
+}
+
+.expansion-buttons {
+  margin: auto;
+  width: 20vw;
+}
+
+input.balance {
+  -moz-appearance: textfield;
+}

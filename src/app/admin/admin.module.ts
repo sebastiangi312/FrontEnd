@@ -4,10 +4,11 @@ import { VerifyComponent } from './verify/verify.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule } from '@angular/forms';
+import { VerifiedListComponent } from './verified-list/verified-list.component';
 
 
 @NgModule({
-  declarations: [VerifyComponent],
+  declarations: [VerifyComponent, VerifiedListComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

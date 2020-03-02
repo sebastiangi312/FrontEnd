@@ -22,6 +22,9 @@
     <li *ngIf="isAdmin">
       <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
     </li>
+    <li *ngIf="isAdmin">
+      <a mat-button routerLink="/admin/verifiedList">Usuarios verificados</a>
+    </li>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Apuestas</a>
     </li>
