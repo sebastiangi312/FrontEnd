@@ -32,18 +32,22 @@ export class BetsListComponent implements OnInit, OnDestroy {
   private chosenNumbers: number[] = new Array(4);
 
   constructor(private authService: AuthService,
-              public betService: BetsListService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+    public betService: BetsListService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
     this.isLoading = true;
     this.userIsAuthenticated = this.authService.getIsAuth();
-    this.authStatusSub = this.authService
-      .getAuthStatusListener()
+
+    this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
+        // No está llegando acá, pero el servicio sí funciona
         this.userIsAuthenticated = isAuthenticated;
-        this.userId = this.authService.getUserId();
       });
+
+    if (this.userIsAuthenticated) {
+      this.userId = this.authService.getUserId();
+    }
 
     this.betService.getLotteries();
     this.lotterySub = this.betService.getLotteryUpdateListener()
@@ -57,7 +61,6 @@ export class BetsListComponent implements OnInit, OnDestroy {
     this.roleListenerSub = this.authService.getUser().subscribe((user) => {
       this.isAdmin = user.roles.admin;
     });
-
   }
 
   ngOnDestroy() {
@@ -96,8 +99,8 @@ export class BetsListComponent implements OnInit, OnDestroy {
     });
   }
 
-openSnackBar(message: string) {
-  this._snackBar.open(message, null, { duration: 5000 });
-}
+  openSnackBar(message: string) {
+    this._snackBar.open(message, null, { duration: 5000 });
+  }
 
 }
