@@ -30,6 +30,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
     }
+    this.roleListenerSubs = this.authService.getUser().subscribe((user) => {
+      this.isAdmin = false;
+      this.isAdmin = user.roles.admin;
+    });
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {

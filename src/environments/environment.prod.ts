@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://mplay-server.herokuapp.com/api'
+  apiUrl: 'http://mplayapp-env.5mmgqmpbns.us-east-1.elasticbeanstalk.com/api'
 };
