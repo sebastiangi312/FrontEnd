@@ -1,0 +1,19 @@
+mat-dialog-content {
+  height: 100%;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 10rem;
+  padding-left: 1rem;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
