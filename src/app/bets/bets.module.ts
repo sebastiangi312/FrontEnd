@@ -6,12 +6,16 @@ import { BetsRoutingModule } from './bets-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { MatTableModule, MatInputModule } from '@angular/material';
 import { BetsListService } from '../core/services/bets-list.service';
+
 import { FormsModule, ReactiveFormsModule,FormControl } from '@angular/forms';
 import { CreateSportComponent } from './bets-create/sport/create-sport/create-sport/create-sport.component';
 import { BetsListSportComponent } from './bets-list-sport/bets-list-sport/bets-list-sport.component';
+import { BetsInDialogComponent } from './bets-in-dialog/bets-in-dialog.component';
 
 @NgModule({
-  declarations: [BetsListComponent, CreateLotteryComponent, CreateSportComponent, BetsListSportComponent],
+  declarations: [BetsListComponent, CreateLotteryComponent, CreateSportComponent, BetsListSportComponent, BetsInDialogComponent],
+
+
   imports: [
     CommonModule,
     BetsRoutingModule,
@@ -21,6 +25,9 @@ import { BetsListSportComponent } from './bets-list-sport/bets-list-sport/bets-l
     MatTableModule,
     ReactiveFormsModule,
     MatInputModule
-  ],providers: [BetsListService]
+  ], entryComponents: [
+    BetsInDialogComponent
+  ], providers: [BetsListService]
+
 })
 export class BetsModule { }

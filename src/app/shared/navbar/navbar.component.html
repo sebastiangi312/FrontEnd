@@ -19,8 +19,14 @@
     <li *ngIf="!userIsAuthenticated">
       <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">Regístrate</a>
     </li>
-    <li *ngIf="isAdmin">
+    <li *ngIf="isAdmin && userIsAuthenticated">
       <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
+    </li>
+    <li *ngIf="isAdmin && userIsAuthenticated">
+      <a mat-button routerLink="/admin/verifyCharges">Verificar recargas</a>
+    </li>
+    <li *ngIf="isAdmin && userIsAuthenticated">
+      <a mat-button routerLink="/admin/verifiedList">Usuarios verificados</a>
     </li>
     <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Apuestas</a>
@@ -29,6 +35,9 @@
       <a mat-button [routerLink]="['/profile/', userId]" routerLinkActive="mat-accent">
         <mat-icon>perm_identity</mat-icon>Cuenta
       </a>
+    </li>
+    <li>
+      <span *ngIf="userIsAuthenticated" class="currentBalance mat-body">{{ currentBalance | currency }}</span>
     </li>
     <li *ngIf="userIsAuthenticated">
       <button mat-raised-button (click)="onLogout()">

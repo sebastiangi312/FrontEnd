@@ -7,7 +7,7 @@ import {
   MAT_DIALOG_DATA
 } from "@angular/material/dialog";
 import { ChargeMoneyComponent } from "../charge-money/charge-money.component";
-import { CreateMoneyChargeService } from 'src/app/core/services/create-money-charge.service';
+import { CreateMoneyChargeService } from "src/app/core/services/create-money-charge.service";
 
 @Component({
   selector: "app-navbar",
@@ -18,25 +18,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   isAdmin = false;
   private authListenerSubs: Subscription;
-  private roleListenerSubs: Subscription;
+  private userListenerSubs: Subscription;
+  currentBalance: number;
   userId: string;
-  amount: Number;
+  amount: number;
 
-  constructor(private authService: AuthService, private dialog: MatDialog,
-    private chargeMoneyService: CreateMoneyChargeService) {}
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private chargeMoneyService: CreateMoneyChargeService
+  ) {}
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.getIsAuth();
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
     }
+    this.userListenerSubs = this.authService.getUser().subscribe(user => {
+      this.isAdmin = false;
+      this.isAdmin = user.roles.admin;
+      this.currentBalance = user.balance;
+    });
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
-        this.roleListenerSubs = this.authService.getUser().subscribe(user => {
-          this.isAdmin = false;
-          this.isAdmin = user.roles.admin;
-        });
         this.userIsAuthenticated = isAuthenticated;
       });
   }
@@ -47,20 +52,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
-    this.roleListenerSubs.unsubscribe();
+    this.userListenerSubs.unsubscribe();
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ChargeMoneyComponent, {
       width: "250px",
-      data: { money: this.amount}
+      data: { money: this.amount }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("The dialog was closed");
-      this.amount = result;
-      this.chargeMoneyService.createTransaction(this.userId, this.amount);
+      if (result > 0) {
+        this.amount = result;
+        this.chargeMoneyService.createTransaction(this.userId, this.amount);
+      }
     });
-    
   }
 }

@@ -1,0 +1,35 @@
+<div class="main-div">
+  <mat-toolbar>
+      Verificación de recargas
+  </mat-toolbar>
+  <mat-spinner *ngIf="isLoading" color = "accent"></mat-spinner>
+  <mat-accordion *ngIf="!isLoading">
+    <mat-expansion-panel *ngFor="let charge of charges">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Aquí iría el nombre
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ charge.id }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <hr>
+      <div class="expansion-content">
+        <div class="expansion-user-info">
+          <h3><label>Valor de la recarga: </label> ${{ charge.amount }}</h3>
+        </div>
+        <div class="expansion-buttons">
+          <button mat-raised-button (click)="onAuthorize(charge.id)" class="accept-button" color="accent">VERIFICAR</button>
+          <button mat-raised-button (click)="onDeauthorize(charge.id)" class="delete-button" color="warn">RECHAZAR</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div class="footer">
+  <mat-paginator [length]="totalCharges" [pageSize]="chargesPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="charges.length > 0"></mat-paginator>
+
+</div>
+  <p class="info-text mat-body-1" *ngIf="charges.length <= 0 && !isLoading">No hay recargas por autorizar</p>
+
