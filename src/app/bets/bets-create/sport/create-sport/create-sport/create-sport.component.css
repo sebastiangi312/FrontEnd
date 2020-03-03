@@ -1,0 +1,61 @@
+.main-div {
+  position: absolute;
+  left: 30%;
+  top: 15%;
+
+
+
+}
+
+mat-card {
+  padding: 10vh;
+  width: 70%;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+
+
+mat-spinner {
+  margin: auto;
+}
+
+
+label {
+ width: 60%;
+ float: left;
+
+}
+
+
+.add {
+  width: 100%;
+  color: black;
+  background-color: rgb(40, 250, 124);;
+
+}
+
+.button-final{
+  float: right;
+}
+
+.box {
+  display: flex;
+  align-items: stretch;
+  padding: 1vh;
+
+}
+
+.non-bet-button {
+  width: 20%;
+}
+
+
+
+
+
+
+
+
