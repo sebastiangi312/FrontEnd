@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 const BACKEND_URL = environment.apiUrl + '/lottery';
+const BACKEND_URL_SPORT = environment.apiUrl + '/sportBetAdmin';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,18 @@ export class CreateLotteryService {
     this.http.put(BACKEND_URL + '/edit/' + id, editData).subscribe(result => {
       this.router.navigate(['/bets/list']);
     })
+  }
+
+  createSportBetAdmin(
+    finalDate: Date, matches: []) {
+
+    const data = { finalDate, matches};
+    this.http
+      .post(BACKEND_URL_SPORT, data
+      )
+      .subscribe(result => {
+        this.router.navigate(['/bets/list-sport']);
+      });
   }
 
   constructor(private http: HttpClient, private router: Router) { }
