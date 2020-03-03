@@ -27,21 +27,28 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private dialog: MatDialog,
     private chargeMoneyService: CreateMoneyChargeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.getIsAuth();
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
     }
-    this.userListenerSubs = this.authService.getUser().subscribe(user => {
-      this.isAdmin = false;
-      this.isAdmin = user.roles.admin;
-      this.currentBalance = user.balance;
-    });
+    this.userListenerSubs = this.authService.getUser()
+      .subscribe(user => {
+        this.isAdmin = false;
+        this.isAdmin = user.roles.admin;
+        this.currentBalance = user.balance;
+      });
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
+        this.userListenerSubs = this.authService.getUser()
+          .subscribe(user => {
+            this.isAdmin = false;
+            this.isAdmin = user.roles.admin;
+            this.currentBalance = user.balance;
+          });
         this.userIsAuthenticated = isAuthenticated;
       });
   }
