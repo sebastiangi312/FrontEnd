@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BetsListComponent } from './bets-list-lottery/bets-list.component';
+import { BetsListComponent } from './bets-list/bets-list.component';
 import { CreateLotteryComponent } from './bets-create/lottery/create-lottery/create-lottery.component'
 import { BetsRoutingModule } from './bets-routing.module';
 import { MaterialModule } from '../material/material.module';

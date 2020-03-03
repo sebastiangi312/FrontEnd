@@ -9,7 +9,7 @@
           <mat-label>Plazo límite para la apuesta</mat-label>
           <div>
             <mat-form-field>
-              <input matInput [min]="minDate" class="form-control" [matDatepicker]="picker" formControlName="finalDate"
+              <input matInput [min]="maxDate"  class="form-control" [matDatepicker]="picker" formControlName="finalDate"
                 required>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -43,14 +43,14 @@
 
                 <mat-form-field color="accent">
                   <mat-label class="col-md-1" [attr.for]="'matchDate' + i">Fecha del partido</mat-label>
-                  <input matInput [min]="minDate" [attr.id]="'matchDate' + i" class="form-control"
+                  <input matInput [min]="maxDate" [attr.id]="'matchDate' + i" class="form-control"
                     formControlName="matchDate" [matDatepicker]="picker" requiered>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                   <mat-error *ngIf="sportForm.controls['matches'].invalid">Por favor ingrese un valor valido.</mat-error>
                 </mat-form-field>
                 <div>
-                  <a mat-raised-button (click)="deleteMatch(i)" color="warn" class="non-bet-button"> 
+                  <a mat-raised-button (click)="deleteMatch(i)" color="warn" class="non-bet-button">
                     <mat-icon>delete</mat-icon>
                   </a>
                 </div>

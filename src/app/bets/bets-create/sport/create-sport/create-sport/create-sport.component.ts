@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Validators, FormArray, FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { Validators, FormArray, FormGroup, FormControl} from '@angular/forms';
 import { CreateLotteryService } from 'src/app/core/services/create-lottery.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,8 +15,8 @@ export class CreateSportComponent implements OnInit {
   isLoading = false;
   mode = 'create';
   sportForm: FormGroup;
-  minDate: Date;
-  arrayMatches: []
+
+  maxDate = new Date();
 
   constructor(public createLotteryService: CreateLotteryService,
     public route: ActivatedRoute, private router: Router) { }

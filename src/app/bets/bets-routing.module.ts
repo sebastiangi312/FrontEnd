@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BetsListComponent } from './bets-list-lottery/bets-list.component';
+import { BetsListComponent } from './bets-list/bets-list.component';
 import { CreateLotteryComponent } from './bets-create/lottery/create-lottery/create-lottery.component';
 import { AdminGuard } from '../core/guards/admin.guard';
 import { BetsListSportComponent } from './bets-list-sport/bets-list-sport/bets-list-sport.component';
