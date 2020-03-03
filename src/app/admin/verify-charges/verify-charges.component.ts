@@ -20,7 +20,7 @@ export class VerifyChargesComponent implements OnInit {
 
   totalCharges = 0;
 
-  chargesPerPage = 10;
+  chargesPerPage = 5;
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   chargeId: string;
@@ -37,9 +37,7 @@ export class VerifyChargesComponent implements OnInit {
       .getChargeUpdateListener()
       .subscribe((chargeData: { charges: Charge[]; chargeCount: number }) => {
         this.charges = chargeData.charges;
-        this.charges.forEach(charge => {
-          this.chargesService.getChargeUserName(charge.id);
-        });
+        console.log(this.charges);
         this.isLoading = false;
         this.totalCharges = chargeData.chargeCount;
       });

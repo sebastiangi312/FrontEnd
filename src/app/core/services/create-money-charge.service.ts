@@ -10,10 +10,10 @@ const BACKEND_URL = environment.apiUrl + "/transaction/";
   providedIn: "root"
 })
 export class CreateMoneyChargeService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
-  createTransaction(_idUser: String, amount: Number) {
-    const data = { amount, _idUser };
+  createTransaction(_idUser: string, userName: string, amount: number) {
+    const data = { amount, _idUser, userName };
     this.http.post(BACKEND_URL, data).subscribe(result => {
       console.log(result);
     });

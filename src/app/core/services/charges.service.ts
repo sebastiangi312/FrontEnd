@@ -26,14 +26,6 @@ export class ChargesService {
     return this.chargeId;
   }
 
-  getChargeUserName(idChargeToAuthorize: string) {
-    this.http
-      .get<{ name: string }>(
-        BACKEND_URL + '/transactionName/' + idChargeToAuthorize)
-      .subscribe(profileData => {
-      });
-  }
-
   getCharges(chargesPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${chargesPerPage}&page=${currentPage}`;
     this.http
@@ -47,6 +39,7 @@ export class ChargesService {
               return {
                 id: transaction._id, // MONGO
                 amount: transaction.amount,
+                userName: transaction.userName
               };
             }),
             maxCharges: transactionData.maxTransactions
