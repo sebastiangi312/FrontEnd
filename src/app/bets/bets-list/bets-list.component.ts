@@ -19,9 +19,11 @@ export class BetsListComponent implements OnInit, OnDestroy {
   isLoading = false;
   userIsAuthenticated = false;
   userId: string;
+  balance: number;
   private authStatusSub: Subscription;
   private lotterySub: Subscription;
   private roleListenerSub: Subscription;
+  private userListenerSubs: Subscription;
 
   ELEMENT_DATA: Lottery[];
 
@@ -31,8 +33,8 @@ export class BetsListComponent implements OnInit, OnDestroy {
 
   private chosenNumbers: number[] = new Array(4);
 
-  constructor(private authService: AuthService,
-    public betService: BetsListService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(private authService: AuthService, public betService: BetsListService,
+    public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
@@ -44,11 +46,12 @@ export class BetsListComponent implements OnInit, OnDestroy {
         // No está llegando acá, pero el servicio sí funciona
         this.userIsAuthenticated = isAuthenticated;
       });
-
+    this.userListenerSubs = this.authService.getUser().subscribe(user => {
+      this.balance = user.balance;
+    });
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
     }
-
     this.betService.getLotteries();
     this.lotterySub = this.betService.getLotteryUpdateListener()
       .subscribe(lotteries => {
@@ -72,7 +75,6 @@ export class BetsListComponent implements OnInit, OnDestroy {
   onBet(row: Lottery) {
     this.chosenNumbers = [0, 0, 0, 0, 0];
     this.openBetDialog(row);
-    console.log(row);
   }
 
   onDelete(row: Lottery) {
@@ -87,14 +89,22 @@ export class BetsListComponent implements OnInit, OnDestroy {
 
   openBetDialog(row: Lottery) {
     const dialogRef = this.dialog.open(BetsInDialogComponent, {
-      width: '1000px',
-      data: {
-        userId: this.userId, lotteryId: row.id, balance: 0, fare: row.fare, chosenNumbers: this.chosenNumbers
-      }
+      width: '950px',
+      data: { lotteryId: row.id, balance: this.balance, fare: row.fare }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.betService.onBet(row.id, this.userId, this.chosenNumbers);
+      if (result === 'cancel') {
+      } else if (result === 'invalid') {
+        this.openSnackBar('Los valores ingresados no son válidos');
+      } else if (result) {
+        this.chosenNumbers = [result.first, result.second, result.third, result.fourth, result.fifth];
+        this.betService.onBet(row.id, this.userId, this.chosenNumbers)
+          .subscribe(response => {
+            this.openSnackBar('Ticket creado exitosamente');
+          },
+            error => {
+              this.openSnackBar('Hubo un error interno');
+            });
       }
     });
   }
