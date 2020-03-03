@@ -9,7 +9,7 @@ import { VerifyChargeData } from '../models/verify-charge-data.model';
 import { AdminData } from '../models/admin-data.model';
 
 
-const BACKEND_URL = environment.apiUrl + '/charge/';
+const BACKEND_URL = environment.apiUrl + '/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ export class ChargesService {
   private charges: Charge[] = [];
   private chargesUpdated = new Subject<{ charges: Charge[]; chargeCount: number }>();
   private chargeId: string;
+  private userName: string[];
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -26,31 +27,29 @@ export class ChargesService {
   }
 
   getChargeUserName(idChargeToAuthorize: string) {
-    const getChargeUserNameData: VerifyChargeData = {
-      idChargeToAuthorize
-    };
-    return String(this.http
-      .put<{ message: string }>(
-        BACKEND_URL + './transactionName', getChargeUserNameData
-      ));
+    this.http
+      .get<{ name: string }>(
+        BACKEND_URL + '/transactionName/' + idChargeToAuthorize)
+      .subscribe(profileData => {
+      });
   }
 
   getCharges(chargesPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${chargesPerPage}&page=${currentPage}`;
     this.http
-      .get<{ message: string; charges: any; maxCharges: number }>(
-        BACKEND_URL + queryParams
+      .get<{ maxTransactions: number; message: string; transaction: any; }>(
+        BACKEND_URL + '/nonApproved' + queryParams
       )
       .pipe(
-        map(chargeData => {
+        map(transactionData => {
           return {
-            charges: chargeData.charges.map(charge => {
+            charges: transactionData.transaction.map(transaction => {
               return {
-                id: charge._id, // MONGO
-                amount: charge.amount,
+                id: transaction._id, // MONGO
+                amount: transaction.amount,
               };
             }),
-            maxCharges: chargeData.maxCharges
+            maxCharges: transactionData.maxTransactions
           };
         })
       )
@@ -84,17 +83,14 @@ export class ChargesService {
     };
     return this.http
       .put<{ message: string }>(
-        BACKEND_URL + './chargeAuth', verifyChargeData
+        BACKEND_URL + '/chargeAuth', verifyChargeData
       );
   }
 
   deauthorizeCharge(idChargeToDeauthorize: string) {
-    const verifyChargeData: VerifyChargeData = {
-      idChargeToAuthorize: idChargeToDeauthorize
-    };
     return this.http
-      .put<{ message: string }>(
-        BACKEND_URL + './chargeDeauth', verifyChargeData
+      .delete<{ message: string }>(
+        BACKEND_URL + '/chargeDeauth/' + idChargeToDeauthorize
       );
   }
 

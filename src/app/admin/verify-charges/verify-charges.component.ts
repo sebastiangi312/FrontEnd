@@ -24,7 +24,7 @@ export class VerifyChargesComponent implements OnInit {
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   chargeId: string;
-  chargeChargeUserName: string;
+  chargeUserName: string[];
   private chargesSub: Subscription;
 
   constructor(public chargesService: ChargesService) { }
@@ -33,13 +33,15 @@ export class VerifyChargesComponent implements OnInit {
     this.isLoading = true;
     this.chargesService.getCharges(this.chargesPerPage, this.currentPage);
     this.chargeId = this.chargesService.getChargeId();
-    this.chargeChargeUserName = this.chargesService.getChargeUserName(this.chargeId);
     this.chargesSub = this.chargesService
       .getChargeUpdateListener()
       .subscribe((chargeData: { charges: Charge[]; chargeCount: number }) => {
+        this.charges = chargeData.charges;
+        this.charges.forEach(charge => {
+          this.chargesService.getChargeUserName(charge.id);
+        });
         this.isLoading = false;
         this.totalCharges = chargeData.chargeCount;
-        this.charges = chargeData.charges;
       });
   }
 
