@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileData } from 'src/app/core/models/';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { UsersService } from 'src/app/core/services/users.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -24,6 +24,7 @@ export class VerifyChargesComponent implements OnInit {
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
   chargeId: string;
+  chargeChargeUserName: string;
   private chargesSub: Subscription;
 
   constructor(public chargesService: ChargesService) { }
@@ -32,6 +33,7 @@ export class VerifyChargesComponent implements OnInit {
     this.isLoading = true;
     this.chargesService.getCharges(this.chargesPerPage, this.currentPage);
     this.chargeId = this.chargesService.getChargeId();
+    this.chargeChargeUserName = this.chargesService.getChargeUserName(this.chargeId);
     this.chargesSub = this.chargesService
       .getChargeUpdateListener()
       .subscribe((chargeData: { charges: Charge[]; chargeCount: number }) => {

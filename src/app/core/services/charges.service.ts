@@ -25,6 +25,16 @@ export class ChargesService {
     return this.chargeId;
   }
 
+  getChargeUserName(idChargeToAuthorize: string) {
+    const getChargeUserNameData: VerifyChargeData = {
+      idChargeToAuthorize
+    };
+    return String(this.http
+      .put<{ message: string }>(
+        BACKEND_URL + './transactionName', getChargeUserNameData
+      ));
+  }
+
   getCharges(chargesPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${chargesPerPage}&page=${currentPage}`;
     this.http
