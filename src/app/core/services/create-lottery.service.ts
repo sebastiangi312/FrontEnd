@@ -8,6 +8,7 @@ import { BetsListService } from './bets-list.service';
 import { environment } from '../../../environments/environment';
 
 const BACKEND_URL = environment.apiUrl + '/lottery';
+const BACKEND_URL_SPORT = environment.apiUrl + '/sportBetAdmin';
 const ADMIN_URL = environment.apiUrl + '/admin';
 
 @Injectable({
@@ -43,6 +44,18 @@ export class CreateLotteryService {
           .subscribe(() => {
             this.router.navigate(['/bets/list']);
           });
+      });
+  }
+
+  createSportBetAdmin(
+    finalDate: Date, matches: []) {
+
+    const data = { finalDate, matches};
+    this.http
+      .post(BACKEND_URL_SPORT, data
+      )
+      .subscribe(result => {
+        this.router.navigate(['/bets/list-sport']);
       });
   }
 
