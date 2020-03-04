@@ -42,7 +42,7 @@ export class BetsListService {
       })
     ).subscribe(transformedLotteries => {
       this.lotteries = transformedLotteries;
-
+      // Tal vez se pueda usar un .filter en vez de un .forEach
       this.lotteries.forEach(item => {
         const now = new Date();
         if (item.open && item.closingDate <= now) {
