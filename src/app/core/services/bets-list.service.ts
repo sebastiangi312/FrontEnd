@@ -42,6 +42,14 @@ export class BetsListService {
       })
     ).subscribe(transformedLotteries => {
       this.lotteries = transformedLotteries;
+
+      this.lotteries.forEach(item => {
+        const now = new Date();
+        if (item.open && item.closingDate <= now) {
+          this.http.put<{ message: string }>(BACKEND_URL + '/close', { lotteryId: item.id });
+        }
+      });
+
       this.lotteriesUpdated.next([...this.lotteries]);
     });
   }
