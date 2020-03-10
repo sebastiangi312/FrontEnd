@@ -47,10 +47,9 @@ export class CreateLotteryService {
       });
   }
 
-  createSportBetAdmin(
-    finalDate: Date, matches: []) {
+  createSportBetAdmin( matches: []) {
 
-    const data = { finalDate, matches};
+    const data = { matches};
     this.http
       .post(BACKEND_URL_SPORT, data
       )

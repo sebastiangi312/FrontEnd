@@ -51,8 +51,8 @@ export class CreateSportComponent implements OnInit {
       if (this.mode === 'create') {
 
         this.isLoading = true;
-        const { finalDate, matches } = this.sportForm.value;
-        this.createLotteryService.createSportBetAdmin(finalDate, matches);
+        const {  matches } = this.sportForm.value;
+        this.createLotteryService.createSportBetAdmin( matches);
         this.isLoading = false;
       }
     }
