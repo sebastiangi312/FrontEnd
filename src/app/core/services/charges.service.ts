@@ -9,7 +9,7 @@ import { VerifyChargeData } from '../models/verify-charge-data.model';
 import { AdminData } from '../models/admin-data.model';
 
 
-const BACKEND_URL = environment.apiUrl + '/transaction/';
+const BACKEND_URL = environment.apiUrl + '/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ export class ChargesService {
   private charges: Charge[] = [];
   private chargesUpdated = new Subject<{ charges: Charge[]; chargeCount: number }>();
   private chargeId: string;
+  private userName: string[];
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -25,17 +26,10 @@ export class ChargesService {
     return this.chargeId;
   }
 
-  getChargeUserName(idChargeToAuthorize: string) {
-    return this.http
-      .get<{ message: string }>(
-        BACKEND_URL + '/transactionName/' + idChargeToAuthorize
-      );
-  }
-
   getCharges(chargesPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${chargesPerPage}&page=${currentPage}`;
     this.http
-      .get<{ maxTransactions: number, message: string; transaction: any;  }>(
+      .get<{ maxTransactions: number; message: string; transaction: any; }>(
         BACKEND_URL + '/nonApproved' + queryParams
       )
       .pipe(
@@ -45,6 +39,7 @@ export class ChargesService {
               return {
                 id: transaction._id, // MONGO
                 amount: transaction.amount,
+                userName: transaction.userName
               };
             }),
             maxCharges: transactionData.maxTransactions
@@ -86,12 +81,9 @@ export class ChargesService {
   }
 
   deauthorizeCharge(idChargeToDeauthorize: string) {
-    const verifyChargeData: VerifyChargeData = {
-      idChargeToAuthorize: idChargeToDeauthorize
-    };
     return this.http
-      .put<{ message: string }>(
-        BACKEND_URL + '/chargeDeauth', verifyChargeData
+      .delete<{ message: string }>(
+        BACKEND_URL + '/chargeDeauth/' + idChargeToDeauthorize
       );
   }
 
