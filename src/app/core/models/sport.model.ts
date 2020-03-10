@@ -1,5 +1,7 @@
+import { Match } from './match.model';
+
 export interface Sport {
 
-  finalDate: Date;
-  matches: [];
+  sportBetId: string;
+  matches: [Match];
 }

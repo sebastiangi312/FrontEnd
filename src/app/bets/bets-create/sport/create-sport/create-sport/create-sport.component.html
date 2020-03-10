@@ -3,23 +3,9 @@
     <mat-card-content>
       <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
       <form (submit)="onCreate()" *ngIf="!isLoading" [formGroup]="sportForm" >
+        <mat-card-title >Crear Apuesta deportiva</mat-card-title>
 
 
-        <div class="box">
-          <mat-label>Plazo límite para la apuesta</mat-label>
-          <div>
-            <mat-form-field>
-              <input matInput [min]="maxDate"  class="form-control" [matDatepicker]="picker" formControlName="finalDate"
-                required>
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-              <mat-error *ngIf="finalDate.invalid">Por favor ingrese una fecha válida.</mat-error>
-
-            </mat-form-field>
-
-          </div>
-
-        </div>
 
         <div formArrayName="matches" *ngFor="let match of matches.controls; let i = index">
           <div class="box">
