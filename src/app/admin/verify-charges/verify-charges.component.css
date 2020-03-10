@@ -34,7 +34,8 @@ label {
   padding-right: 1rem;
 }
 
-.id, .birthdate {
+.id,
+.birthdate {
   text-align: justify;
   margin-left: auto;
 }

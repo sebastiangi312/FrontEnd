@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   currentBalance: number;
   userId: string;
   amount: number;
+  userName: string;
 
   constructor(
     private authService: AuthService,
@@ -39,6 +40,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isAdmin = false;
         this.isAdmin = user.roles.admin;
         this.currentBalance = user.balance;
+        this.userName = user.name;
       });
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
@@ -48,6 +50,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
             this.isAdmin = false;
             this.isAdmin = user.roles.admin;
             this.currentBalance = user.balance;
+            this.userName = user.name;
           });
         this.userIsAuthenticated = isAuthenticated;
       });
@@ -72,7 +75,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       console.log("The dialog was closed");
       if (result > 0) {
         this.amount = result;
-        this.chargeMoneyService.createTransaction(this.userId, this.amount);
+        this.chargeMoneyService.createTransaction(this.userId, this.userName, this.amount);
       }
     });
   }

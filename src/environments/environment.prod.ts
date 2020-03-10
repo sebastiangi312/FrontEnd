@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://mplayapp-env.5mmgqmpbns.us-east-1.elasticbeanstalk.com/api'
+  apiUrl: 'http://mplayapi-env.eba-fbwrd5pn.us-east-1.elasticbeanstalk.com/api'
 };

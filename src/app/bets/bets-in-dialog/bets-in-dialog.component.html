@@ -7,31 +7,36 @@
     <mat-form-field color="accent">
       <mat-label>Primer número</mat-label>
       <input type="number" matInput min="0" max="45" name="first" formControlName="first" required>
+      <mat-error *ngIf="form.get('first').invalid">Ingrese un valor entre 0 y 45</mat-error>
       <mat-hint align="end">Valor entre 0 y 45</mat-hint>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Segundo número</mat-label>
       <input type="number" matInput  min="0" max="45" formControlName="second" required>
+      <mat-error *ngIf="form.get('second').invalid">Ingrese un valor entre 0 y 45</mat-error>
       <mat-hint align="end">Valor entre 0 y 45</mat-hint>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Tercer número</mat-label>
       <input type="number" matInput  min="0" max="45" formControlName="third" required>
+      <mat-error *ngIf="form.get('third').invalid">Ingrese un valor entre 0 y 45</mat-error>
       <mat-hint align="end">Valor entre 0 y 45</mat-hint>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Cuarto número</mat-label>
       <input type="number" matInput  min="0" max="45" formControlName="fourth" required>
+      <mat-error *ngIf="form.get('fourth').invalid">Ingrese un valor entre 0 y 45</mat-error>
       <mat-hint align="end">Valor entre 0 y 45</mat-hint>
     </mat-form-field>
     <mat-form-field color="accent">
       <mat-label>Quinto número</mat-label>
       <input type="number" matInput  min="0" max="45" formControlName="fifth" required>
+      <mat-error *ngIf="form.get('fifth').invalid">Ingrese un valor entre 0 y 45</mat-error>
       <mat-hint align="end">Valor entre 0 y 45</mat-hint>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button color="warn" (click)="onNoClick()">CANCELAR</button>
-  <button mat-button color="accent" type="submit" [disabled]="(data.fare > data.balance)" (click)="onSubmit()">APOSTAR</button>
+  <button mat-button color="accent" type="submit" [disabled]="(data.fare > data.balance)||form.invalid" (click)="onSubmit()">APOSTAR</button>
 </div>

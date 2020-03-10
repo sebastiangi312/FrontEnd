@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BetsListComponent } from './bets-list/bets-list.component';
 import { CreateLotteryComponent } from './bets-create/lottery/create-lottery/create-lottery.component';
 import { AdminGuard } from '../core/guards/admin.guard';
-import { BetsListSportComponent } from './bets-list-sport/bets-list-sport/bets-list-sport.component';
+import { BetsListSportComponent } from './bets-list-sport/bets-list-sport.component';
 import { CreateSportComponent } from './bets-create/sport/create-sport/create-sport/create-sport.component';
 
 const routes: Routes = [
