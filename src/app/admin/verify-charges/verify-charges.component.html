@@ -19,7 +19,6 @@
           <h3><label>Valor de la recarga: </label> ${{ charge.amount }}</h3>
         </div>
         <div class="expansion-buttons">
-          <button mat-raised-button (click)="onAuthorize(charge.id)" class="accept-button"
           <button mat-raised-button (click)="onAuthorize(charge.id, idCurrentUser)" class="accept-button"
             color="accent">VERIFICAR</button>
           <button mat-raised-button (click)="onDeauthorize(charge.id)" class="delete-button"
