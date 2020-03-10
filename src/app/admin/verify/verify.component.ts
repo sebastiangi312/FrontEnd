@@ -75,14 +75,15 @@ export class VerifyComponent implements OnInit {
     });
   }
 
-  onAuthorize(idUserToAuthorize: string) {
+  onAuthorize(idUserToAuthorize: string, newBalance: number) {
     this.isLoading = true;
-    this.usersService.authorizeUser(idUserToAuthorize).subscribe(() => {
+    this.usersService.authorizeUser(idUserToAuthorize, newBalance).subscribe(() => {
       this.usersService.getUsers(this.usersPerPage, this.currentPage);
     }, () => {
       this.isLoading = false;
     });
   }
+
 
   onDeauthorize(idUserToAuthorize: string) {
     this.isLoading = true;

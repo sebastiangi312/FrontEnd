@@ -75,9 +75,9 @@ export class UsersService {
     return this.http.delete(BACKEND_URL + userId);
   }
 
-  authorizeUser(idUserToAuthorize: string) {
+  authorizeUser(idUserToAuthorize: string, newBalance: number) {
     const verifyData: VerifyData = {
-      idUserToAuthorize
+      idUserToAuthorize, newBalance
     };
     return this.http
       .put<{ message: string }>(
@@ -85,9 +85,9 @@ export class UsersService {
       );
   }
 
-  deauthorizeUser(idUserToDeauthorize: string) {
+  deauthorizeUser(idUserToDeauthorize: string, newBalance = 0) {
     const verifyData: VerifyData = {
-      idUserToAuthorize: idUserToDeauthorize
+      idUserToAuthorize: idUserToDeauthorize, newBalance
     };
     return this.http
       .put<{ message: string }>(

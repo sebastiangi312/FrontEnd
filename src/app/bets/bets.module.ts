@@ -15,7 +15,7 @@ import { BetsInDialogComponent } from './bets-in-dialog/bets-in-dialog.component
 @NgModule({
   declarations: [BetsListComponent, CreateLotteryComponent, CreateSportComponent, BetsListSportComponent, BetsInDialogComponent],
 
-
+  
   imports: [
     CommonModule,
     BetsRoutingModule,
