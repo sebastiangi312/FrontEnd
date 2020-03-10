@@ -19,7 +19,7 @@ export class VerifiedListService {
 
   getAuthorizedUsers(usersPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${usersPerPage}&page=${currentPage}`;
-    this.http.get<{ message: string, users: any, maxUsers: number }>(BACKEND_URL + 'authUsers/list').pipe(
+    this.http.get<{ message: string, users: any, maxUsers: number }>(BACKEND_URL + 'authUsers/list' + queryParams).pipe(
       map(verifiedUsers => {
         return{
         verifiedUser: verifiedUsers.users.map(users => {
