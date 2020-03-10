@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileData } from 'src/app/core/models/';
 import { UsersService } from 'src/app/core/services/users.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -17,9 +18,8 @@ import { Charge } from 'src/app/core/models/charge.model';
 export class VerifyChargesComponent implements OnInit {
   isLoading = false;
   charges: Charge[] = [];
-
   totalCharges = 0;
-
+  idCurrentUser: string;
   chargesPerPage = 5;
   currentPage = 1;
   pageSizeOptions = [1, 2, 5, 10];
@@ -27,11 +27,12 @@ export class VerifyChargesComponent implements OnInit {
   chargeUserName: string[];
   private chargesSub: Subscription;
 
-  constructor(public chargesService: ChargesService) { }
+  constructor(public chargesService: ChargesService, public authService: AuthService) { }
 
   ngOnInit() {
     this.isLoading = true;
     this.chargesService.getCharges(this.chargesPerPage, this.currentPage);
+    this.idCurrentUser = this.authService.getUserId();
     this.chargeId = this.chargesService.getChargeId();
     this.chargesSub = this.chargesService
       .getChargeUpdateListener()
@@ -59,9 +60,9 @@ export class VerifyChargesComponent implements OnInit {
     });
   }
 
-  onAuthorize(idChargeToAuthorize: string) {
+  onAuthorize(idChargeToAuthorize: string, idCurrentUser: string) {
     this.isLoading = true;
-    this.chargesService.authorizeCharge(idChargeToAuthorize).subscribe(() => {
+    this.chargesService.authorizeCharge(idChargeToAuthorize, idCurrentUser).subscribe(() => {
       this.chargesService.getCharges(this.chargesPerPage, this.currentPage);
     }, () => {
       this.isLoading = false;

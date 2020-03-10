@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VerifyChargeData } from '../models/verify-charge-data.model';
 import { AdminData } from '../models/admin-data.model';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 const BACKEND_URL = environment.apiUrl + '/transaction';
@@ -70,9 +71,10 @@ export class ChargesService {
     return this.http.delete(BACKEND_URL + chargeId);
   }
 
-  authorizeCharge(idChargeToAuthorize: string) {
+  authorizeCharge(idChargeToAuthorize: string, idAdmin: string) {
     const verifyChargeData: VerifyChargeData = {
-      idChargeToAuthorize
+      idChargeToAuthorize,
+      idAdmin
     };
     return this.http
       .put<{ message: string }>(
