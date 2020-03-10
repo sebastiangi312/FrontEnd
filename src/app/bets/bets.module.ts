@@ -7,9 +7,9 @@ import { MaterialModule } from '../material/material.module';
 import { MatTableModule, MatInputModule } from '@angular/material';
 import { BetsListService } from '../core/services/bets-list.service';
 
-import { FormsModule, ReactiveFormsModule,FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateSportComponent } from './bets-create/sport/create-sport/create-sport/create-sport.component';
-import { BetsListSportComponent } from './bets-list-sport/bets-list-sport/bets-list-sport.component';
+import { BetsListSportComponent } from './bets-list-sport/bets-list-sport.component';
 import { BetsInDialogComponent } from './bets-in-dialog/bets-in-dialog.component';
 
 @NgModule({
