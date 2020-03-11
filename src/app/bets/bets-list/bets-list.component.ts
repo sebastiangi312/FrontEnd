@@ -23,7 +23,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
   private authStatusSub: Subscription;
   private lotterySub: Subscription;
   private roleListenerSub: Subscription;
-  private userListenerSubs: Subscription;
+  private userListenerSub: Subscription;
 
   ELEMENT_DATA: Lottery[];
 
@@ -34,7 +34,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
   private chosenNumbers: number[] = new Array(4);
 
   constructor(private authService: AuthService, public betService: BetsListService,
-    public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+              public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
@@ -46,11 +46,13 @@ export class BetsListComponent implements OnInit, OnDestroy {
         // No está llegando acá, pero el servicio sí funciona
         this.userIsAuthenticated = isAuthenticated;
       });
-    this.userListenerSubs = this.authService.getUser().subscribe(user => {
-      this.balance = user.balance;
-    });
+
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
+      this.userListenerSub = this.authService.getUser()
+      .subscribe(user => {
+        this.balance = user.balance;
+      });
     }
     this.betService.getLotteries();
     this.lotterySub = this.betService.getLotteryUpdateListener()
@@ -110,7 +112,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
   }
 
   openSnackBar(message: string) {
-    this._snackBar.open(message, null, { duration: 5000 });
+    this.snackBar.open(message, null, { duration: 5000 });
   }
 
 }
