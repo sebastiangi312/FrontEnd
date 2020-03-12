@@ -23,9 +23,6 @@ export class CreateSportComponent implements OnInit {
 
 
 
-  get finalDate() {
-    return this.sportForm.get('finalDate');
-  }
 
   get matches() {
     return this.sportForm.get('matches') as FormArray;
@@ -36,7 +33,6 @@ export class CreateSportComponent implements OnInit {
   ngOnInit() {
     this.mode = 'create';
     this.sportForm = new FormGroup({
-      'finalDate': new FormControl('', Validators.required),
       'matches': new FormArray([])
     });
 
@@ -75,6 +71,9 @@ export class CreateSportComponent implements OnInit {
       }));
 
       console.log(this.sportForm.controls['matches'].value);
+      console.log((this.sportForm.controls['matches'].value).length);
+
+
 
 
   }
@@ -85,10 +84,7 @@ export class CreateSportComponent implements OnInit {
   }
 
   cancel(form: FormGroup) {
-    this.sportForm.patchValue({
-      finalDate: ''
 
-    });
     form.reset();
     Object.keys(form.controls).forEach(key => {
       form.get(key).setErrors(null);
