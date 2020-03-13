@@ -1,0 +1,40 @@
+<div class="main-div">
+  <mat-toolbar>
+    Ingreso de marcadores
+  </mat-toolbar>
+  <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
+  <mat-accordion *ngIf="!isLoading">
+    <mat-expansion-panel *ngFor="let match of matches">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ match.homeTeam }} - {{ match.awayTeam }}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ match.matchDate }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <hr>
+      <div class="expansion-content">
+        <mat-form-field color = "accent">
+          <input matInput [(ngModel)]="homeScore" type="number" placeholder="Marcador local" #homeScoreInput="ngModel"
+          min="0" oninput="validity.valid||(value='');" required>
+          <mat-error *ngIf="homeScoreInput.invalid">Por favor ingrese un número válido.</mat-error>
+        </mat-form-field>
+        <mat-form-field color = "accent">
+          <input matInput [(ngModel)]="awayScore" type="number" placeholder="Marcador visitante" #awayScoreInput="ngModel"
+          min="0" oninput="validity.valid||(value='');" required>
+          <mat-error *ngIf="awayScoreInput.invalid">Por favor ingrese un número válido.</mat-error>
+        </mat-form-field>
+        <div class="expansion-buttons">
+          <button mat-raised-button (click)="onSave(homeScore, awayScore)" class="accept-button"
+            color="accent">GUARDAR</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div class="footer">
+  <mat-paginator [length]="totalMatches" [pageSize]="matchesPerPage" [pageSizeOptions]="pageSizeOptions"
+    (page)="onChangedPage($event)" *ngIf="matches.length > 0"></mat-paginator>
+</div>
+<p class="info-text mat-body-1" *ngIf="matches.length <= 0 && !isLoading">Todos los partidos tienen marcador</p>

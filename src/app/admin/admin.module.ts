@@ -6,13 +6,15 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule } from '@angular/forms';
 import { VerifyChargesComponent } from './verify-charges/verify-charges.component';
 import { VerifiedListComponent } from './verified-list/verified-list.component';
+import { FillScoreboardsComponent } from './fill-scoreboards/fill-scoreboards.component';
 
 
 @NgModule({
   declarations: [
     VerifyComponent,
     VerifyChargesComponent,
-    VerifiedListComponent],
+    VerifiedListComponent,
+    FillScoreboardsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
