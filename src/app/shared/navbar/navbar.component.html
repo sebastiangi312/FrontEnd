@@ -20,6 +20,9 @@
       <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">Regístrate</a>
     </li>
     <li *ngIf="isAdmin && userIsAuthenticated">
+      <a mat-button routerLink="/admin/fillScoreboards">Llenar marcadores</a>
+    </li>
+    <li *ngIf="isAdmin && userIsAuthenticated">
       <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
     </li>
     <li *ngIf="isAdmin && userIsAuthenticated">
