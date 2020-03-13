@@ -1,7 +1,11 @@
 export interface Match {
+
+  id: string;
   homeTeam: string;
   awayTeam: string;
   matchDate: Date;
-  scoreBoard: string;
+  homeScore: number;
+  awayScore: number;
   status: boolean;
+
 }
