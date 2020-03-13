@@ -2,80 +2,48 @@
   <mat-card>
     <mat-card-content>
       <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
-      <form (submit)="onCreate()" *ngIf="!isLoading" [formGroup]="sportForm" >
-        <mat-card-title >Crear Apuesta deportiva</mat-card-title>
+      <form (submit)="onCreate(sportForm)" *ngIf="!isLoading" [formGroup]="sportForm">
+        <mat-card-title>Crear Partido Nuevo</mat-card-title>
 
+        <mat-form-field color="accent">
+          <mat-label>Nombre del equipo local</mat-label>
+          <input type="text" matInput name="homeTeam" formControlName="homeTeam" required>
+          <mat-error *ngIf="sportForm.get('homeTeam').invalid">Ingrese un nombre válido</mat-error>
+        </mat-form-field>
 
+        <mat-form-field color="accent">
+          <mat-label>Nombre del equipo visitante</mat-label>
+          <input type="text" matInput name="awayTeam" formControlName="awayTeam" required>
+          <mat-error *ngIf="sportForm.get('awayTeam').invalid">Ingrese un nombre válido</mat-error>
+        </mat-form-field>
 
-        <div formArrayName="matches" *ngFor="let match of matches.controls; let i = index">
-          <div class="box">
-            <label>Partido {{i+1}}</label>
-            <div>
-              <div [formGroupName]="i">
-                <mat-form-field color="accent">
-                  <mat-label class="col-md-1" [attr.for]="'homeTeam' + i">Equipo local</mat-label>
-                  <input matInput type="text" [attr.id]="'homeTeam' + i" class="form-control" formControlName="homeTeam" requiered>
-                  <mat-error *ngIf="sportForm.controls['matches'].invalid">Por favor ingrese un valor valido.</mat-error>
-                </mat-form-field>
-
-                <div>
-                  <mat-form-field color="accent">
-                    <mat-label class="col-md-1" [attr.for]="'awayTeam' + i">Equipo visitante</mat-label>
-                    <input matInput type="text" [attr.id]="'awayTeam' + i" class="form-control"
-                      formControlName="awayTeam" requiered>
-                      <mat-error *ngIf="sportForm.controls['matches'].invalid">Por favor ingrese un valor valido.</mat-error>
-                  </mat-form-field>
-                </div>
-
-                <mat-form-field color="accent">
-                  <mat-label class="col-md-1" [attr.for]="'matchDate' + i">Fecha del partido</mat-label>
-                  <input matInput [min]="maxDate" [attr.id]="'matchDate' + i" class="form-control"
-                    formControlName="matchDate" [matDatepicker]="picker" requiered>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                  <mat-error *ngIf="sportForm.controls['matches'].invalid">Por favor ingrese un valor valido.</mat-error>
-                </mat-form-field>
-                <div>
-                  <a mat-raised-button (click)="deleteMatch(i)" color="warn" class="non-bet-button">
-                    <mat-icon>delete</mat-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-
-
+        <mat-form-field color="accent">
+          <mat-label>Fecha del partido</mat-label>
+          <input matInput [min]="minDate" name="matchDate" formControlName="matchDate" [matDatepicker]="picker"
+            placeholder="Fecha de cierre" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="sportForm.get('matchDate').invalid">Por favor ingrese una fecha válida.</mat-error>
+        </mat-form-field>
+        <!--
+        <div class="score">
+          <mat-form-field color="accent">
+            <mat-label>Marcador local</mat-label>
+            <input type="number" matInput name="homeScore" min="0" max="45" formControlName="homeScore" required>
+            <mat-error *ngIf="form.get('homeScore').invalid">Ingrese un valor válido</mat-error>
+          </mat-form-field>
+          <mat-form-field color="accent">
+            <mat-label>Marcador visitante</mat-label>
+            <input type="number" matInput  name="awayScore" min="0" max="45" formControlName="awayScore" required>
+            <mat-error *ngIf="form.get('awayScore').invalid">Ingrese un valor válido</mat-error>
+          </mat-form-field>
         </div>
-
-
-        <div>
-          <a mat-raised-button (click)="addMatches()" class="add">
-            <mat-icon>add</mat-icon>
-          </a>
+        -->
+        <div class="create" *ngIf="mode=='create' && !isLoading">
+          <a mat-raised-button color="warn" routerLink="/bets/list">CANCELAR</a>
+          <button mat-raised-button color="accent" type="submit" [disabled]="sportForm.invalid">CREAR</button>
         </div>
-
-
-
-
-        <p></p>
-        <button mat-raised-button type="submit" class="button-final" [disabled]="sportForm.invalid"
-          *ngIf="mode=='create' && !isLoading && (sportForm.controls['matches'].value).length >=5 ">
-          Crear apuesta
-        </button>
-
-        <a mat-raised-button (click)="cancel(sportForm)" class="button-final">
-          Cancelar
-        </a>
-        <mat-error *ngIf="(sportForm.controls['matches'].value).length <5" >Debe crear mínimo 5 partidos</mat-error>
-        
-
-
-
       </form>
-
     </mat-card-content>
   </mat-card>
 </div>

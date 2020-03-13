@@ -40,6 +40,13 @@ input[type="number"] {
 }
 
 .create {
-  margin: auto;
+  display: inline-block;
   width: 100%;
+  text-align: center;
+}
+
+.create .mat-raised-button {
+  width: 40%;
+  margin-left: 5px;
+  margin-right: 5px;
 }

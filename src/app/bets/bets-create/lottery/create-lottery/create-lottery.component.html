@@ -41,9 +41,11 @@
             placeholder="Valor del tercer premio" disabled>
         </mat-form-field>
 
-
-        <button mat-raised-button color="accent" type="submit" *ngIf="mode=='create' && !isLoading" class="create"
+        <div class="create">
+          <a mat-raised-button color="warn" *ngIf="mode=='create' && !isLoading" routerLink="/bets/list">CANCELAR</a>
+          <button mat-raised-button color="accent" type="submit" *ngIf="mode=='create' && !isLoading" class="create"
           [disabled]="createLotteryForm.form.invalid">CREAR</button>
+        </div>
         <div class="edit">
           <a mat-raised-button color="warn" *ngIf="mode=='edit' && !isLoading" routerLink="/bets/list">CANCELAR</a>
           <button mat-raised-button color="accent" type="submit" *ngIf="mode=='edit' && !isLoading"
