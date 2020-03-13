@@ -1,62 +1,40 @@
 .main-div {
-  position: absolute;
-  left: 30%;
-  top: 15%;
-
-
-
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 mat-card {
-  padding: 10vh;
-  width: 70%;
+  padding: 5vh;
+  width: 40%;
 }
 
 mat-card-title {
   text-align: center;
 }
 
-
+mat-form-field {
+  width: 100%;
+  margin: 0 5px 10px 5px;
+}
 
 mat-spinner {
   margin: auto;
 }
 
-
-label {
- width: 60%;
- float: left;
-
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
-
-.add {
+.create {
+  display: inline-block;
   width: 100%;
-  color: black;
-  background-color: rgb(40, 250, 124);;
-
+  text-align: center;
 }
 
-.button-final{
-  float: right;
+.create .mat-raised-button {
+  width: 40%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
-
-.box {
-  display: flex;
-  align-items: stretch;
-  padding: 1vh;
-  width: 105%;
-
-}
-
-.non-bet-button {
-  width: 20%;
-}
-
-
-
-
-
-
-
-

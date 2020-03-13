@@ -1,3 +1,32 @@
+
+.mat-raised-button {
+  margin-left: 5px;
+}
+
+.mat-table {
+  width: 80%;
+  margin: auto;
+}
+
+mat-cell {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+mat-header-cell {
+  display: flex;
+  justify-content: center;
+}
+
+.bet-button {
+  width: 100%;
+}
+
+.non-bet-button {
+  width: 45%;
+}
+
+
 .create {
   width: 100%;
 }
@@ -10,4 +39,8 @@
 .container .add-wrapper {
   margin: auto;
   width: 80%;
+}
+
+.mat-column-select {
+  overflow: initial;
 }

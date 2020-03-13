@@ -1,8 +1,7 @@
-import { Match } from './match.model';
+import { MatchBet } from './matchBet.model';
 
 export interface SportTicket {
   userId: string;
-  sportId: string;
-  matches: Match[];
-  betMoney: number;
+  betValue: number;
+  matchBets: MatchBet[];
 }

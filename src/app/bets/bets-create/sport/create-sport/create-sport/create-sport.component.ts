@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Validators, FormArray, FormGroup, FormControl} from '@angular/forms';
+import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { CreateLotteryService } from 'src/app/core/services/create-lottery.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -15,84 +15,41 @@ export class CreateSportComponent implements OnInit {
   isLoading = false;
   mode = 'create';
   sportForm: FormGroup;
+  homeTeam: string;
+  awayTeam: string;
+  matchDate: Date;
+  homeScore: number;
+  awayScore: number;
 
-  maxDate = new Date();
+  minDate: Date;
 
-  constructor(public createLotteryService: CreateLotteryService,
+  constructor(private formBuilder: FormBuilder, public createLotteryService: CreateLotteryService,
     public route: ActivatedRoute, private router: Router) { }
-
-
-
-
-  get matches() {
-    return this.sportForm.get('matches') as FormArray;
-  }
-
-
 
   ngOnInit() {
     this.mode = 'create';
-    this.sportForm = new FormGroup({
-      'matches': new FormArray([])
+    this.minDate = new Date();
+    this.sportForm = this.formBuilder.group({
+      homeTeam: new FormControl('', [Validators.required]),
+      awayTeam: new FormControl('', [Validators.required]),
+      matchDate: new FormControl('', [Validators.required]),
+      /*
+      homeScore: new FormControl('', [Validators.min(0)]),
+      awayScore: new FormControl('', [Validators.min(0)]),
+      */
     });
-
   }
 
   onCreate() {
     if (this.sportForm.invalid) {
       return;
-    }
-    if((this.sportForm.controls['matches'].value).length >=5){
-
+    } else {
       if (this.mode === 'create') {
-
         this.isLoading = true;
-        const {  matches } = this.sportForm.value;
-        this.createLotteryService.createSportBetAdmin( matches);
+        this.createLotteryService.createMatch(this.sportForm.value);
         this.isLoading = false;
       }
     }
-
-
-
-
-
-  }
-
-  addMatches() {
-    (<FormArray>this.sportForm.controls['matches']).push(
-      new FormGroup({
-        'homeTeam': new FormControl('', Validators.required),
-        'awayTeam': new FormControl('', Validators.required),
-        'matchDate': new FormControl('', Validators.required),
-        'secoreboard': new FormControl(''),
-        'status': new FormControl(false)
-
-      }));
-
-      console.log(this.sportForm.controls['matches'].value);
-      console.log((this.sportForm.controls['matches'].value).length);
-
-
-
-
-  }
-
-  deleteMatch(index: number) {
-    (<FormArray>this.sportForm.controls['matches']).removeAt(index);
-    console.log(this.sportForm.controls['matches'].value)
-  }
-
-  cancel(form: FormGroup) {
-
-    form.reset();
-    Object.keys(form.controls).forEach(key => {
-      form.get(key).setErrors(null);
-    });
-    (this.sportForm.controls['matches'].value).length = 0;
-    console.log(this.sportForm.controls['matches'].value)
-    this.router.navigate(['/bets/list-sport']);
-
   }
 
 }
