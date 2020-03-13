@@ -34,7 +34,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
   private chosenNumbers: number[] = new Array(4);
 
   constructor(private authService: AuthService, public betService: BetsListService,
-              public dialog: MatDialog, private snackBar: MatSnackBar) { }
+    public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
@@ -50,9 +50,9 @@ export class BetsListComponent implements OnInit, OnDestroy {
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
       this.userListenerSub = this.authService.getUser()
-      .subscribe(user => {
-        this.balance = user.balance;
-      });
+        .subscribe(user => {
+          this.balance = user.balance;
+        });
     }
     this.betService.getLotteries();
     this.lotterySub = this.betService.getLotteryUpdateListener()

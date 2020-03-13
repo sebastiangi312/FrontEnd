@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'list', component: BetsListComponent },
   { path: 'create-lottery', component: CreateLotteryComponent, canActivate: [AdminGuard] },
   { path: 'edit-lottery/:id', component: CreateLotteryComponent, canActivate: [AdminGuard]},
-  { path: 'list-sport', component: BetsListSportComponent, canActivate: [AdminGuard] },
+  { path: 'list-sport', component: BetsListSportComponent},
   { path: 'create-sport', component: CreateSportComponent, canActivate: [AdminGuard] }
 ];
 

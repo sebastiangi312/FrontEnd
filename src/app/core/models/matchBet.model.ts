@@ -1,4 +1,4 @@
-export interface SportBet {
+export interface MatchBet {
   id: string;
   homeTeam: string;
   awayTeam: string;

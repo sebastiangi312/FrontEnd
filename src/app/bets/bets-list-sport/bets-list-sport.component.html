@@ -4,4 +4,68 @@
       <mat-icon>add</mat-icon>
     </a>
   </div>
+  <div class="add-wrapper">
+    <a mat-raised-button *ngIf="!isAdmin" color="accent" routerLink="/bets/create-sport" class="create">
+      <mat-icon>add</mat-icon>
+    </a>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- id [hidden] Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"></td>
+    </ng-container>
+
+    <!-- homeTeam Column -->
+    <ng-container matColumnDef="homeTeam">
+      <th mat-header-cell *matHeaderCellDef>Equipo local</th>
+      <td mat-cell *matCellDef="let element"> {{element.homeTeam}} </td>
+    </ng-container>
+
+    <!-- awayTeam Column -->
+    <ng-container matColumnDef="awayTeam">
+      <th mat-header-cell *matHeaderCellDef>Equipo visitante</th>
+      <td mat-cell *matCellDef="let element"> {{element.awayTeam}} </td>
+    </ng-container>
+
+    <!-- matchDate Column -->
+    <ng-container matColumnDef="matchDate">
+      <th mat-header-cell *matHeaderCellDef>Fecha del Juego</th>
+      <td mat-cell *matCellDef="let element"> {{ element.matchDate.getDate() + "/" +
+        element.matchDate.getMonth() + "/" + element.matchDate.getFullYear() }} </td>
+    </ng-container>
+
+    <!-- open Column -->
+    <ng-container matColumnDef="open">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let element"> {{element.open ? 'Abierto' : 'Cerrado'}} </td>
+    </ng-container>
+
+    <ng-container *ngIf="isAdmin" matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Opciones</th>
+      <td mat-cell *matCellDef="let element">
+        <a mat-raised-button color="accent" class="non-bet-button" [routerLink]="['/bets/edit-lottery', element.id]">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <button mat-raised-button color="warn" class="non-bet-button" (click)="onDelete(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container *ngIf="!isAdmin" matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox [disabled]="!row.open" (click)="onSelect($event, row.id); $event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
