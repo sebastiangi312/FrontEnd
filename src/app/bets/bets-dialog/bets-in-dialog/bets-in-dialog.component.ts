@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BetsListComponent } from '../bets-list/bets-list.component';
+import { BetsListComponent } from '../../bets-list/bets-list.component';
 import { FormControl, Validators, Form, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({

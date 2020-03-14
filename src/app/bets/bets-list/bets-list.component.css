@@ -36,5 +36,6 @@ mat-header-cell {
 
 .container .add-wrapper {
   margin: auto;
+  padding: 10px;
   width: 80%;
 }
