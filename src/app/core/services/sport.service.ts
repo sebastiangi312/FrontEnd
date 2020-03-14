@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatchBet } from '../models/matchBet.model';
 import { GlobalBalance } from '../models/global-balance.model';
+import { SportTicket } from '../models/sportTicket.model';
 
 const BACKEND_URL = environment.apiUrl + '/match';
 const ADMIN_URL = environment.apiUrl + '/admin';
@@ -31,6 +32,7 @@ export class SportService {
               id: matchBet._id,
               homeTeam: matchBet.homeTeam,
               awayTeam: matchBet.awayTeam,
+              finalScoreBoard: matchBet.finalScoreBoard,
               matchDate: new Date(matchBet.matchDate),
               open: matchBet.open
             };
@@ -42,7 +44,7 @@ export class SportService {
         this.matchBets.forEach(item => {
           const now = new Date();
           if (item.open && item.matchDate <= now) {
-            this.http.put<{ message: string }>(BACKEND_URL + '/close', { matchBetId: item.id });
+            this.http.put<{ message: string }>(BACKEND_URL + '/close', { matchId: item.id });
           }
         });
         this.matchBetsUpdated.next([...this.matchBets]);
@@ -65,8 +67,8 @@ export class SportService {
       });
   }
 
-  createSportTicket() {
-    // post
+  onBet(sportTicketData: SportTicket) {
+    return this.http.post<{ message: string }>(TICKET_URL, sportTicketData);
   }
 
 }

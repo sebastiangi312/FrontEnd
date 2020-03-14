@@ -4,6 +4,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { MatchBet } from 'src/app/core/models/matchBet.model';
 import { SportService } from 'src/app/core/services/sport.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { BetsSportInDialogComponent } from '../bets-dialog/bets-sport-in-dialog/bets-sport-in-dialog.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { SportTicket } from 'src/app/core/models/sportTicket.model';
 
 @Component({
   selector: 'app-bets-list-sport',
@@ -17,6 +20,7 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   userId: string;
   balance: number;
+  chosenMatches: MatchBet[] = new Array();
   private authStatusSub: Subscription;
   private matchBetSub: Subscription;
   private roleListenerSub: Subscription;
@@ -27,7 +31,8 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
   dataSource: MatchBet[];
   selection = new SelectionModel<MatchBet>(true, []);
 
-  constructor(private authService: AuthService, public sportService: SportService) { }
+  constructor(private authService: AuthService, public dialog: MatDialog,
+    public sportService: SportService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -48,7 +53,7 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
       .subscribe(matchBets => {
         this.ELEMENT_DATA = matchBets;
         this.dataSource = this.ELEMENT_DATA;
-        this.displayedColumns = ['id', 'homeTeam', 'awayTeam', 'matchDate', 'open', 'actions'];
+        this.displayedColumns = ['id', 'homeTeam', 'awayTeam', 'finalScoreBoard', 'matchDate', 'open', 'actions'];
       });
     this.roleListenerSub = this.authService.getUser().subscribe((user) => {
       this.isAdmin = user.roles.admin;
@@ -61,33 +66,53 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
     this.roleListenerSub.unsubscribe();
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.forEach(row => this.selection.select(row));
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: MatchBet): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} todos`;
+  onSelect(row: MatchBet, selection: SelectionModel<MatchBet>) {
+    selection.toggle(row);
+    if (selection.isSelected(row)) {
+      if (!this.chosenMatches.find(p => p.id === row.id)) {
+        this.chosenMatches.push(row);
+      }
+    } else {
+      const i: number = this.chosenMatches.findIndex(p => p.id === row.id);
+      if (i !== -1) {
+        this.chosenMatches.splice(i, 1);
+      }
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} partido ${row.homeTeam + '-' + row.awayTeam}`;
   }
 
-  onSelect(event: Event, row: MatchBet) {
-    console.log(event);
-    console.log(row);
+  onBet() {
+    const dialogRef = this.dialog.open(BetsSportInDialogComponent, {
+      width: '500px',
+      data: { chosenMatches: this.chosenMatches, balance: this.balance }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'cancel') {
+      } else if (result === 'invalid') {
+        this.openSnackBar('Los valores ingresados no son válidos');
+      } else if (result) {
+        const matchBets: { match: string, scoreBoard: string }[] = new Array();
+        for (let i = 0; i < this.chosenMatches.length; i++) {
+          matchBets.push({
+            match: this.chosenMatches[i].id,
+            scoreBoard: result.formArray[i].homeScore + '-' + result.formArray[i].awayScore
+          });
+        }
+        const data: SportTicket = { userId: this.userId, betValue: result.betValue, matchBets: matchBets };
+        console.log(data);
+        this.sportService.onBet(data)
+          .subscribe(
+            response => {
+              this.openSnackBar('Ticket creado exitosamente');
+            },
+            error => {
+              this.openSnackBar('Hubo un error interno');
+            });
+      }
+    });
   }
-  onBet(matches: MatchBet[]) {
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, { duration: 5000 });
   }
+
 }

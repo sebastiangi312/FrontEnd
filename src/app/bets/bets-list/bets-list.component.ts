@@ -4,7 +4,7 @@ import { BetsListService } from 'src/app/core/services/bets-list.service';
 import { Subscription } from 'rxjs';
 import { Lottery } from 'src/app/core/models/lottery.model';
 import { MatDialog } from '@angular/material/dialog';
-import { BetsInDialogComponent } from '../bets-in-dialog/bets-in-dialog.component';
+import { BetsInDialogComponent } from '../bets-dialog/bets-in-dialog/bets-in-dialog.component';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -34,7 +34,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
   private chosenNumbers: number[] = new Array(4);
 
   constructor(private authService: AuthService, public betService: BetsListService,
-    public dialog: MatDialog, private snackBar: MatSnackBar) { }
+              public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
