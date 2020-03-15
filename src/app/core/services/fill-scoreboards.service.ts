@@ -11,7 +11,7 @@ import { AdminData } from '../models/admin-data.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 
-const BACKEND_URL = environment.apiUrl + '/fillScoreboards';
+const BACKEND_URL = environment.apiUrl + '/match';
 
 @Injectable({
   providedIn: 'root'
