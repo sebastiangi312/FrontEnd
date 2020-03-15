@@ -21,7 +21,7 @@
     <ng-container matColumnDef="closingDate">
       <th mat-header-cell *matHeaderCellDef>Fecha Cierre</th>
       <td mat-cell *matCellDef="let element">{{ element.closingDate.getDate() + "/" +
-        element.closingDate.getMonth() + "/" + element.closingDate.getFullYear() }} </td>
+        (element.closingDate.getMonth() + 1) + "/" + element.closingDate.getFullYear() }} </td>
 
     </ng-container>
 
@@ -43,9 +43,9 @@
 
     <!--Price Column -->
     <ng-container matColumnDef="creationDate">
-      <th mat-header-cell *matHeaderCellDef>Precio Boleta</th>
+      <th mat-header-cell *matHeaderCellDef>Fecha de Creacion</th>
       <td mat-cell *matCellDef="let element"> {{ element.creationDate.getDate() + "/" +
-        element.creationDate.getMonth() + "/" + element.creationDate.getFullYear() }} </td>
+        (element.creationDate.getMonth() + 1) + "/" + element.creationDate.getFullYear() }} </td>
     </ng-container>
 
     <!--Status Column -->
