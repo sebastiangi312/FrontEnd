@@ -26,7 +26,7 @@
           <mat-error *ngIf="awayScoreInput.invalid">Por favor ingrese un número válido.</mat-error>
         </mat-form-field>
         <div class="expansion-buttons">
-          <button mat-raised-button (click)="onSave(matchId, homeScore, awayScore)" class="accept-button"
+          <button mat-raised-button (click)="onSave(match.id, homeScore, awayScore)" class="accept-button"
             color="accent">GUARDAR</button>
         </div>
       </div>
