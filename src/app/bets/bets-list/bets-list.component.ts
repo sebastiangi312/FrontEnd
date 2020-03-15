@@ -58,11 +58,12 @@ export class BetsListComponent implements OnInit, OnDestroy {
     this.lotterySub = this.betService.getLotteryUpdateListener()
       .subscribe(lotteries => {
         this.ELEMENT_DATA = lotteries;
+        this.betService.closeLotterys(lotteries);
         this.dataSource = this.ELEMENT_DATA;
         this.displayedColumns = ['id', 'fare', 'closingDate', 'firstPrize',
           'secondPrize', 'thirdPrize', 'creationDate', 'open', 'actions'];
       });
-
+      
     this.roleListenerSub = this.authService.getUser().subscribe((user) => {
       this.isAdmin = user.roles.admin;
     });
