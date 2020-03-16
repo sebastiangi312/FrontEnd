@@ -17,7 +17,10 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatSnackBarModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatTabsModule,
+  MatDividerModule,
+  MatListModule
 } from '@angular/material';
 
 @NgModule({
@@ -38,7 +41,10 @@ import {
     MatPaginatorModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatListModule
   ],
   exports: [
     MatToolbarModule,
@@ -55,7 +61,10 @@ import {
     MatPaginatorModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTabsModule,
+    MatDividerModule,
+    MatListModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }

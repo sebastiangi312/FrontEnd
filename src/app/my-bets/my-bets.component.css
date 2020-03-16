@@ -1,0 +1,46 @@
+.grid-container {
+  margin: 1rem;
+  display: grid;
+  gap: 1rem;
+
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-auto-rows: 240px;
+}
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-tall {
+  grid-row: span 2 / auto;
+}
+
+.mat-card-header {
+  flex-shrink: 0;
+}
+
+.mat-card-content {
+  flex-grow: 1;
+  margin-top: 1rem;
+  overflow: auto;
+}
+
+.winner {
+  background-color: #80deea;
+}
+
+.loser {
+  background-color: #e53935;
+}
+
+.mat-list-item-content {
+  justify-content: center;
+  align-items: center;
+}

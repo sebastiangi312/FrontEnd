@@ -97,7 +97,7 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
             scoreBoard: result.formArray[i].homeScore + '-' + result.formArray[i].awayScore
           });
         }
-        const data: SportTicket = { userId: this.userId, betValue: result.betValue, matchBets: matchBets };
+        const data = { userId: this.userId, betValue: result.betValue, matchBets: matchBets };
         console.log(data);
         this.sportService.onBet(data)
           .subscribe(
