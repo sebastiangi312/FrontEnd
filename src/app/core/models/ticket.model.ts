@@ -1,4 +1,5 @@
 export interface Ticket {
+  id: string;
   lotteryId: string;
   userId: string;
   firstNumber: number;

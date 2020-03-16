@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule) },
   { path: 'bets', loadChildren: () => import('./bets/bets.module').then(mod => mod.BetsModule), canActivate: [UserGuard] },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(mod => mod.ProfileModule), canActivate: [UserGuard] },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule), canActivate: [AdminGuard] }
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule), canActivate: [AdminGuard] },
+  { path: 'my-bets', loadChildren: () => import('./my-bets/my-bets.module').then(m => m.MyBetsModule), canActivate: [UserGuard] }
 ];
 
 @NgModule({

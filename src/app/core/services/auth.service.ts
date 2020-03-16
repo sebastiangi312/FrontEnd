@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
-const BACKEND_URL = environment.apiUrl + '/user/';
+const BACKEND_URL = environment.apiUrl + '/user';
 
 @Injectable({
   providedIn: 'root'
@@ -44,13 +44,13 @@ export class AuthService {
       phone: string;
       balance: number;
       roles: Roles;
-    }>(BACKEND_URL + userId);
+    }>(BACKEND_URL + '/currentUser/' + userId);
   }
 
   editUser(email: string, phone: string, password: string, newPassword: string) {
     const userId = this.getUserId();
     return this.http
-      .put(BACKEND_URL + userId, { userId, phone, email, password, newPassword })
+      .put(BACKEND_URL + '/' + userId, { userId, phone, email, password, newPassword })
       .subscribe(response => {
         this.router.navigate(['/']).then(() => {
           this.router.navigate(['/profile/', userId]);

@@ -1,0 +1,108 @@
+<div class="spinner-wrapper">
+  <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
+</div>
+<mat-tab-group color="accent" mat-align-tabs="center" *ngIf="!isLoading">
+
+  <mat-tab label="Loterías">
+
+    <ng-template matTabContent>
+      <section class="grid-container">
+        <mat-card *ngFor="let ticket of lotteryTickets">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>local_activity</mat-icon>
+              {{ ticket.firstNumber + ' - ' + ticket.secondNumber + ' - ' +
+               ticket.thirdNumber + ' - ' + ticket.fourthNumber + ' - ' + ticket.fifthNumber }}
+            </mat-card-title>
+            <mat-card-subtitle>
+              Tu número
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <span *ngIf="!getLottery(ticket.lotteryId).open"> <strong>Número ganador:
+              </strong>
+              <span *ngIf="getLottery(ticket.lotteryId).winningNumbers">
+                {{ getLottery(ticket.lotteryId).winningNumbers.join(" - ") }}
+              </span>
+            </span>
+            <span *ngIf="getLottery(ticket.lotteryId).open"><strong>Esta lotería todavía no ha cerrado</strong></span>
+            <br>
+            <br>
+            <span *ngIf="getWinnings(ticket)">
+              <strong>Premio: {{ getWinnings(ticket) | currency:'COP':'code': '1.0-2':'es-419' }}</strong>
+            </span>
+            <span *ngIf="!getWinnings(ticket)">
+              <strong>Lo sentimos</strong>, no has ganado esta vez. <a mat-button routerLink="/bets/list">¡Sigue intentando!</a>
+            </span>
+          </mat-card-content>
+
+          <mat-card-footer *ngIf="getWinnings(ticket)" class="winner">
+            <br>
+          </mat-card-footer>
+          <mat-card-footer *ngIf="!getWinnings(ticket)" class="loser">
+            <br>
+          </mat-card-footer>
+
+        </mat-card>
+      </section>
+    </ng-template>
+
+  </mat-tab>
+
+  <mat-tab label="Deportivas">
+
+    <ng-template matTabContent>
+      <section class="grid-container">
+        <mat-card *ngFor="let ticket of sportTickets" class="card-tall">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>sports_soccer</mat-icon>
+              <span> {{ ticket.betValue | currency:'COP':'code': '1.0-2':'es-419' }} </span>
+            </mat-card-title>
+            <mat-card-subtitle>
+              Tu apuesta
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+
+            <mat-list>
+              <mat-list-item *ngFor="let matchBet of ticket.matchBets">
+                <div *ngIf="getMatch(matchBet.match).id">
+                  {{ getMatch(matchBet.match).homeTeam }}
+                  &nbsp;
+                  &nbsp;
+                  <strong>
+                    {{ getMatch(matchBet.match).homeScore }}
+                    vs
+                    {{ getMatch(matchBet.match).awayScore }}
+                  </strong>
+                  &nbsp;
+                  &nbsp;
+                  {{ getMatch(matchBet.match).awayTeam }}
+                </div>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+            </mat-list>
+            <span *ngIf="ticket.isWinner">
+              <strong>
+                Ganaste {{ ticket.profit | currency:'COP':'code': '1.0-2':'es-419' }}
+              </strong>
+            </span>
+            <span *ngIf="!ticket.isWinner">
+              <strong>Lo sentimos</strong>, no ganaste esta vez. <a mat-button routerLink="/bets/list-sport">¡Sigue intentando!</a>
+            </span>
+          </mat-card-content>
+          <mat-card-footer *ngIf="ticket.isWinner" class="winner">
+            <br>
+          </mat-card-footer>
+          <mat-card-footer *ngIf="!ticket.isWinner" class="loser">
+            <br>
+          </mat-card-footer>
+        </mat-card>
+      </section>
+    </ng-template>
+
+  </mat-tab>
+
+</mat-tab-group>

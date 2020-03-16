@@ -7,4 +7,8 @@ export interface Lottery {
   thirdPrize: number;
   creationDate: number;
   open: boolean;
+  firstPrizeWinners: string[];
+  secondPrizeWinners: string[];
+  thirdPrizeWinners: string[];
+  winningNumbers: number[];
 }

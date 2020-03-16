@@ -59,7 +59,7 @@ export class BetsListService {
   }
 
   onBet(lotteryId: string, userId: string, chosenNumbers: number[]) {
-    const ticketData: Ticket = {
+    const ticketData = {
       lotteryId: lotteryId,
       userId: userId,
       firstNumber: chosenNumbers[0],
