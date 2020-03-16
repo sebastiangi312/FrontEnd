@@ -39,12 +39,12 @@ export class FillScoreboardsService {
       .pipe(
         map(matchData => {
           return {
-            matches: matchData.match.map(match => {
+            matches: matchData.match.map(partido => {
               return {
-                id: match._id, // MONGO
-                homeTeam: match.homeTeam,
-                awayTeam: match.awayTeam,
-                matchDate: match.matchDate,
+                id: partido._id, // MONGO
+                homeTeam: partido.homeTeam,
+                awayTeam: partido.awayTeam,
+                matchDate: partido.matchDate,
               };
             }),
             maxMatches: matchData.maxMatches
