@@ -4,8 +4,9 @@
 <mat-tab-group color="accent" mat-align-tabs="center" *ngIf="!isLoading">
 
   <mat-tab label="Loterías">
-
+    
     <ng-template matTabContent>
+      <span *ngIf="lotteryTickets.length === 0">No tienes loterías</span>
       <section class="grid-container">
         <mat-card *ngFor="let ticket of lotteryTickets">
           <mat-card-header>
@@ -52,6 +53,7 @@
   <mat-tab label="Deportivas">
 
     <ng-template matTabContent>
+      <span *ngIf="sportTickets.length === 0">No tienes apuestas deportivas</span>
       <section class="grid-container">
         <mat-card *ngFor="let ticket of sportTickets" class="card-tall">
           <mat-card-header>
@@ -80,6 +82,9 @@
                   &nbsp;
                   &nbsp;
                   {{ getMatch(matchBet.match).awayTeam }}
+                </div>
+                <div *ngIf="!getMatch(matchBet.match).id">
+                  No pudimos encontrar este partido
                 </div>
                 <mat-divider></mat-divider>
               </mat-list-item>
