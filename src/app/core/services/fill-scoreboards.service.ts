@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 
 
 const BACKEND_URL = environment.apiUrl + '/match';
+const SPORT_TICKET_URL = environment.apiUrl + '/sportTicket';
 
 @Injectable({
   providedIn: 'root'
@@ -83,6 +84,10 @@ export class FillScoreboardsService {
       .put<{ message: string }>(
         BACKEND_URL + '/saveScores', matchData
       );
+  }
+
+  setSportWinners() {
+    return this.http.put<{ message: string }>(SPORT_TICKET_URL + '/setSportWinners', {});
   }
 
 }
