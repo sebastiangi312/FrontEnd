@@ -87,7 +87,7 @@ export class FillScoreboardsService {
   }
 
   setSportWinners() {
-    return this.http.post<{ message: string }>(SPORT_TICKET_URL + 'setSportWinners', 'holi');
+    return this.http.put<{ message: string }>(SPORT_TICKET_URL + '/setSportWinners', {});
   }
 
 }
