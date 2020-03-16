@@ -67,7 +67,7 @@ export class SportService {
       });
   }
 
-  onBet(sportTicketData: SportTicket) {
+  onBet(sportTicketData: any) {
     return this.http.post<{ message: string }>(TICKET_URL, sportTicketData);
   }
 
