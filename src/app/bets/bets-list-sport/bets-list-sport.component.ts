@@ -23,8 +23,6 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
   chosenMatches: MatchBet[] = new Array();
   private authStatusSub: Subscription;
   private matchBetSub: Subscription;
-  private roleListenerSub: Subscription;
-  private userListenerSub: Subscription;
 
   ELEMENT_DATA: MatchBet[];
   displayedColumns: string[];
@@ -37,33 +35,32 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this.userIsAuthenticated = this.authService.getIsAuth();
+
+    if (this.userIsAuthenticated) {
+      this.userId = this.authService.getUserId();
+    }
+
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
+        this.userId = this.authService.getUserId();
+        this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+        this.balance = this.authService.getUserBalance();
       });
-    if (this.userIsAuthenticated) {
-      this.userId = this.authService.getUserId();
-      this.userListenerSub = this.authService.getUser()
-        .subscribe(user => {
-          this.balance = user.balance;
-        });
-    }
+
     this.sportService.getMatchBets();
     this.matchBetSub = this.sportService.getMatchBetUpdateListener()
       .subscribe(matchBets => {
         this.ELEMENT_DATA = matchBets;
         this.dataSource = this.ELEMENT_DATA;
         this.displayedColumns = ['id', 'homeTeam', 'awayTeam', 'finalScoreBoard', 'matchDate', 'open', 'actions'];
+        this.isLoading = false;
       });
-    this.roleListenerSub = this.authService.getUser().subscribe((user) => {
-      this.isAdmin = user.roles.admin;
-    });
   }
 
   ngOnDestroy() {
     this.matchBetSub.unsubscribe();
     this.authStatusSub.unsubscribe();
-    this.roleListenerSub.unsubscribe();
   }
 
   onSelect(row: MatchBet, selection: SelectionModel<MatchBet>) {

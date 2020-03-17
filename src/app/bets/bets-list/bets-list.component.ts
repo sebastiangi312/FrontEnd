@@ -34,17 +34,25 @@ export class BetsListComponent implements OnInit, OnDestroy {
   private chosenNumbers: number[] = new Array(4);
 
   constructor(private authService: AuthService, public betService: BetsListService,
-              public dialog: MatDialog, private snackBar: MatSnackBar) { }
+    public dialog: MatDialog, private snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
     this.isLoading = true;
     this.userIsAuthenticated = this.authService.getIsAuth();
-
+    if (this.userIsAuthenticated) {
+      this.userId = this.authService.getUserId();
+    }
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
-        // No está llegando acá, pero el servicio sí funciona
         this.userIsAuthenticated = isAuthenticated;
+        this.userId = this.authService.getUserId();
+        if (this.userIsAuthenticated) {
+          this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+        } else {
+          this.isAdmin = false;
+        }
+        this.balance = this.authService.getUserBalance();
       });
 
     if (this.userIsAuthenticated) {
@@ -63,7 +71,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
         this.displayedColumns = ['id', 'fare', 'closingDate', 'firstPrize',
           'secondPrize', 'thirdPrize', 'creationDate', 'open', 'actions'];
       });
-      
+
     this.roleListenerSub = this.authService.getUser().subscribe((user) => {
       this.isAdmin = user.roles.admin;
     });
