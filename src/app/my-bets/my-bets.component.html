@@ -70,7 +70,7 @@
 
             <mat-list>
               <mat-list-item *ngFor="let matchBet of ticket.matchBets">
-                <div *ngIf="getMatch(matchBet.match).id">
+                <div *ngIf="getMatch(matchBet.match)">
                   {{ getMatch(matchBet.match).homeTeam }}
                   &nbsp;
                   &nbsp;
@@ -81,7 +81,7 @@
                   &nbsp;
                   {{ getMatch(matchBet.match).awayTeam }}
                 </div>
-                <div *ngIf="!getMatch(matchBet.match).id">
+                <div *ngIf="!getMatch(matchBet.match)">
                   No pudimos encontrar este partido
                 </div>
                 <mat-divider></mat-divider>
