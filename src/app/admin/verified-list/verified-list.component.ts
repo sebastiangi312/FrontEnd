@@ -27,15 +27,14 @@ export class VerifiedListComponent implements OnInit, OnDestroy {
   userId: string;
   private authStatusSub: Subscription;
   private VerifiedUsersSub: Subscription;
-  private roleListenerSub: Subscription;
 
   constructor(public verifiedListService: VerifiedListService, private authService: AuthService) { }
 
   ngOnInit() {
-    
+
     this.isLoading = true;
     this.verifiedListService.getAuthorizedUsers(this.usersPerPage, this.currentPage);
-    this.userId = this.authService.getUserId();
+
     this.VerifiedUsersSub = this.verifiedListService
       .getAuthorizedUpdateListener()
       .subscribe((userData: { users: User[]; userCount: number }) => {
@@ -44,28 +43,34 @@ export class VerifiedListComponent implements OnInit, OnDestroy {
         this.verifiedUsers = userData.users;
       });
     this.userIsAuthenticated = this.authService.getIsAuth();
+
+    if (this.userIsAuthenticated) {
+      this.userId = this.authService.getUserId();
+    }
+
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
+        if (this.userIsAuthenticated) {
+          this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+        } else {
+          this.isAdmin = false;
+        }
       });
-    this.roleListenerSub = this.authService.getUser().subscribe((user) => {
-      this.isAdmin = user.roles.admin;
-    });
   }
 
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
     this.authStatusSub.unsubscribe();
-    this.roleListenerSub.unsubscribe();
   }
-    /*this.verifiedUsers = [
-      {id: '1042882229', name: 'Toby Lleras Rojas', email: 'email@gashito.com', 
-      birthdate: null, phone: '300', balance: 300000, roles: { subscriber: true } },
-      {id: '10428321229', name: 'Pito Lleras Rojas', email: 'email2@gashito.com', 
-      birthdate: null, phone: '301', balance: 300000, roles: { subscriber: true } },
-    ]*/
+  /*this.verifiedUsers = [
+    {id: '1042882229', name: 'Toby Lleras Rojas', email: 'email@gashito.com',
+    birthdate: null, phone: '300', balance: 300000, roles: { subscriber: true } },
+    {id: '10428321229', name: 'Pito Lleras Rojas', email: 'email2@gashito.com',
+    birthdate: null, phone: '301', balance: 300000, roles: { subscriber: true } },
+  ]*/
 
   onChangedPage(pageData: PageEvent) {
     this.isLoading = true;
