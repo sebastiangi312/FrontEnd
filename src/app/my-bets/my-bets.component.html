@@ -20,27 +20,36 @@
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <span *ngIf="!getLottery(ticket.lotteryId).open"> <strong>Número ganador:
-              </strong>
-              <span *ngIf="getLottery(ticket.lotteryId).winningNumbers">
-                {{ getLottery(ticket.lotteryId).winningNumbers.join(" - ") }}
+            <div *ngIf="getLottery(ticket.lotteryId)">
+              <span *ngIf="!getLottery(ticket.lotteryId).open"> <strong>Número ganador:
+                </strong>
+                <span *ngIf="getLottery(ticket.lotteryId).winningNumbers">
+                  {{ getLottery(ticket.lotteryId).winningNumbers.join(" - ") }}
+                </span>
               </span>
-            </span>
-            <span *ngIf="getLottery(ticket.lotteryId).open"><strong>Esta lotería todavía no ha cerrado</strong></span>
-            <br>
-            <br>
-            <span *ngIf="getWinnings(ticket)">
-              <strong>Premio: {{ getWinnings(ticket) | currency:'COP':'code': '1.0-2':'es-419' }}</strong>
-            </span>
-            <span *ngIf="!getWinnings(ticket)">
-              <strong>Lo sentimos</strong>, no has ganado esta vez. <a mat-button routerLink="/bets/list">¡Sigue intentando!</a>
-            </span>
+              <span *ngIf="getLottery(ticket.lotteryId).open"><strong>Esta lotería todavía no ha cerrado</strong></span>
+              <br>
+              <br>
+              <span *ngIf="getWinnings(ticket)">
+                <strong>Premio: {{ getWinnings(ticket) | currency:'COP':'code': '1.0-2':'es-419' }}</strong>
+              </span>
+              <span *ngIf="!getWinnings(ticket) && !getLottery(ticket.lotteryId).open">
+                <strong>Lo sentimos</strong>, no has ganado esta vez. <a mat-button routerLink="/bets/list">¡Sigue
+                  intentando!</a>
+              </span>
+            </div>
+            <div *ngIf="!getLottery(ticket.lotteryId)">
+              No pudimos encontrar esta lotería.
+            </div>
           </mat-card-content>
 
-          <mat-card-footer *ngIf="getWinnings(ticket)" class="winner">
+          <mat-card-footer *ngIf="getWinnings(ticket) && !getLottery(ticket.lotteryId).open" class="winner">
             <br>
           </mat-card-footer>
-          <mat-card-footer *ngIf="!getWinnings(ticket)" class="loser">
+          <mat-card-footer *ngIf="!getWinnings(ticket) && !getLottery(ticket.lotteryId).open" class="loser">
+            <br>
+          </mat-card-footer>
+          <mat-card-footer *ngIf="getLottery(ticket.lotteryId).open" class="open">
             <br>
           </mat-card-footer>
 
@@ -92,14 +101,21 @@
                 Ganaste {{ ticket.profit | currency:'COP':'code': '1.0-2':'es-419' }}
               </strong>
             </span>
-            <span *ngIf="!ticket.isWinner">
-              <strong>Lo sentimos</strong>, no ganaste esta vez. <a mat-button routerLink="/bets/list-sport">¡Sigue intentando!</a>
+            <span *ngIf="!ticket.isWinner && !ticket.status">
+              <strong>Lo sentimos</strong>, no ganaste esta vez. <a mat-button routerLink="/bets/list-sport">¡Sigue
+                intentando!</a>
+            </span>
+            <span *ngIf="ticket.status">
+              Los partidos en esta apuesta todavía no han terminado.
             </span>
           </mat-card-content>
-          <mat-card-footer *ngIf="ticket.isWinner" class="winner">
+          <mat-card-footer *ngIf="ticket.isWinner && !ticket.status" class="winner">
             <br>
           </mat-card-footer>
-          <mat-card-footer *ngIf="!ticket.isWinner" class="loser">
+          <mat-card-footer *ngIf="!ticket.isWinner && !ticket.status" class="loser">
+            <br>
+          </mat-card-footer>
+          <mat-card-footer *ngIf="ticket.status" class="open">
             <br>
           </mat-card-footer>
         </mat-card>

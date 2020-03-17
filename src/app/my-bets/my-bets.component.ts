@@ -55,7 +55,7 @@ export class MyBetsComponent implements OnInit {
       )
       .subscribe(data => {
         this.isLoading = false;
-        this.matches = data.matches;
+        this.matches = data.matches.sort((x, y) => (x.status === y.status) ? 0 : x.status ? -1 : 1);;
       });
   }
 
