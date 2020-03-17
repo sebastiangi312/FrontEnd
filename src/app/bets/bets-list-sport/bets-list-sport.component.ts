@@ -62,6 +62,9 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
         this.ELEMENT_DATA = matchBets;
         this.dataSource = this.ELEMENT_DATA;
         this.displayedColumns = ['id', 'homeTeam', 'awayTeam', 'finalScoreBoard', 'matchDate', 'open', 'actions'];
+        if (this.authService.getUserRoles()) {
+          this.isLoading = false;
+        }
       });
   }
 
