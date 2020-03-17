@@ -18,52 +18,51 @@ export class ProfileComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authStatusSub = this.authService
-      .getAuthStatusListener()
-      .subscribe(authStatus => {
-        this.isLoading = false;
-      });
+    this.isLoading = true;
+
     this.form = new FormGroup({
       name: new FormControl({ value: '', disabled: true }, { validators: [Validators.required] }),
       id: new FormControl({ value: '', disabled: true }, { validators: [Validators.required] }),
-      email: new FormControl(null, { validators: [Validators.required, Validators.email] }),
+      email: new FormControl({ value: '', disabled: true }, { validators: [Validators.required, Validators.email] }),
       phone: new FormControl(null, { validators: [Validators.required] }),
       balance: new FormControl({ value: '', disabled: true }, { validators: [Validators.required, Validators.min(0),] }),
       birthdate: new FormControl({ value: '', disabled: true }, { validators: [Validators.required] }),
       password: new FormControl(null),
       newPassword: new FormControl(null)
     });
-    this.authService.getUser().subscribe(profileData => {
-      this.isLoading = false;
-      this.userData = {
-        id: profileData.id,
-        name: profileData.name,
-        email: profileData.email,
-        birthdate: profileData.birthdate,
-        phone: profileData.phone,
-        balance: profileData.balance,
-        roles: profileData.roles
-      };
-      this.form.setValue({
-        id: this.userData.id,
-        name: this.userData.name,
-        email: this.userData.email,
-        birthdate: this.userData.birthdate,
-        phone: this.userData.phone,
-        balance: this.userData.balance,
-        password: '',
-        newPassword: ''
-      });
+
+    this.userData = {
+      id: this.authService.getUserCedula(),
+      name: this.authService.getUserName(),
+      email: this.authService.getUserEmail(),
+      birthdate: this.authService.getUserBirthdate(),
+      phone: this.authService.getUserPhone(),
+      balance: this.authService.getUserBalance(),
+      roles: this.authService.getUserRoles()
+    };
+
+    this.form.setValue({
+      id: this.userData.id,
+      name: this.userData.name,
+      email: this.userData.email,
+      birthdate: this.userData.birthdate,
+      phone: this.userData.phone,
+      balance: this.userData.balance,
+      password: '',
+      newPassword: ''
     });
+    this.isLoading = false;
   }
 
   onEditProfile() {
-    this.authService.editUser(
-      this.form.value.email,
-      this.form.value.phone,
-      this.form.value.password,
-      this.form.value.newPassword
-    );
+    if (this.form.valid) {
+      this.authService.editUser(
+        this.form.value.email,
+        this.form.value.phone,
+        this.form.value.password,
+        this.form.value.newPassword
+      );
+    }
   }
 
 }
