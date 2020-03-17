@@ -43,14 +43,14 @@
                 <mat-form-field appearance="fill" color="accent">
                   <mat-label>Balance</mat-label>
                   <input matInput [(ngModel)]="newBalance" type="number" class="balance" placeholder="0" #balanceInput="ngModel" min="0" oninput="validity.valid||(value='');" required>
-                  <mat-error *ngIf="balanceInput.invalid">Por favor ingrese un valor válido.</mat-error> 
+                  <mat-error *ngIf="balanceInput.invalid">Por favor ingrese un valor válido.</mat-error>
                 </mat-form-field>
               </td>
             </tr>
           </table>
         </div>
         <div class="expansion-buttons">
-          <button mat-raised-button (click)="onAuthorize(user.id, newBalance)" [disabled]="balanceInput.pristine || balanceInput.invalid" class="accept-button" color="accent">VERIFICAR</button>
+          <button mat-raised-button (click)="onAuthorize(user.id)" [disabled]="balanceInput.pristine || balanceInput.invalid" class="accept-button" color="accent">VERIFICAR</button>
           <button mat-raised-button (click)="onDeauthorize(user.id)" class="delete-button" color="warn">RECHAZAR</button>
         </div>
       </div>

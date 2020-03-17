@@ -65,7 +65,7 @@ export class MyBetsComponent implements OnInit {
       const lottery = lotteryArray[0];
       return lottery;
     }
-    return 'No pudimos encontrar esta lotería';
+    return;
   }
 
   getWinnings(ticket: Ticket) {
@@ -93,7 +93,7 @@ export class MyBetsComponent implements OnInit {
         return match;
       }
     }
-    return 'No pudimos encontrar este partido';
+    return;
   }
 
 }

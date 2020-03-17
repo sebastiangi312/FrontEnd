@@ -27,6 +27,7 @@ export class VerifyComponent implements OnInit {
   ]*/
   isLoading = false;
   users: UserData[] = [];
+  newBalance: number;
 
   totalUsers = 0;
   usersPerPage = 10;
@@ -75,9 +76,9 @@ export class VerifyComponent implements OnInit {
     });
   }
 
-  onAuthorize(idUserToAuthorize: string, newBalance: number) {
+  onAuthorize(idUserToAuthorize: string) {
     this.isLoading = true;
-    this.usersService.authorizeUser(idUserToAuthorize, newBalance).subscribe(() => {
+    this.usersService.authorizeUser(idUserToAuthorize, this.newBalance).subscribe(() => {
       this.usersService.getUsers(this.usersPerPage, this.currentPage);
     }, () => {
       this.isLoading = false;

@@ -2,7 +2,7 @@
   <mat-card>
     <mat-card-content>
       <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
-      <form (submit)="onCreate(sportForm)" *ngIf="!isLoading" [formGroup]="sportForm">
+      <form (submit)="onCreate()" *ngIf="!isLoading" [formGroup]="sportForm">
         <mat-card-title>Crear Partido Nuevo</mat-card-title>
 
         <mat-form-field color="accent">
