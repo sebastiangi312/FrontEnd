@@ -9,22 +9,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  userIsAuthenticated: boolean;
-  private authListenerSubs: Subscription;
-  userId: string;
+  constructor() { }
 
-  constructor(private authService: AuthService) { }
-
-  ngOnInit() {
-    this.userIsAuthenticated = this.authService.getIsAuth();
-    if (this.userIsAuthenticated) {
-      this.userId = this.authService.getUserId();
-    }
-    this.authListenerSubs = this.authService
-      .getAuthStatusListener()
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
-      });
-  }
+  ngOnInit() { }
 
 }
