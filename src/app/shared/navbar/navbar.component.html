@@ -20,24 +20,31 @@
       <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">Regístrate</a>
     </li>
     <li *ngIf="isAdmin && userIsAuthenticated">
-      <a mat-button routerLink="/admin/fillScoreboards">Llenar marcadores</a>
-    </li>
-    <li *ngIf="isAdmin && userIsAuthenticated">
-      <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
-    </li>
-    <li *ngIf="isAdmin && userIsAuthenticated">
-      <a mat-button routerLink="/admin/verifyCharges">Verificar recargas</a>
-    </li>
-    <li *ngIf="isAdmin && userIsAuthenticated">
-      <a mat-button routerLink="/admin/verifiedList">Usuarios verificados</a>
+      <button mat-button [matMenuTriggerFor]="menuAdmin">Menu Administrador</button>
+      <mat-menu #menuAdmin="matMenu">
+        <a mat-button routerLink="/admin/fillScoreboards">Llenar marcadores</a>
+        <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
+        <a mat-button routerLink="/admin/verifyCharges">Verificar recargas</a>
+        <a mat-button routerLink="/admin/verifiedList">Usuarios verificados</a>
+      </mat-menu>
     </li>
     <li *ngIf="userIsAuthenticated">
-      <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Apuestas</a>
+      <button mat-button [matMenuTriggerFor]="menuApuestas">Apostar</button>
+      <mat-menu #menuApuestas="matMenu">
+        <a mat-button routerLink="/bets/list-sport" routerLinkActive="mat-accent">Apuestas Deportivas</a>
+        <br>
+        <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Loteria</a>
+      </mat-menu>
     </li>
     <li *ngIf="userIsAuthenticated">
-      <a mat-button [routerLink]="['/profile/', userId]" routerLinkActive="mat-accent">
-        <mat-icon>perm_identity</mat-icon>Cuenta
-      </a>
+      <button mat-button [matMenuTriggerFor]="menuUsuario"><mat-icon>perm_identity</mat-icon>Cuenta</button>
+      <mat-menu #menuUsuario="matMenu">
+        <a mat-button [routerLink]="['/profile/', userId]" routerLinkActive="mat-accent">
+          Mi Perfil
+        </a>
+        <br>
+        <a mat-button routerLink="/my-bets" routerLinkActive="mat-accent">Mis Apuestas</a>
+      </mat-menu>
     </li>
     <li>
       <span *ngIf="userIsAuthenticated" class="currentBalance mat-body">{{ currentBalance | currency }}</span>
