@@ -7,6 +7,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MatDialogModule } from "@angular/material";
 import { ChargeMoneyComponent } from './charge-money/charge-money.component';
 import { FormsModule } from '@angular/forms';
+import { MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [NavbarComponent, ChargeMoneyComponent],
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     AppRoutingModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
   entryComponents: [
     ChargeMoneyComponent
