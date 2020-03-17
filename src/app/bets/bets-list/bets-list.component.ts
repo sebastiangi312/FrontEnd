@@ -42,6 +42,11 @@ export class BetsListComponent implements OnInit, OnDestroy {
     this.userIsAuthenticated = this.authService.getIsAuth();
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
+      if (this.authService.getUserRoles()) {
+        this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+      } else {
+        this.isAdmin = false;
+      }
     }
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {

@@ -38,13 +38,22 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
 
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
+      if (this.authService.getUserRoles()) {
+        this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+      } else {
+        this.isAdmin = false;
+      }
     }
 
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
-        this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+        if (this.userIsAuthenticated) {
+          this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+        } else {
+          this.isAdmin = false;
+        }
         this.balance = this.authService.getUserBalance();
       });
 
