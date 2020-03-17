@@ -25,3 +25,7 @@ ul {
 .currentBalance {
   margin-right: 10px;
 }
+
+li {
+  margin-right: 0.3rem;
+}

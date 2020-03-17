@@ -22,28 +22,26 @@
     <li *ngIf="isAdmin && userIsAuthenticated">
       <button mat-button [matMenuTriggerFor]="menuAdmin">Menu Administrador</button>
       <mat-menu #menuAdmin="matMenu">
-        <a mat-button routerLink="/admin/fillScoreboards">Llenar marcadores</a>
-        <a mat-button routerLink="/admin/verifyUser">Verificar usuarios</a>
-        <a mat-button routerLink="/admin/verifyCharges">Verificar recargas</a>
-        <a mat-button routerLink="/admin/verifiedList">Usuarios verificados</a>
+        <a mat-menu-item routerLink="/admin/fillScoreboards">Llenar marcadores</a>
+        <a mat-menu-item routerLink="/admin/verifyUser">Verificar usuarios</a>
+        <a mat-menu-item routerLink="/admin/verifyCharges">Verificar recargas</a>
+        <a mat-menu-item routerLink="/admin/verifiedList">Usuarios verificados</a>
       </mat-menu>
     </li>
     <li *ngIf="userIsAuthenticated">
       <button mat-button [matMenuTriggerFor]="menuApuestas">Apostar</button>
       <mat-menu #menuApuestas="matMenu">
-        <a mat-button routerLink="/bets/list-sport" routerLinkActive="mat-accent">Apuestas Deportivas</a>
-        <br>
-        <a mat-button routerLink="/bets/list" routerLinkActive="mat-accent">Loteria</a>
+        <a mat-menu-item routerLink="/bets/list-sport" routerLinkActive="mat-accent">Apuestas Deportivas</a>
+        <a mat-menu-item routerLink="/bets/list" routerLinkActive="mat-accent">Loteria</a>
       </mat-menu>
     </li>
     <li *ngIf="userIsAuthenticated">
       <button mat-button [matMenuTriggerFor]="menuUsuario"><mat-icon>perm_identity</mat-icon>Cuenta</button>
       <mat-menu #menuUsuario="matMenu">
-        <a mat-button [routerLink]="['/profile/', userId]" routerLinkActive="mat-accent">
+        <a mat-menu-item [routerLink]="['/profile/', userId]" routerLinkActive="mat-accent">
           Mi Perfil
         </a>
-        <br>
-        <a mat-button routerLink="/my-bets" routerLinkActive="mat-accent">Mis Apuestas</a>
+        <a mat-menu-item routerLink="/my-bets" routerLinkActive="mat-accent">Mis Apuestas</a>
       </mat-menu>
     </li>
     <li>
