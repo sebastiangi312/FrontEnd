@@ -1,9 +1,11 @@
-<div class="container">
+<mat-spinner color="accent" *ngIf="isLoading"></mat-spinner>
+<div class="container" *ngIf="!isLoading">
   <div class="add-wrapper">
     <a mat-raised-button *ngIf="isAdmin" color="accent" routerLink="/bets/create-sport" class="create">
       <mat-icon>add</mat-icon>
     </a>
-    <button mat-raised-button *ngIf="!isAdmin && chosenMatches.length>0" color="accent" class="bet-button" [disabled]="chosenMatches.length<5" (click)="onBet()">
+    <button mat-raised-button *ngIf="!isAdmin && chosenMatches.length>0" color="accent" class="bet-button"
+      [disabled]="chosenMatches.length<5" (click)="onBet()">
       APOSTAR ({{chosenMatches.length}})
     </button>
   </div>
@@ -52,9 +54,6 @@
         <a mat-raised-button color="accent" class="non-bet-button" [routerLink]="['/bets/edit-lottery', element.id]">
           <mat-icon>edit</mat-icon>
         </a>
-        <button mat-raised-button color="warn" class="non-bet-button" (click)="onDelete(element)">
-          <mat-icon>delete</mat-icon>
-        </button>
       </td>
     </ng-container>
     <ng-container *ngIf="!isAdmin" matColumnDef="actions">
