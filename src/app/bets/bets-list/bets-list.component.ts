@@ -22,8 +22,6 @@ export class BetsListComponent implements OnInit, OnDestroy {
   balance: number;
   private authStatusSub: Subscription;
   private lotterySub: Subscription;
-  private roleListenerSub: Subscription;
-  private userListenerSub: Subscription;
 
   ELEMENT_DATA: Lottery[];
 
@@ -40,6 +38,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this.userIsAuthenticated = this.authService.getIsAuth();
+
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
       if (this.authService.getUserRoles()) {
@@ -48,6 +47,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
         this.isAdmin = false;
       }
     }
+
     this.authStatusSub = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
@@ -60,13 +60,6 @@ export class BetsListComponent implements OnInit, OnDestroy {
         this.balance = this.authService.getUserBalance();
       });
 
-    if (this.userIsAuthenticated) {
-      this.userId = this.authService.getUserId();
-      this.userListenerSub = this.authService.getUser()
-        .subscribe(user => {
-          this.balance = user.balance;
-        });
-    }
     this.betService.getLotteries();
     this.lotterySub = this.betService.getLotteryUpdateListener()
       .subscribe(lotteries => {
@@ -75,17 +68,13 @@ export class BetsListComponent implements OnInit, OnDestroy {
         this.dataSource = this.ELEMENT_DATA;
         this.displayedColumns = ['id', 'fare', 'closingDate', 'firstPrize',
           'secondPrize', 'thirdPrize', 'creationDate', 'open', 'actions'];
+        this.isLoading = false;
       });
-
-    this.roleListenerSub = this.authService.getUser().subscribe((user) => {
-      this.isAdmin = user.roles.admin;
-    });
   }
 
   ngOnDestroy() {
     this.lotterySub.unsubscribe();
     this.authStatusSub.unsubscribe();
-    this.roleListenerSub.unsubscribe();
   }
 
   onBet(row: Lottery) {

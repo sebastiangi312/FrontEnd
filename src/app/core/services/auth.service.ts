@@ -160,6 +160,7 @@ export class AuthService {
       this.isAuthenticated = true;
       this.userId = authInformation.userId;
       this.setAuthTimer(expiresIn / 1000);
+      // Esto a veces pasa muy tarde.
       this.getUser()
         .subscribe(user => {
           this.userRoles = user.roles;

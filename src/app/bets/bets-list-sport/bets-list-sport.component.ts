@@ -40,8 +40,6 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
       this.userId = this.authService.getUserId();
       if (this.authService.getUserRoles()) {
         this.isAdmin = this.authService.getUserRoles().admin ? true : false;
-      } else {
-        this.isAdmin = false;
       }
     }
 
@@ -55,6 +53,7 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
           this.isAdmin = false;
         }
         this.balance = this.authService.getUserBalance();
+        this.isLoading = false;
       });
 
     this.sportService.getMatchBets();
@@ -63,7 +62,6 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
         this.ELEMENT_DATA = matchBets;
         this.dataSource = this.ELEMENT_DATA;
         this.displayedColumns = ['id', 'homeTeam', 'awayTeam', 'finalScoreBoard', 'matchDate', 'open', 'actions'];
-        this.isLoading = false;
       });
   }
 
