@@ -28,7 +28,7 @@ mat-header-cell {
 
 
 .create {
-  width: 100%;
+  width: 50%;
 }
 
 .container {
@@ -37,6 +37,9 @@ mat-header-cell {
 }
 
 .container .add-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   padding: 10px;
   margin: auto;
   width: 80%;

@@ -59,7 +59,7 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
     this.sportService.getMatchBets();
     this.matchBetSub = this.sportService.getMatchBetUpdateListener()
       .subscribe(matchBets => {
-        this.ELEMENT_DATA = matchBets;
+        this.ELEMENT_DATA = matchBets.sort((x, y) => (x.open === y.open) ? 0 : x.open ? -1 : 1);
         this.dataSource = this.ELEMENT_DATA;
         this.displayedColumns = ['id', 'homeTeam', 'awayTeam', 'finalScoreBoard', 'matchDate', 'open', 'actions'];
         if (this.authService.getUserRoles()) {

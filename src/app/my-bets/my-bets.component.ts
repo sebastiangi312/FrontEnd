@@ -56,8 +56,6 @@ export class MyBetsComponent implements OnInit {
       .subscribe(data => {
         this.isLoading = false;
         this.matches = data.matches;
-        console.log(this.sportTickets);
-        console.log(this.matches);
       });
   }
 

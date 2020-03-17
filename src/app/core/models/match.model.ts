@@ -4,8 +4,7 @@ export interface Match {
   homeTeam: string;
   awayTeam: string;
   matchDate: Date;
-  homeScore: number;
-  awayScore: number;
+  finalScoreBoard: string;
   status: boolean;
 
 }

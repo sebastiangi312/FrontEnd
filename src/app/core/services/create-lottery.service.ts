@@ -54,7 +54,7 @@ export class CreateLotteryService {
       awayTeam: match.awayTeam,
       matchDate: match.matchDate,
       open: true
-      // score: match.homeTeam + ':' + match.awayTeam,
+      // score: match.homeTeam + '-' + match.awayTeam,
     };
     this.http
       .post(BACKEND_URL_MATCH, data

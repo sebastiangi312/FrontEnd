@@ -20,7 +20,7 @@
       <a mat-raised-button routerLink="/auth/signup" routerLinkActive="mat-accent">Regístrate</a>
     </li>
     <li *ngIf="isAdmin && userIsAuthenticated">
-      <button mat-button [matMenuTriggerFor]="menuAdmin">Menu Administrador</button>
+      <button mat-button [matMenuTriggerFor]="menuAdmin">Administrador</button>
       <mat-menu #menuAdmin="matMenu">
         <a mat-menu-item routerLink="/admin/fillScoreboards">Llenar marcadores</a>
         <a mat-menu-item routerLink="/admin/verifyUser">Verificar usuarios</a>
@@ -36,7 +36,9 @@
       </mat-menu>
     </li>
     <li *ngIf="userIsAuthenticated">
-      <button mat-button [matMenuTriggerFor]="menuUsuario"><mat-icon>perm_identity</mat-icon>Cuenta</button>
+      <button mat-button [matMenuTriggerFor]="menuUsuario">
+        <mat-icon>perm_identity</mat-icon>Cuenta
+      </button>
       <mat-menu #menuUsuario="matMenu">
         <a mat-menu-item [routerLink]="['/profile/', userId]" routerLinkActive="mat-accent">
           Mi Perfil
@@ -45,7 +47,8 @@
       </mat-menu>
     </li>
     <li>
-      <span *ngIf="userIsAuthenticated" class="currentBalance mat-body">{{ currentBalance | currency }}</span>
+      <span *ngIf="userIsAuthenticated"
+        class="currentBalance mat-body">{{ currentBalance | currency:'COP':'code': '3.0-2':'es-419' }}</span>
     </li>
     <li *ngIf="userIsAuthenticated">
       <button mat-raised-button (click)="onLogout()">
