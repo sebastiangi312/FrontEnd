@@ -220,8 +220,7 @@ export class UsersService {
                 homeTeam: match.homeTeam,
                 awayTeam: match.awayTeam,
                 matchDate: new Date(match.matchDate),
-                homeScore: match.homeTeamScore,
-                awayScore: match.awayTeamScore,
+                finalScoreBoard: match.finalScoreBoard,
                 status: match.open
               };
             }),

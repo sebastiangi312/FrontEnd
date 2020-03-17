@@ -4,6 +4,9 @@
     <a mat-raised-button *ngIf="isAdmin" color="accent" routerLink="/bets/create-sport" class="create">
       <mat-icon>add</mat-icon>
     </a>
+    <a mat-raised-button *ngIf="isAdmin" color="edit" routerLink="/admin/fillScoreboards" class="create">
+      <mat-icon>edit</mat-icon>
+    </a>
     <button mat-raised-button *ngIf="!isAdmin && chosenMatches.length>0" color="accent" class="bet-button"
       [disabled]="chosenMatches.length<5" (click)="onBet()">
       APOSTAR ({{chosenMatches.length}})
@@ -49,12 +52,8 @@
     </ng-container>
 
     <ng-container *ngIf="isAdmin" matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Opciones</th>
-      <td mat-cell *matCellDef="let element">
-        <a mat-raised-button color="accent" class="non-bet-button" [routerLink]="['/bets/edit-lottery', element.id]">
-          <mat-icon>edit</mat-icon>
-        </a>
-      </td>
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef></td>
     </ng-container>
     <ng-container *ngIf="!isAdmin" matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>

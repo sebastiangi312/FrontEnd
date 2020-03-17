@@ -4,7 +4,7 @@
 <mat-tab-group color="accent" mat-align-tabs="center" *ngIf="!isLoading">
 
   <mat-tab label="Loterías">
-    
+
     <ng-template matTabContent>
       <span *ngIf="lotteryTickets.length === 0">No tienes loterías</span>
       <section class="grid-container">
@@ -75,9 +75,7 @@
                   &nbsp;
                   &nbsp;
                   <strong>
-                    {{ getMatch(matchBet.match).homeScore }}
-                    vs
-                    {{ getMatch(matchBet.match).awayScore }}
+                    {{ getMatch(matchBet.match).finalScoreBoard }}
                   </strong>
                   &nbsp;
                   &nbsp;
