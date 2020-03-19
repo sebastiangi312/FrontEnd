@@ -56,9 +56,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-</div>
-<div class="footer">
-  <mat-paginator [length]="totalUsers" [pageSize]="usersPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  <mat-paginator class="paginator" [length]="totalUsers" [pageSize]="usersPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
   *ngIf="users.length > 0"></mat-paginator>
 
 </div>

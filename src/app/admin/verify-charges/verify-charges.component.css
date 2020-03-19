@@ -60,3 +60,10 @@ label {
 input.balance {
   -moz-appearance: textfield;
 }
+
+.mat-paginator.paginator {
+  margin-top: 5px;
+  left: 0px;
+  border-radius: 3px;
+  box-shadow: 0px 4px rgba(0, 0, 0, .2);
+}
