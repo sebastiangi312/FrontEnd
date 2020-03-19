@@ -27,9 +27,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
-</div>
-<div class="footer">
-  <mat-paginator [length]="totalCharges" [pageSize]="chargesPerPage" [pageSizeOptions]="pageSizeOptions"
+  <mat-paginator class="paginator" [length]="totalCharges" [pageSize]="chargesPerPage" [pageSizeOptions]="pageSizeOptions"
     (page)="onChangedPage($event)" *ngIf="charges.length > 0"></mat-paginator>
 </div>
 <p class="info-text mat-body-1" *ngIf="charges.length <= 0 && !isLoading">No hay recargas por autorizar</p>
