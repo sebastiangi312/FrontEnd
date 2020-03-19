@@ -10,7 +10,7 @@
   </span>
   <span class="spacer"></span>
   <ul>
-    <li *ngIf="userIsAuthenticated">
+    <li *ngIf="userIsAuthenticated && (isBettor || isAdmin)">
       <button mat-raised-button (click)="openDialog()">Recargar Dinero</button>
     </li>
     <li *ngIf="!userIsAuthenticated">

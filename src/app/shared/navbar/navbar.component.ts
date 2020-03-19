@@ -17,6 +17,7 @@ import { CreateMoneyChargeService } from 'src/app/core/services/create-money-cha
 export class NavbarComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   isAdmin = false;
+  isBettor = false;
   private authListenerSubs: Subscription;
   currentBalance: number;
   userId: string;
@@ -40,6 +41,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
         if (this.userIsAuthenticated) {
           this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+          this.isBettor = this.authService.getUserRoles().bettor ? true : false;
         } else {
           this.isAdmin = false;
         }
