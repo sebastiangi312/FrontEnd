@@ -16,6 +16,7 @@ import { SportTicket } from 'src/app/core/models/sportTicket.model';
 export class BetsListSportComponent implements OnInit, OnDestroy {
 
   isAdmin: boolean;
+  canBet: boolean;
   isLoading = false;
   userIsAuthenticated = false;
   userId: string;
@@ -39,7 +40,8 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
       if (this.authService.getUserRoles()) {
-        this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+        this.isAdmin = this.authService.canDelete();
+        this.canBet = this.authService.canBet();
       }
     }
 
@@ -47,8 +49,9 @@ export class BetsListSportComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
-        if (this.userIsAuthenticated) {
-          this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+        if (this.authService.getUserRoles()) {
+          this.isAdmin = this.authService.canDelete();
+          this.canBet = this.authService.canBet();
         } else {
           this.isAdmin = false;
         }
