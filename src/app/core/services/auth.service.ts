@@ -227,33 +227,37 @@ export class AuthService {
 
   // Check role auth
 
-  private checkAuthorization(user: User, allowedRoles: string[]): boolean {
-    if (!user) { return false; }
+  private checkAuthorization(roles: Roles, allowedRoles: string[]): boolean {
+    if (!roles) { return false; }
     for (const role of allowedRoles) {
-      if (user.roles[role]) {
+      if (roles[role]) {
         return true;
       }
     }
     return false;
   }
 
-  canRead(user: User) {
+  canRead() {
+    const roles = this.getUserRoles();
     const allowed = ['admin', 'editor', 'subscriber', 'bettor'];
-    return this.checkAuthorization(user, allowed);
+    return this.checkAuthorization(roles, allowed);
   }
 
-  canBet(user: User) {
+  canBet() {
+    const roles = this.getUserRoles();
     const allowed = ['admin', 'editor', 'bettor'];
-    return this.checkAuthorization(user, allowed);
+    return this.checkAuthorization(roles, allowed);
   }
 
-  canEdit(user: User) {
+  canEdit() {
+    const roles = this.getUserRoles();
     const allowed = ['admin', 'editor'];
-    return this.checkAuthorization(user, allowed);
+    return this.checkAuthorization(roles, allowed);
   }
 
-  canDelete(user: User) {
+  canDelete() {
+    const roles = this.getUserRoles();
     const allowed = ['admin'];
-    return this.checkAuthorization(user, allowed);
+    return this.checkAuthorization(roles, allowed);
   }
 }

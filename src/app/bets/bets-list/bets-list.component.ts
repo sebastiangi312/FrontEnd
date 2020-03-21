@@ -16,6 +16,7 @@ import { MatSnackBar } from '@angular/material';
 export class BetsListComponent implements OnInit, OnDestroy {
 
   isAdmin: boolean;
+  canBet: boolean;
   isLoading = false;
   userIsAuthenticated = false;
   userId: string;
@@ -42,7 +43,8 @@ export class BetsListComponent implements OnInit, OnDestroy {
     if (this.userIsAuthenticated) {
       this.userId = this.authService.getUserId();
       if (this.authService.getUserRoles()) {
-        this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+        this.canBet = this.authService.canBet();
+        this.isAdmin = this.authService.canDelete();
       } else {
         this.isAdmin = false;
       }
@@ -53,7 +55,8 @@ export class BetsListComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
         if (this.userIsAuthenticated) {
-          this.isAdmin = this.authService.getUserRoles().admin ? true : false;
+          this.canBet = this.authService.canBet();
+          this.isAdmin = this.authService.canDelete();
         } else {
           this.isAdmin = false;
         }
