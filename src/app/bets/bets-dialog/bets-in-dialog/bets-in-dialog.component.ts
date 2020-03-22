@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BetsListComponent } from '../../bets-list/bets-list.component';
 import { FormControl, Validators, Form, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bets-in-dialog',
@@ -21,7 +22,8 @@ export class BetsInDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<BetsListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
-      userId: string, lotteryId: string, balance: number, fare: number}) {
+      userId: string, lotteryId: string, balance: number, fare: number},
+      private router: Router) {
   }
 
   ngOnInit() {
@@ -35,10 +37,15 @@ export class BetsInDialogComponent implements OnInit {
   }
   onNoClick() {
     this.dialogRef.close('cancel');
+
+  }
+  refresh(){
+    location.reload();
   }
   onSubmit() {
     if (this.form.valid) {
       this.dialogRef.close(this.form.value);
+      this.refresh()
     } else {
       this.dialogRef.close('invalid');
     }
