@@ -43,10 +43,13 @@ export class BetsSportInDialogComponent implements OnInit {
   onNoClick() {
     this.dialogRef.close('cancel');
   }
-
+  refresh(){
+    location.reload();
+  }
   onSubmit() {
     if (this.form.valid) {
       this.dialogRef.close(this.form.value);
+      this.refresh()
     } else {
       this.dialogRef.close('invalid');
     }

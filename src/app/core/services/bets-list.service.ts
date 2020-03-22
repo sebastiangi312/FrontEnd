@@ -92,7 +92,7 @@ export class BetsListService {
       if(item.closingDate < new Date() && item.open){
         this.http.put( BACKEND_URL+'/close',item).subscribe(result => {
           console.log("se ha cerrado la apuesta con id "+item.id);
-        }); 
+        });
       }
     })
   }
