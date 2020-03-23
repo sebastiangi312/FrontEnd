@@ -7,10 +7,10 @@
       <mat-expansion-panel *ngFor="let verifiedUser of verifiedUsers">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{ verifiedUser.email }}
+            <label>{{ verifiedUser.email }}</label>
           </mat-panel-title>
           <mat-panel-description>
-            {{ verifiedUser.name }}
+            <label>{{ verifiedUser.name }}</label>
           </mat-panel-description>
         </mat-expansion-panel-header>
         <hr>
