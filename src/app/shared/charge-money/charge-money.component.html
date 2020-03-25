@@ -1,9 +1,10 @@
 <h1 mat-dialog-title>Recargar Dinero</h1>
 <div mat-dialog-content>
-  <p>Cuanto deseas recargar?</p>
+  <p>¿Cuánto deseas recargar?</p>
   <mat-form-field color = "accent">
     <mat-label>Valor a Recargar</mat-label>
     <input matInput [(ngModel)]="data.money" placeholder="Valor a Recargar" #amount="ngModel" type="number" min="0" oninput="validity.valid||(value='');" required>
+    <span matSuffix>COP</span>
     <mat-error *ngIf="amount.invalid">Por favor ingrese un valor válido.</mat-error>
   </mat-form-field>
 </div>
