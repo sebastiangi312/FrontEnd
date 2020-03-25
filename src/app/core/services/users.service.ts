@@ -155,7 +155,10 @@ export class UsersService {
                 id: ticket._id,
                 userId: ticket.user,
                 betValue: ticket.betValue,
-                matchBets: ticket.matchBets
+                matchBets: ticket.matchBets,
+                isWinner: ticket.isWinner,
+                profit: ticket.profit,
+                closingDate: new Date(ticket.closingDate)
               };
             }),
           };

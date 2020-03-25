@@ -18,6 +18,7 @@ export class MyBetsComponent implements OnInit {
   sportTickets: SportTicket[];
   lotteries: Lottery[];
   matches: Match[];
+  now: Date;
   private lotteryTicketsSub: Subscription;
   private sportTicketsSub: Subscription;
   private lotteriesSub: Subscription;
@@ -25,6 +26,7 @@ export class MyBetsComponent implements OnInit {
   constructor(public userService: UsersService) { }
 
   ngOnInit() {
+    this.now = new Date();
     this.isLoading = true;
     this.userService.fetchLotteryTickets();
     this.userService.fetchSportTickets();

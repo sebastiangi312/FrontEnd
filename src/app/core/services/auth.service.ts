@@ -82,8 +82,8 @@ export class AuthService {
 
   editUser(email: string, phone: string, password: string, newPassword: string) {
     const userId = this.getUserId();
-    return this.http
-      .put(BACKEND_URL + '/' + userId, { userId, phone, email, password, newPassword })
+    this.http
+      .put(BACKEND_URL + '/' + userId, { phone, email, password, newPassword })
       .subscribe(response => {
         this.router.navigate(['/']).then(() => {
           this.router.navigate(['/profile/', userId]);

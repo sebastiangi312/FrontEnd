@@ -98,24 +98,24 @@
             </mat-list>
             <span *ngIf="ticket.isWinner">
               <strong>
-                Ganaste {{ ticket.profit | currency:'COP':'code': '1.0-2':'es-419' }}
+                Ganaste {{ ticket.profit * ticket.betValue | currency:'COP':'code': '1.0-2':'es-419' }}
               </strong>
             </span>
-            <span *ngIf="!ticket.isWinner && !ticket.status">
+            <span *ngIf="!ticket.isWinner && ticket.closingDate > now">
               <strong>Lo sentimos</strong>, no ganaste esta vez. <a mat-button routerLink="/bets/list-sport">¡Sigue
                 intentando!</a>
             </span>
-            <span *ngIf="ticket.status">
+            <span *ngIf="ticket.closingDate < now">
               Los partidos en esta apuesta todavía no han terminado.
             </span>
           </mat-card-content>
-          <mat-card-footer *ngIf="ticket.isWinner && !ticket.status" class="winner">
+          <mat-card-footer *ngIf="ticket.isWinner && ticket.closingDate > now" class="winner">
             <br>
           </mat-card-footer>
-          <mat-card-footer *ngIf="!ticket.isWinner && !ticket.status" class="loser">
+          <mat-card-footer *ngIf="!ticket.isWinner && ticket.closingDate > now" class="loser">
             <br>
           </mat-card-footer>
-          <mat-card-footer *ngIf="ticket.status" class="open">
+          <mat-card-footer *ngIf="ticket.closingDate < now" class="open">
             <br>
           </mat-card-footer>
         </mat-card>
