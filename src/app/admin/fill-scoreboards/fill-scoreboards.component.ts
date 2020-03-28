@@ -57,7 +57,7 @@ export class FillScoreboardsComponent implements OnInit {
     this.isLoading = true;
     this.fillScoreboardService.saveScores(matchId, homeScore, awayScore).subscribe(() => {
       this.fillScoreboardService.getMatches(this.matchesPerPage, this.currentPage);
-      this.fillScoreboardService.setSportWinners();
+      this.fillScoreboardService.setSportWinners().subscribe();
     }, () => {
       this.isLoading = false;
     });
